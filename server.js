@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
+const Influx = require("influx");
 
 const PORT = process.env.PORT || 3001;
 
@@ -76,12 +77,108 @@ app.post("/api/hosts", function(req, res) {
     })
 });
 
+// Influx DB connection and routes
+const influx = new Influx.InfluxDB({
+    database: "telegraf",
+    username: "gtadmin",
+    password: "@lmost12",
+    host: "159.242.248.20",
+  });
+
+  influx
+  .getDatabaseNames()
+  .then(names => {
+    if (!names.includes("telegraf")) {
+      return influx.createDatabase("telegraf");
+    }
+  })
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log(`🌎 ==> API server now on port ${PORT}!`);
+    });
+    // writeDataToInflux(test);
+  })
+  .catch(error => console.log({ error }));
+
+  app.get("/api/host-cpu/15", function(req, res) {
+    influx.query('select * from vsphere_host_cpu where time > now() - 15m')
+    .then((allHostsCpu15) => {
+        console.log(allHostsCpu15);
+        res.json({
+            message: "Requested all host CPU data for the last minute",
+            error: false,
+            data: allHostsCpu15
+        });
+    }).catch((err) => {
+        console.log(err);
+        res.json({
+            message: err.message,
+            error: true
+        })
+    })
+});
+
+app.get("/api/host-cpu/1", function(req, res) {
+  influx.query('select * from vsphere_host_cpu where time > now() - 1m')
+  .then((allHostsCpu1) => {
+      console.log(allHostsCpu1);
+      res.json({
+          message: "Requested all host CPU data for the last 15 minutes",
+          error: false,
+          data: allHostsCpu1
+      });
+  }).catch((err) => {
+      console.log(err);
+      res.json({
+          message: err.message,
+          error: true
+      })
+  })
+});
+
+app.get("/api/host-mem/1", function(req, res) {
+  influx.query('select * from vsphere_host_mem where time > now() - 1m')
+  .then((allHostsMem1) => {
+      console.log(allHostsMem1);
+      res.json({
+          message: "Requested all host MEM data for the last 1 minute",
+          error: false,
+          data: allHostsMem1
+      });
+  }).catch((err) => {
+      console.log(err);
+      res.json({
+          message: err.message,
+          error: true
+      })
+  })
+});
+
+app.get("/api/host-mem/15", function(req, res) {
+  influx.query('select * from vsphere_host_mem where time > now() - 15m')
+  .then((allHostsMem15) => {
+      console.log(allHostsMem15);
+      res.json({
+          message: "Requested all host MEM data for the last 15 minutes",
+          error: false,
+          data: allHostsMem15
+      });
+  }).catch((err) => {
+      console.log(err);
+      res.json({
+          message: err.message,
+          error: true
+      })
+  })
+});
+
+
 app.use(express.static(__dirname + '/client/build'));
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "/client/build/index.html"));
 });
 
-app.listen(PORT, function() {
-    console.log(`App is running on http://localhost:${PORT}`);
-});
+// app.listen(PORT, function() {
+//     console.log(`App is running on http://localhost:${PORT}`);
+// });
