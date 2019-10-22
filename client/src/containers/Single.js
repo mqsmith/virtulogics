@@ -4,10 +4,11 @@ import {Link} from "react-router-dom";
 
 class Single extends Component {
   state = {
-    model: "",
-    color: "",
-    year: "",
-    _id: ""
+    clustername: "",
+    host: "",
+    moid: "",
+    totalCapacity_average: "",
+    time: ""
   };
 
   componentDidMount() {
