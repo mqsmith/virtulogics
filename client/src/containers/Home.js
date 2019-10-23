@@ -11,7 +11,7 @@ class Home extends Component {
             // TODO: 
             
 
-            <div>
+            <div className="container">
                 <h1>Welcome to Virtulogics! This is our "/" route</h1>
                 
             </div>
