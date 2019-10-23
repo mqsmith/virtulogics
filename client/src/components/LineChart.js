@@ -17,7 +17,11 @@ class LineChart extends React.Component {
     //   this.myChart.update();
     // }
   
-    componentDidUpdate() {
+    componentDidMount() {
+      this.chart()
+    }
+
+    chart = ()=>{
       this.myChart = new Chart(this.chartRef.current, {
         type: 'line',
         options: {
@@ -43,8 +47,8 @@ class LineChart extends React.Component {
         data: {
           // labels: this.props.data.map(d => d.time),
           datasets: [{
-            label: this.props.data.esxhostname,
-            data: this.props.data.RAM_Usage.map(d => d.value),
+            label: this.props.label,
+            data: this.props.data,
             fill: 'none',
             backgroundColor: this.props.color,
             pointRadius: 2,
@@ -55,8 +59,11 @@ class LineChart extends React.Component {
         }
       });
     }
+      
+    
   
     render() {
+
       return <canvas ref={this.chartRef} />;
     }
   }
