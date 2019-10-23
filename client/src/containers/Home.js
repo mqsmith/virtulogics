@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
 
 class Home extends Component {
     render() {
         return (
+
+            // HOME-Landing page
+            //
+            // TODO: Should be able to Login or go to a Login page.
+            // TODO: Displays what Virtulogics is as a technology.
+            // TODO: 
+            
+
             <div>
-                <h1>This is my homepage.</h1>
-                <Link to="/collection" >View My Teslas</Link>
+                <h1>Welcome to Virtulogics! This is our "/" route</h1>
+                
             </div>
         );
     }
