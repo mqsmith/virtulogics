@@ -43,8 +43,8 @@ class LineChart extends React.Component {
         data: {
           // labels: this.props.data.map(d => d.time),
           datasets: [{
-            label: this.props.esxhostname,
-            data: this.props.RAM_Usage.map(d => d.value),
+            label: this.props.data.esxhostname,
+            data: this.props.data.RAM_Usage.map(d => d.value),
             fill: 'none',
             backgroundColor: this.props.color,
             pointRadius: 2,

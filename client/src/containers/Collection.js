@@ -30,11 +30,12 @@ class Collection extends Component {
 
       <div>
         <h1>Collection of Hosts</h1>
-        {console.log(this.state.data)}
+        {console.log(this.state.data.data)}
         {/* <div className="main chart-wrapper">
           <LineChart
-            data={this.state.data}
+            label={this.state.data}
             title={this.state.data}
+            {...this.state}
             color="#3E517A"
           />
         </div> */}
