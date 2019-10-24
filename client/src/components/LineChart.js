@@ -23,7 +23,7 @@ class LineChart extends React.Component {
       this.myChart = new Chart(this.chartRef.current, {
         type: 'line',
         options: {
-            maintainAspectRatio: false,
+            maintainAspectRatio: true,
           scales: {
             xAxes: [
               {
@@ -34,14 +34,15 @@ class LineChart extends React.Component {
             yAxes: [
               {
                 ticks: {
-                  min: 50000
+                  min: 220000,
+                  stepSize: 50000
                 }
               }
             ]
           }
         },
         data: {
-          labels: this.props.time,
+          // labels: this.props.time,
           datasets: [{
             label: this.props.label,
             data: this.props.data,
