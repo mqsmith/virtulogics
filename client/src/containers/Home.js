@@ -12,7 +12,7 @@ class Home extends Component {
             
 
             <div className="container">
-                <h1>Welcome to Virtulogics! This is our "/" route</h1>
+                <h1>Welcome to Virtulogics! This is our "/home" route</h1>
                 
             </div>
         );

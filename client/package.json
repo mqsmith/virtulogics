@@ -4,9 +4,12 @@
   "private": true,
   "proxy": "http://localhost:3001",
   "dependencies": {
+    "@trendmicro/react-sidenav": "^0.4.5",
     "axios": "^0.19.0",
-    "react": "^16.10.2",
+    "react": "^16.11.0",
+    "react-breadcrumbs": "^2.1.7",
     "react-dom": "^16.10.2",
+    "react-fontawesome": "^1.6.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0"
   },
