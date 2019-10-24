@@ -4,59 +4,72 @@ import axios from "axios";
 // import { Link } from "react-router-dom";
 // import moment from "moment";
 import BarChart from "../components/BarChart"
+import moment from "moment";
+import LineChart from "../components/LineChart";
 
 class Collection extends Component {
   state = {
-    data: []
+    data: [],
+    labels: [],
+    time: []
   };
+
+  
 
   componentDidMount() {
     this.getRam();
+    // console.log(this.ramUsage);
   }
 
-  componentDidUpdate(){
-    console.log(this.state.data[0].RAM_Usage);
-  }
+  // componentDidUpdate(){
+  //   console.log(this.state.data[0].RAM_Usage);
+  // }
     
   
 
   getRam = () => {
     axios
-      .get("/api/chart-mem")
+      .get("/api/host-mem/15")
       .then(hostMemData => {
         // console.log(hostMemData.data.data);
-        this.setState({ data: hostMemData.data.data });
+         const ramUsage = hostMemData.data.data.map(data => data.usage_average);
+         const hostName = hostMemData.data.data.map(data => data.moid);
+         const time = hostMemData.data.data.map(data => moment(data.time).format("h:mm a"));
+        //  console.log(ramUsage);
+        //  console.log(hostName);
+        this.setState({ data: ramUsage, labels: hostName, time: time });
+        console.log(this.state);
       })
       .catch(err => {
         console.log(err);
       });
   };
-  render() {
-    return (
 
-      <div className="container">
-        <h1>Collection of Hosts</h1>
-        {console.log(this.state.data.data)}
-        <div className="main chart-wrapper">
-          <BarChart
-            label={this.state.data.map((host, i) => host.esxhostname)}
-            data={this.state.data.map((host, i) => host.RAM_Usage)}
-           
-            color="#3E517A"
-          />
-        </div>
-        {/* {this.state.data.map((host, i) => (
-          <div key={host.esxhostname}>
-            <p>Cluster Name: {host.clustername}</p>
-            <p>Host Name: {host.esxhostname}</p>
-            <p>Ram Usage Average: {host.RAM_Usage}</p>
-            <p>Total Capacity Average: {host.totalCapacity_average}</p>
-            <p>Time: {moment(host.time).format("h:mm:ss a")}</p>
-            
-          </div>
-        ))} */}
+  render() {
+    // usage = this.state.data.filter(({ RAM_Usage }) => RAM_Usage !== null);
+    // console.log(usage);
+    return (
+      <>
+      <div className="main chart-wrapper container">
+        <BarChart
+          label={"Host MEM Usage Average"}
+          data={this.state.data}
+          labels={this.state.labels}
+          time={this.state.time}
+          color="#3E517A"
+        />
       </div>
-    );
+      <div className="main chart-wrapper container">
+        <LineChart
+          label={"Host MEM Usage Average"}
+          data={this.state.data}
+          labels={this.state.labels}
+          time={this.state.time}
+          color="#3E517A"
+        />
+      </div>
+      </>
+    ) 
   }
 }
 
