@@ -16,7 +16,7 @@ class Collection extends Component {
 
   getRam = () => {
     axios
-      .get("/api/chart-mem")
+      .get("/api/host-mem/1")
       .then(hostMemData => {
         console.log(hostMemData.data.data);
         this.setState({ data: hostMemData.data.data });
@@ -27,8 +27,7 @@ class Collection extends Component {
   };
   render() {
     return (
-
-      <div>
+      <div className="container">
         <h1>Collection of Hosts</h1>
         {console.log(this.state.data.data)}
         {/* <div className="main chart-wrapper">
@@ -40,13 +39,26 @@ class Collection extends Component {
           />
         </div> */}
         {this.state.data.map((host, i) => (
+          <div className="card">
+          <div className="card-body">
           <div key={host.esxhostname}>
-            {/* <p>Cluster Name: {host.clustername}</p> */}
+            <p>Cluster Name: {host.clustername}</p>
             <p>Host Name: {host.esxhostname}</p>
-            <p>Ram Usage Average: {host.RAM_Usage}</p>
+        
+            <button className="btn btn-success" >
+            <p>MEM Usage:</p>
+            {host.usage_average}
+           </button>
+        
+           <button className="btn btn-success" >
+           <p>MEM Capacity:</p>
+            {`${host.totalCapacity_average} `}
+           </button>
+            {/* <p>Ram Usage Average: {host.usage_average}</p> */}
             {/* <p>Total Capacity Average: {host.totalCapacity_average}</p> */}
             <p>Time: {moment(host.time).format("h:mm:ss a")}</p>
-            
+            </div>
+            </div>
           </div>
         ))}
       </div>
