@@ -21,12 +21,12 @@ class Collection extends Component {
 
   getRam = () => {
     axios
-      .get("/api/host-mem/15")
+      .get("/api/chart-mem")
       .then(hostMemData => {
         // console.log(hostMemData.data.data);
-         const ramUsage = hostMemData.data.data.map(data => data.usage_average);
-         const hostName = hostMemData.data.data.map(data => data.moid);
-         const time = hostMemData.data.data.map(data => moment(data.time).format("h:mm:ss a"));
+         const ramUsage = hostMemData.data.data.map(data => Math.floor(data.RAM_Usage));
+         const hostName = hostMemData.data.data.map(data => data.esxhostname);
+         const time = hostMemData.data.data.map(data => moment(data.time).format("h:mm a"));
         //  console.log(ramUsage);
         //  console.log(hostName);
         this.setState({ data: ramUsage, labels: hostName, time: time });
@@ -43,7 +43,7 @@ class Collection extends Component {
     return (
       <div className="main chart-wrapper container">
         <LineChart
-          label={"Host CPU Usage Average"}
+          label={"Host RAM Usage mHz"}
           data={this.state.data}
           labels={this.state.labels}
           time={this.state.time}

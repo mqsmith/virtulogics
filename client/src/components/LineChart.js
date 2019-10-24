@@ -28,13 +28,13 @@ class LineChart extends React.Component {
             xAxes: [
               {
                 type: 'category',
-                labels: this.props.labels
+                labels: this.props.time
               }
             ],
             yAxes: [
               {
                 ticks: {
-                  min: 0
+                  min: 50000
                 }
               }
             ]
