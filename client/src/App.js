@@ -19,8 +19,8 @@ function App() {
                     }
                 }}
             >
-                <SideNav.Toggle />
-                <SideNav.Nav defaultSelected="home">
+                <Toggle />
+                <Nav defaultSelected="home">
                     <NavItem eventKey="home">
                         <NavIcon>
                             <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
@@ -37,7 +37,7 @@ function App() {
                             Collection
                         </NavText>
                     </NavItem>
-                </SideNav.Nav>
+                </Nav>
             </SideNav>
             <main>
                 {/* <Route path="/" exact component={props => <RootComponent />} /> */}

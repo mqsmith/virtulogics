@@ -28,7 +28,7 @@ class Collection extends Component {
   render() {
     return (
 
-      <div>
+      <div className="container">
         <h1>Collection of Hosts</h1>
         {console.log(this.state.data.data)}
         {/* <div className="main chart-wrapper">
