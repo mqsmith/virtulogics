@@ -20,6 +20,7 @@
 .App-link {
   color: #09d3ac;
 } */
-.sidenav---_u0En{
-  background: gray;
+main{
+  transition: margin-left .5s;
+  padding: 20px;
 }

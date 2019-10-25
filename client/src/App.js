@@ -4,7 +4,12 @@ import Home from "./containers/Home";
 import Collection from "./containers/Collection";
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
+import "./App.css";
 
+const divStyle= {
+    transition: 'margin-left .5s',
+  padding: '20px'
+};
 
 function App() {
   return (
@@ -39,7 +44,7 @@ function App() {
                     </NavItem>
                 </Nav>
             </SideNav>
-            <main>
+            <main style={divStyle}>
                 {/* <Route path="/" exact component={props => <RootComponent />} /> */}
                 <Route path="/collection" component={props => <Collection />} />
                 <Route path="/home" component={props => <Home />} />
