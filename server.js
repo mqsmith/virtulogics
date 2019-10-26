@@ -247,8 +247,8 @@ app.get("/api/cluster-cpu", function(req, res) {
 
     app.get("/api/chart-mem", function(req, res) {
         influx.query(`select mean("active_average") as "RAM_Usage" from "vsphere_host_mem"
-        where time > now() - 1h
-        group by "esxhostname", time(60s)
+        where time > now() - 60m
+        group by "esxhostname", time(120s)
         `)
         .then(allClusterCpu => {
             console.log(allClusterCpu);
@@ -268,10 +268,9 @@ app.get("/api/cluster-cpu", function(req, res) {
     });
     
     app.get("/api/chart-cpu/", function(req, res) {
-        influx.query(`SELECT mean("usage_average") AS "CPU_Usage" FROM "vsphere_host_cpu"
-        WHERE time > now() - 15s
-        AND "esxhostname"=~ /^lab-esxi-01.vdilab.int$/
-        GROUP BY time(2500ms), "cpu" FILL(null)
+        influx.query(`select mean("usage_average") as "CPU_Usage" from "vsphere_host_cpu"
+        where time > now() - 60m
+        group by "esxhostname", time(120s), "cpu" FILL(null)
         `)
         .then(allClusterCpu => {
             console.log(allClusterCpu);
