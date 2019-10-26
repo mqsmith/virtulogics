@@ -259,6 +259,65 @@ app.get("/api/cluster-cpu", function(req, res) {
         });
     });
 
+    app.get("/api/host/cpu-mem/1", async function (req, res) {
+        let newHashMap = {};
+        await influx
+          .query(`select * from vsphere_host_mem
+          ORDER BY DESC LIMIT 2
+           `)
+          .then(allHostsMem1 => {
+            for(let i = 0; i < allHostsMem1.length; i++){
+                console.log(allHostsMem1[i].usage_average);
+                let moid = allHostsMem1[i].moid;
+                console.log(allHostsMem1[i]);
+                if(newHashMap[moid]){
+                    console.log(allHostsMem1[i].usage_average);
+                    allHostsMem1[i].mem_usage_average = allHostsMem1[i]['usage_average'];
+                    newHashMap[moid] = allHostsMem1[i];
+                }else{
+                    newHashMap[moid] = allHostsMem1[i];
+                }
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+          
+          await influx
+          .query(`
+          select * from vsphere_host_cpu
+          where "cpu"='instance-total'
+          ORDER BY DESC LIMIT 2
+          `)
+          .then(allHostsCpu1 => {
+            for(let i = 0; i < allHostsCpu1.length; i++){
+                
+                console.log(allHostsCpu1[i].usage_average);
+                let moid = allHostsCpu1[i].moid;
+                if(newHashMap[moid]){
+                    allHostsCpu1[i].cpu_usage_average = allHostsCpu1[i]['usage_average'];
+                    console.log(allHostsCpu1[i].usage_average);
+                    delete allHostsCpu1[i].usage_average;
+                    let oldValues = newHashMap[moid];
+                    let newValues = allHostsCpu1[i];
+                    newHashMap[moid] = {...oldValues, ...newValues};
+                }else{
+                    newHashMap[moid] = allHostsCpu1[i];
+                }
+            }
+
+          })
+          .catch((err) => {
+              console.log(err);
+          })
+
+          res.json({
+              ...newHashMap
+          })
+
+        
+      });
+
 influx.getMeasurements()
  .then(names => console.log('My measurement names are: ' + names.join(', ')))
 

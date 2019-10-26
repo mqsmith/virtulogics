@@ -1,10 +1,29 @@
-.btn {
-    margin: 5px;
-}
 .card {
-    margin: 10px;;
+    width: 90%;
+    padding: 20px
 }
-/* .card-body {
-    width: 40%;
-    float: right;
-} */
+.card-body {
+    /* width: 100%; */
+    float: left;
+}
+
+
+.main-card {
+    width: 100%;
+    padding: 10px;
+}
+img {
+    width: 128px;
+    height: 128px;
+    margin: 20px;
+}
+.card-stats {
+    box-shadow: 0 2px 2px #999, 0 2px 2px #999;
+}
+
+.main-card {
+    box-shadow: 0 2px 2px #999, 0 2px 2px #999;
+}
+.card-wrapper {
+    border-style: none;
+}
