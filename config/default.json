@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb://localhost/virtulogics",
+  "jwtSecret": "secret",
+  "githubClientId": "",
+  "githubSecret": ""
+}

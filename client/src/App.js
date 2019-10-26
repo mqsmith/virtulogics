@@ -1,34 +1,63 @@
-import React from "react";
-
-import Nav from "./components/Nav/Nav";
-import Sidebar from "./components/Sidebar/Sidebar";
-
+import React, { Fragment, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Navbar from './components/layout/Navbar';
+import Landing from './components/layout/Landing';
 import Home from "./containers/Home";
+// import Routes from './components/routing/Routes';
+import Sidebar from "./components/Sidebar/Sidebar";
 import Collection from "./containers/Collection";
-import Hosts from './containers/Hosts/Hosts'
+import Hosts from './containers/Hosts/Hosts';
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
+
+// Redux
+import { Provider } from 'react-redux';
+import store from './store';
+import { loadUser } from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
 
 import './App.css';
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
+const App = () => {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
 
-function App() {
   return (
+    <Provider store={store}>
     <Router>
+   {/*  //<Fragment> */}
       <div>
-        <Nav />
+        <Navbar />
         <Sidebar />
         <div id="page-wrap">
         <Switch>
+        {/* <Route component={Routes} />   */}
           <Route path="/collection" component={Collection} />
+          <Route path='/register' component={Register} />
+          <Route path='/login' component={Login} />
           <Route path="/hosts" component={Hosts} />
-          <Route path="/" component={Home} />
+          
+          <Route path="/*" component={Home} />
+          
+          
+          
+          
+          
+          
         </Switch>
         </div>
+        
       </div>
+     {/*  </Fragment> */}
     </Router>
+    </Provider>
   );
-}
+};
 
 
 export default App;

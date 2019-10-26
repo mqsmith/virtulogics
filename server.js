@@ -1,18 +1,14 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const path = require("path");
+const express = require('express');
+const connectDB = require('./config/db');
+const path = require('path');
 const Influx = require('influx');
 const os = require('os');
 const bodyParser = require('body-parser');
-
-
-
-const PORT = process.env.PORT || 3001;
-
-const db = require("./models");
+require("dotenv").config();
 
 const app = express();
+
+const db = require("./models");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -21,20 +17,19 @@ app.use(bodyParser.urlencoded({
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
+// Connect Database
+connectDB();
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
-const connection = mongoose.connection;
+//app.get('/',(req,res) => res.send("API Running"));
 
-connection.on("connected", () => {
-  console.log("Mongoose connected successfully");
-});
-connection.on("error", err => {
-  console.log("Mongoose default connection error: " + err);
-});
+// Initialize Middleware
+app.use(express.json({ extended: false }));
+
+// Define Routes
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
+//app.use('/api/profile', require('./routes/api/profile'));
+//app.use('/api/posts', require('./routes/api/posts'));
 
 // app.get("/api/cars/:id", function(req, res) {
 //     db.Tesla.findById(req.params.id)
@@ -106,14 +101,14 @@ influx
       return influx.createDatabase("telegraf");
     }
   })
-  .then(() => {
+/*   .then(() => {
     app.listen(PORT, () => {
       console.log(`🌎 ==> API server now on port ${PORT}!`);
       console.log("Imflux DB connected successfully");
     });
     // writeDataToInflux(test);
   })
-  .catch(error => console.log({ error }));
+  .catch(error => console.log({ error })); */
 
   // to narrow down the fields we return we can do "select cpu, usagemhz_average, esxhostname from vsphere_host_cpu"
 app.get("/api/host-cpu/1", function(req, res) {
@@ -158,6 +153,24 @@ app.get("/api/host-cpu/15", function(req, res) {
         error: true
       });
     });
+});
+
+app.get("/api/host-cpu/1", function(req, res) {
+influx.query('select * from vsphere_host_cpu where time > now() - 1m')
+.then((allHostsCpu1) => {
+    console.log(allHostsCpu1);
+    res.json({
+        message: "Requested all host CPU data for the last 15 minutes",
+        error: false,
+        data: allHostsCpu1
+    });
+}).catch((err) => {
+    console.log(err);
+    res.json({
+        message: err.message,
+        error: true
+    })
+})
 });
 
 app.get("/api/host-mem/1", function(req, res) {
@@ -247,8 +260,8 @@ app.get("/api/cluster-cpu", function(req, res) {
 
     app.get("/api/chart-mem", function(req, res) {
         influx.query(`select mean("active_average") as "RAM_Usage" from "vsphere_host_mem"
-        where time > now() - 1h
-        group by "esxhostname", time(60s)
+        where time > now() - 60m
+        group by "esxhostname", time(120s)
         `)
         .then(allClusterCpu => {
             console.log(allClusterCpu);
@@ -268,10 +281,9 @@ app.get("/api/cluster-cpu", function(req, res) {
     });
     
     app.get("/api/chart-cpu/", function(req, res) {
-        influx.query(`SELECT mean("usage_average") AS "CPU_Usage" FROM "vsphere_host_cpu"
-        WHERE time > now() - 15s
-        AND "esxhostname"=~ /^lab-esxi-01.vdilab.int$/
-        GROUP BY time(2500ms), "cpu" FILL(null)
+        influx.query(`select mean("usage_average") as "CPU_Usage" from "vsphere_host_cpu"
+        where time > now() - 60m
+        group by "esxhostname", time(120s), "cpu" FILL(null)
         `)
         .then(allClusterCpu => {
             console.log(allClusterCpu);
@@ -363,4 +375,8 @@ app.get("*", (req, res) => {
 // app.listen(PORT, function() {
 //     console.log(`App is running on http://localhost:${PORT}`);
 // });
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
