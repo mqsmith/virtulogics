@@ -6,11 +6,10 @@ class LineChart extends React.Component {
     constructor(props) {
       super(props);
       this.chartRef = React.createRef();
-      console.log(this.props);
+      // console.log(this.props);
     }
 
     
-  
     // componentDidUpdate() {
     //   this.myChart.data.labels = this.props.esxhostname.map(d => console.log(d.name));
     //   // this.myChart.data.datasets[0].data = this.props.data.map(d => d.value);
@@ -18,33 +17,35 @@ class LineChart extends React.Component {
     // }
   
     componentDidUpdate() {
+      console.log(this.props.data);
+      console.log(this.props.labels);
+      console.log(this.props.time);
       this.myChart = new Chart(this.chartRef.current, {
         type: 'line',
         options: {
-            maintainAspectRatio: false,
+            maintainAspectRatio: true,
           scales: {
             xAxes: [
               {
-                type: 'time',
-                time: {
-                  unit: 'hour'
-                }
+                type: 'category',
+                labels: this.props.time
               }
             ],
             yAxes: [
               {
                 ticks: {
-                  min: 0
+                  min: 220000,
+                  stepSize: 50000
                 }
               }
             ]
           }
         },
         data: {
-          // labels: this.props.data.map(d => d.time),
+          // labels: this.props.time,
           datasets: [{
-            label: this.props.data.esxhostname,
-            data: this.props.data.RAM_Usage.map(d => d.value),
+            label: this.props.label,
+            data: this.props.data,
             fill: 'none',
             backgroundColor: this.props.color,
             pointRadius: 2,
@@ -54,9 +55,17 @@ class LineChart extends React.Component {
           }]
         }
       });
+      console.log(this.myChart);
     }
+
+    
+      
+    
+      
+    
   
     render() {
+
       return <canvas ref={this.chartRef} />;
     }
   }

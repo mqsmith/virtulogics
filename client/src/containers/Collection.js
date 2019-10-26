@@ -1,68 +1,56 @@
 import React, { Component } from "react";
-import Moment from "react-moment";
+// import Moment from "react-moment";
 import axios from "axios";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import moment from "moment";
-import LineChart from "../components/LineChart"
+import LineChart from "../components/LineChart";
 
 class Collection extends Component {
   state = {
-    data: []
+    data: [],
+    labels: [],
+    time: []
   };
+
+  
 
   componentDidMount() {
     this.getRam();
+    // console.log(this.ramUsage);
   }
 
   getRam = () => {
     axios
       .get("/api/host-mem/1")
       .then(hostMemData => {
-        console.log(hostMemData.data.data);
-        this.setState({ data: hostMemData.data.data });
+        // console.log(hostMemData.data.data);
+         const ramUsage = hostMemData.data.data.map(data => Math.floor(data.RAM_Usage));
+         const hostName = hostMemData.data.data.map(data => data.esxhostname);
+         const time = hostMemData.data.data.map(data => moment(data.time).format("h:mm a"));
+        //  console.log(ramUsage);
+        //  console.log(hostName);
+        this.setState({ data: ramUsage, labels: hostName, time: time });
+        console.log(this.state);
       })
       .catch(err => {
         console.log(err);
       });
   };
+
   render() {
+    // usage = this.state.data.filter(({ RAM_Usage }) => RAM_Usage !== null);
+    // console.log(usage);
     return (
-      <div className="container">
-        <h1>Collection of Hosts</h1>
-        {console.log(this.state.data.data)}
-        {/* <div className="main chart-wrapper">
-          <LineChart
-            label={this.state.data}
-            title={this.state.data}
-            {...this.state}
-            color="#3E517A"
-          />
-        </div> */}
-        {this.state.data.map((host, i) => (
-          <div className="card">
-          <div className="card-body">
-          <div key={host.esxhostname}>
-            <p>Cluster Name: {host.clustername}</p>
-            <p>Host Name: {host.esxhostname}</p>
-        
-            <button className="btn btn-success" >
-            <p>MEM Usage:</p>
-            {host.usage_average}
-           </button>
-        
-           <button className="btn btn-success" >
-           <p>MEM Capacity:</p>
-            {`${host.totalCapacity_average} `}
-           </button>
-            {/* <p>Ram Usage Average: {host.usage_average}</p> */}
-            {/* <p>Total Capacity Average: {host.totalCapacity_average}</p> */}
-            <p>Time: {moment(host.time).format("h:mm:ss a")}</p>
-            </div>
-            </div>
-          </div>
-        ))}
+      <div className="main chart-wrapper container">
+        <LineChart
+          label={"Host RAM Usage mHz"}
+          data={this.state.data}
+          labels={this.state.labels}
+          time={this.state.time}
+          color="#3E517A"
+        />
       </div>
-    );
+    ) 
   }
 }
 
