@@ -21,7 +21,7 @@ class Collection extends Component {
 
   getRam = () => {
     axios
-      .get("/api/chart-mem")
+      .get("/api/chart-mem/1")
       .then(hostMemData => {
         // console.log(hostMemData.data.data);
          const ramUsage = hostMemData.data.data.map(data => Math.floor(data.RAM_Usage));
