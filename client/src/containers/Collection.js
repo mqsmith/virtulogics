@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import axios from "axios";
 // import { Link } from "react-router-dom";
 import moment from "moment";
-import LineChart from "../components/LineChart";
+import LineChart from "../components/LineChart/LineChart";
 
 class Collection extends Component {
   state = {
