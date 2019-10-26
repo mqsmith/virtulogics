@@ -49,7 +49,7 @@ class Sidebar extends Component {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <a className="nav-link active" href="/hosts">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -66,7 +66,7 @@ class Sidebar extends Component {
                     <circle cx="20" cy="21" r="1"></circle>
                     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                   </svg>
-                  Products
+                  Hosts
                 </a>
               </li>
               <li className="nav-item">
