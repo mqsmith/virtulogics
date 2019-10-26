@@ -4,6 +4,9 @@ import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
 import Home from "./containers/Home";
 import Routes from './components/routing/Routes';
+import Sidebar from "./components/Sidebar/Sidebar";
+import Collection from "./containers/Collection";
+import Hosts from './containers/Hosts/Hosts'
 
 // Redux
 import { Provider } from 'react-redux';
@@ -24,17 +27,23 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <Router>
-        <Fragment>
-          <Navbar />
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route component={Routes} />
-          </Switch>
-        </Fragment>
-      </Router>
+    <Router>
+      <div>
+        <Navbar />
+        <Sidebar />
+        <div id="page-wrap">
+        <Switch>
+          <Route path="/collection" component={Collection} />
+          <Route path="/hosts" component={Hosts} />
+          <Route path="/" component={Home} />
+          <Route component={Routes} />
+        </Switch>
+        </div>
+      </div>
+    </Router>
     </Provider>
   );
 };
+
 
 export default App;
