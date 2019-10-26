@@ -1,102 +1,168 @@
 import React, { Component } from 'react';
 
+const newImage = {
+  color: 'white'
+};
+
+const jumbotron = {
+  backgroundImage: 'url("https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1791&q=80")',
+  color: 'white',
+  height: '500px',
+  fontSize: '80px',
+  backgroundPosition: 'center',
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat',
+};
+
+const mainButton = {
+  backgroundColor: '#ff5235',
+  fontSize: '20px',
+  width: '150px',
+  margin: '35px',
+  borderColor: 'black'
+};
+
+const containerMarketing = {
+  backgroundColor: 'white'
+};
+
+const featureText = {
+  padding: '55px'
+};
+
+const highlightText = {
+  color: '#ff5235',
+};
+
+const featureButton = {
+  backgroundColor: '#15a2b8'
+};
+
+const planList = {
+  listStyleType: 'none'
+};
+
+
+const signUpButton = {
+  backgroundColor: '#ff5235'
+};
+
 class Home extends Component {
     render() {
         return (
 
-<>
-
 <div className="container">
-  <div className="row">
-<div className="col-sm">
-<div className="card bg-dark text-white">
-  <img src="http://www.wausaurestaurants.com/public/images/placeholder_image.png" className="card-img" alt="..." />
-  <div className="card-img-overlay">
-    <h5 className="card-title">Card title</h5>
-    <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-    <p className="card-text">Last updated 3 mins ago</p>
-  </div>
-</div>
-</div>
 
-<div className="col-md">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQJpPBolR8mG90ZP6Qt6YnUUfg819-6dyDtoSkThw1Cb0F_Tj1w" alt="pcitures"/>
-</div>
-<div className="row align-items-end">
-    <div >
-      One of three columns
-    </div>
-    <div className="col">
-      One of three columns
-    </div>
-    <div className="col">
-      One of three columns
-    </div>
-  </div>
-</div>
-</div>
+    <div class="jumbotron" style={jumbotron}>
+            <h1>Virtulogics</h1>
+            <p>Simple, Seamless Capacity Planning</p>
+            <p><button className="btn btn-primary btn-lg" style={mainButton}>Try it Free</button></p>
+          </div>
 
 
+   
+    <div className="container marketing" style={containerMarketing}>
 
-
-<div className="card mb-3 ">
-  <div className="row no-gutters">
-    <div className="col-md-4">
-      <img src="https://www.museumswellington.org.nz/wp-content/uploads/2014/06/placehold.it-1280x850.gif" className="card-img" alt="..." />
-    </div>
-    <div className="col-md-8">
-      <div className="card-body">
-        <h5 className="card-title">This is our Dashboard.</h5>
-        <p className="card-text">See how clean and easy to use our dashboard is? It's much easier to read your data on a clean easy to read dashboard.</p>
-        <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
+     
+      <div className="row featurette" style={featureText}>
+        <div className="col-md-7" >
+          <h2 className="featurette-heading">Smart Capacity Planning Suggestions <span style={highlightText}>It'll blow your mind.</span></h2>
+          <p className="lead">Easily and Quickly know when its time to upgrade. </p>
+          <br />
+          <p className="lead"> Data is displayed in a clear and concise way where you can easy get an overview of your current load. Exactly what you need. </p>
+          <br />
+          <p className="lead">Easily customize each of your graphs or extend the time frame visible. </p>
+          <br />
+          <p><a className="btn btn-secondary" href="#" role="button" style={featureButton}>Try for Free</a></p>
+        </div>
+        <div className="col-md-5">
+          <img className="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" style={newImage} src="https://howto.socialchorus.com/hc/article_attachments/360003206494/Dashboard.gif" data-holder-rendered="true" />
+        </div>
       </div>
-    </div>
+
+      <hr></hr>
+
+      <div className="row featurette" style={featureText}>
+      <div className="col-md-5 pull-md-7">
+          <img className="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="https://media.giphy.com/media/fWwR0wiDbqmWs/giphy.gif" data-holder-rendered="true"  style={newImage} />
+        </div>
+        <div className="col-md-7 push-md-5">
+          <h2 className="featurette-heading">Clean, Easy to Read Dashboard </h2> <h2><span style={highlightText}>Check it out for yourself.</span></h2>
+          <p className="lead">Our easy to read dashboard doesn't require weeks of training. </p>
+          <br />
+          <p className="lead">Data is displayed in a clear and concise way where you can easy get an overview of your current load. Exactly what you need. </p>
+          <br />
+          <p><a className="btn btn-secondary" href="#" role="button" style={featureButton}>Try for Free</a></p>
+        </div>
+        
+      </div>
+
+      <hr></hr>
+
+      <div className="row featurette" style={featureText}>
+        <div className="col-md-7">
+          <h2 className="featurette-heading">Practical Pricing.  <span style={highlightText}>No Headaches.</span></h2>
+          <br></br>
+          <p className="lead">We don't like to play games when it comes your money. </p> 
+          <p className="lead">Our clear and simple pricing structure keeps you focused on what really matters and headache-free!</p>
+          <p className="lead">Flat Monthly rates with no caps on the number of users in your account</p>
+          <p className="lead">Robust referal program makes it even easier to save!</p>
+          <br />
+          <p><a className="btn btn-secondary" href="#" role="button" style={featureButton}>Try for Free</a></p>
+          
+        </div>
+        <div className="col-md-5">
+          <img className="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80" data-holder-rendered="true"  style={newImage}  />
+        </div>
+
+        </div>
+
+<hr></hr>
+
+        <div className="row">
+        <div className="col-lg-4">
+          <img className="rounded-circle" src="https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80" alt="Generic placeholder image" width="140" height="140" />
+          <h2>Bronze Plan</h2>
+          <ul style={planList}>
+            <li>Capacity Planner Dashboard</li>
+            <li>Ability to add up to 2 clusters</li>
+            <li>2 Users</li>
+            <li>Load Alert Notifications </li>
+          </ul>
+          <p><a className="btn btn-secondary" href="#" role="button" style={signUpButton}>Sign Up »</a></p>
+        </div>
+        <div className="col-lg-4" >
+          <img className="rounded-circle" src="https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80" alt="Generic placeholder image" width="140" height="140" />
+          <div >
+          <h2 >Silver Plan</h2>
+          <ul style={planList}>
+            <li>Everything in the Bronze Plan</li>
+            <li>Ability to add up to 5 clusters</li>
+            <li>5 Users</li>
+            <li>Smart Load Balance</li>
+          </ul>
+          <p><a className="btn btn-secondary" href="#" role="button" style={signUpButton}>Sign Up »</a></p>
+          </div>
+        </div>
+        <div className="col-lg-4">
+          <img className="rounded-circle" src="https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80" alt="Generic placeholder image" width="140" height="140" />
+          <h2>Gold Plan</h2>
+          <ul style={planList}>
+            <li>Everything in the Bronze and Silver Plan</li>
+            <li>Ability to add up to 10 clusters</li>
+            <li>10 Users</li>
+            <li>Priority Integrations</li>
+            <li>24/7Phone Support</li>
+          </ul>
+          <p><a className="btn btn-secondary" href="#" role="button" style={signUpButton}>Sign Up »</a></p>
+        </div>
+      </div>
+
   </div>
-</div>
 
-
-
-
-
-
-
-
-
-<blockquote className="blockquote">
-  <p className="mb-0">Check out our ridiculously low pricing plans!</p>
-</blockquote>
-
-
-<div className="card-deck">
-  <div className="card">
-    <img src="https://via.placeholder.com/300" className="card-img-top" alt="..." />
-    <div className="card-body">
-      <h5 className="card-title">Bronze Plan</h5>
-      <p className="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-      <p className="card-text"><small className="text-muted">Per User Per Month</small></p>
-    </div>
   </div>
-  <div className="card">
-    <img src="https://via.placeholder.com/300" className="card-img-top" alt="..." />
-    <div className="card-body">
-      <h5 className="card-title">Silver Pricing Plan</h5>
-      <p className="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-      <p className="card-text"><small className="text-muted">Per User Per Month</small></p>
-    </div>
-  </div>
-  <div className="card">
-    <img src="https://via.placeholder.com/300" className="card-img-top" alt="..." />
-    <div className="card-body">
-      <h5 className="card-title">Gold Plan</h5>
-      <p className="card-text">This is a wide card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-      <p className="card-text"><small className="text-muted">Per User Per Month</small></p>
-    </div>
-  </div>
-</div>
-
-  </>
-        );
-    }
-}
+        )
+    };
+};
 
 export default Home;
