@@ -15,16 +15,32 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 function App() {
   return (
     <Router>
+      
       <div>
-        <Nav />
-        <Sidebar />
-        <div id="page-wrap">
         <Switch>
-          <Route path="/collection" component={Collection} />
-          <Route path="/hosts" component={Hosts} />
-          <Route path="/" component={Home} />
+        <Route path="/collection" render={props =>
+            <div className="page-wrap">
+              <Collection />
+              <Sidebar />
+              <Nav />
+            </div>
+          } />
+          <Route path="/hosts" render={props =>
+            <div className="page-wrap">
+              <Hosts />
+              <Sidebar />
+              <Nav />
+            </div>
+          } />
+         <Route path="/" render={props =>
+            <div className="nav-style">
+              <Home />
+              <Nav />
+            </div>
+          } />
+
         </Switch>
-        </div>
+
       </div>
     </Router>
   );
