@@ -101,14 +101,14 @@ influx
       return influx.createDatabase("telegraf");
     }
   })
-  .then(() => {
+/*   .then(() => {
     app.listen(PORT, () => {
       console.log(`🌎 ==> API server now on port ${PORT}!`);
       console.log("Imflux DB connected successfully");
     });
     // writeDataToInflux(test);
   })
-  .catch(error => console.log({ error }));
+  .catch(error => console.log({ error })); */
 
   // to narrow down the fields we return we can do "select cpu, usagemhz_average, esxhostname from vsphere_host_cpu"
 app.get("/api/host-cpu/1", function(req, res) {
@@ -375,4 +375,8 @@ app.get("*", (req, res) => {
 // app.listen(PORT, function() {
 //     console.log(`App is running on http://localhost:${PORT}`);
 // });
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 

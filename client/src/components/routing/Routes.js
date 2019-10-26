@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Register from '../auth/Register';
 import Login from '../auth/Login';
 import Alert from '../layout/Alert';
-import Dashboard from '../dashboard/Dashboard';
+// import Dashboard from '../dashboard/Dashboard';
 
 
 import NotFound from '../layout/NotFound';
@@ -14,10 +14,10 @@ const Routes = () => {
     <section className='container'>
       <Alert />
       <Switch>
-        <Route exact path='/register' component={Register} />
-        <Route exact path='/login' component={Login} />
-        <PrivateRoute exact path='/dashboard' component={Dashboard} />
-        <Route component={NotFound} />
+        <Route path='/register' component={Register} />
+        <Route path='/login' component={Login} />
+        {/* <PrivateRoute path='/dashboard' component={Dashboard} /> */}
+        {/* <Route component={NotFound} /> */}
       </Switch>
     </section>
   );
