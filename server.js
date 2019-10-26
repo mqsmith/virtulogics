@@ -5,6 +5,7 @@ const path = require("path");
 const Influx = require('influx');
 const os = require('os');
 const bodyParser = require('body-parser');
+const routes = require("./routes");
 
 
 
@@ -20,6 +21,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+
+// Add routes, both API and view
+app.use(routes);
 
 mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
 
