@@ -258,6 +258,31 @@ app.get("/api/cluster-cpu", function(req, res) {
             });
         });
     });
+    
+    app.get("/api/chart-cpu/", function(req, res) {
+        influx.query(`SELECT mean("usage_average") AS "CPU_Usage" FROM "vsphere_host_cpu"
+        WHERE time > now() - 15s
+        AND "esxhostname"=~ /^lab-esxi-01.vdilab.int$/
+        GROUP BY time(2500ms), "cpu" FILL(null)
+        `)
+        .then(allClusterCpu => {
+            console.log(allClusterCpu);
+            res.json({
+            message: "Requested last 15 minutes cluster CPU stats",
+            error: false,
+            data: allClusterCpu
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.json({
+            message: err.message,
+            error: true
+            });
+        });
+    });
+
+    
 
     app.get("/api/host/cpu-mem/1", async function (req, res) {
         let newHashMap = {};
@@ -330,3 +355,4 @@ app.get("*", (req, res) => {
 // app.listen(PORT, function() {
 //     console.log(`App is running on http://localhost:${PORT}`);
 // });
+

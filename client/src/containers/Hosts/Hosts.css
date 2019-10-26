@@ -7,7 +7,9 @@
     float: left;
 }
 
-
+p {
+    font-weight: bold;
+}
 .main-card {
     width: 100%;
     padding: 10px;
