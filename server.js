@@ -1,18 +1,14 @@
-require("dotenv").config();
-const express = require("express");
-const mongoose = require("mongoose");
-const path = require("path");
+const express = require('express');
+const connectDB = require('./config/db');
+const path = require('path');
 const Influx = require('influx');
 const os = require('os');
 const bodyParser = require('body-parser');
-
-
-
-const PORT = process.env.PORT || 3001;
-
-const db = require("./models");
+require("dotenv").config();
 
 const app = express();
+
+const db = require("./models");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -21,16 +17,19 @@ app.use(bodyParser.urlencoded({
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true});
+// Connect Database
+connectDB();
 
-const connection = mongoose.connection;
+//app.get('/',(req,res) => res.send("API Running"));
 
-connection.on("connected", () => {
-    console.log("Mongoose connected successfully");
-});
-connection.on("error", (err) => {
-    console.log("Mongoose default connection error: " + err);
-});
+// Initialize Middleware
+app.use(express.json({ extended: false }));
+
+// Define Routes
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
+//app.use('/api/profile', require('./routes/api/profile'));
+//app.use('/api/posts', require('./routes/api/posts'));
 
 // app.get("/api/cars/:id", function(req, res) {
 //     db.Tesla.findById(req.params.id)
@@ -87,128 +86,131 @@ connection.on("error", (err) => {
 
 // Influx DB connection and routes
 const influx = new Influx.InfluxDB({
-    database: "telegraf",
-    username: "gtadmin",
-    password: "@lmost12",
-    host: "159.242.248.20",
+  database: "telegraf",
+  username: "gtadmin",
+  password: "@lmost12",
+  host: "159.242.248.20",
+});
+
+influx
+.getDatabaseNames()
+.then(names => {
+  if (!names.includes("telegraf")) {
+    return influx.createDatabase("telegraf");
+  }
+})
+/* .then(() => {
+  app.listen(PORT, () => {
+    console.log(`🌎 ==> API server now on port ${PORT}!`);
   });
+  // writeDataToInflux(test);
+})
+.catch(error => console.log({ error })); */
 
-  influx
-  .getDatabaseNames()
-  .then(names => {
-    if (!names.includes("telegraf")) {
-      return influx.createDatabase("telegraf");
-    }
+app.get("/api/host-cpu/15", function(req, res) {
+  influx.query('select * from vsphere_host_cpu where time > now() - 15m')
+  .then((allHostsCpu15) => {
+      console.log(allHostsCpu15);
+      res.json({
+          message: "Requested all host CPU data for the last minute",
+          error: false,
+          data: allHostsCpu15
+      });
+  }).catch((err) => {
+      console.log(err);
+      res.json({
+          message: err.message,
+          error: true
+      })
   })
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`🌎 ==> API server now on port ${PORT}!`);
-    });
-    // writeDataToInflux(test);
-  })
-  .catch(error => console.log({ error }));
-
-  app.get("/api/host-cpu/15", function(req, res) {
-    influx.query('select * from vsphere_host_cpu where time > now() - 15m')
-    .then((allHostsCpu15) => {
-        console.log(allHostsCpu15);
-        res.json({
-            message: "Requested all host CPU data for the last minute",
-            error: false,
-            data: allHostsCpu15
-        });
-    }).catch((err) => {
-        console.log(err);
-        res.json({
-            message: err.message,
-            error: true
-        })
-    })
 });
 
 app.get("/api/host-cpu/1", function(req, res) {
-  influx.query('select * from vsphere_host_cpu where time > now() - 1m')
-  .then((allHostsCpu1) => {
-      console.log(allHostsCpu1);
-      res.json({
-          message: "Requested all host CPU data for the last 15 minutes",
-          error: false,
-          data: allHostsCpu1
-      });
-  }).catch((err) => {
-      console.log(err);
-      res.json({
-          message: err.message,
-          error: true
-      })
-  })
+influx.query('select * from vsphere_host_cpu where time > now() - 1m')
+.then((allHostsCpu1) => {
+    console.log(allHostsCpu1);
+    res.json({
+        message: "Requested all host CPU data for the last 15 minutes",
+        error: false,
+        data: allHostsCpu1
+    });
+}).catch((err) => {
+    console.log(err);
+    res.json({
+        message: err.message,
+        error: true
+    })
+})
 });
 
 app.get("/api/host-mem/1", function(req, res) {
-  influx.query('select * from vsphere_host_mem where time > now() - 1m')
-  .then((allHostsMem1) => {
-      console.log(allHostsMem1);
-      res.json({
-          message: "Requested all host MEM data for the last 1 minute",
-          error: false,
-          data: allHostsMem1
-      });
-  }).catch((err) => {
-      console.log(err);
-      res.json({
-          message: err.message,
-          error: true
-      })
-  })
+influx.query('select * from vsphere_host_mem where time > now() - 1m')
+.then((allHostsMem1) => {
+    console.log(allHostsMem1);
+    res.json({
+        message: "Requested all host MEM data for the last 1 minute",
+        error: false,
+        data: allHostsMem1
+    });
+}).catch((err) => {
+    console.log(err);
+    res.json({
+        message: err.message,
+        error: true
+    })
+})
 });
 
 app.get("/api/host-mem/15", function(req, res) {
-  influx.query('select * from vsphere_host_mem where time > now() - 15m')
-  .then((allHostsMem15) => {
-      console.log(allHostsMem15);
-      res.json({
-          message: "Requested all host MEM data for the last 15 minutes",
-          error: false,
-          data: allHostsMem15
-      });
-  }).catch((err) => {
-      console.log(err);
-      res.json({
-          message: err.message,
-          error: true
-      })
-  })
+influx.query('select * from vsphere_host_mem where time > now() - 15m')
+.then((allHostsMem15) => {
+    console.log(allHostsMem15);
+    res.json({
+        message: "Requested all host MEM data for the last 15 minutes",
+        error: false,
+        data: allHostsMem15
+    });
+}).catch((err) => {
+    console.log(err);
+    res.json({
+        message: err.message,
+        error: true
+    })
+})
 });
 
 app.get("/api/chart-mem", function(req, res) {
-    influx.query(`select mean("active_average") as "RAM_Usage" from "vsphere_host_mem"
-      where time > now() - 1h
-      group by "esxhostname", time(60s)
-      `)
-      .then(allClusterCpu => {
-        // console.log(allClusterCpu);
-        res.json({
-          message: "Requested last 15 minutes cluster CPU stats",
-          error: false,
-          data: allClusterCpu
-        });
-      })
-      .catch(err => {
-        console.log(err);
-        res.json({
-          message: err.message,
-          error: true
-        });
+  influx.query(`select mean("active_average") as "RAM_Usage" from "vsphere_host_mem"
+    where time > now() - 1h
+    group by "esxhostname", time(60s)
+    `)
+    .then(allClusterCpu => {
+      // console.log(allClusterCpu);
+      res.json({
+        message: "Requested last 15 minutes cluster CPU stats",
+        error: false,
+        data: allClusterCpu
       });
-  });
-
-
-app.use(express.static(__dirname + '/client/build'));
-
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "/client/build/index.html"));
+    })
+    .catch(err => {
+      console.log(err);
+      res.json({
+        message: err.message,
+        error: true
+      });
+    });
 });
 
-// app.listen(PORT, function() {
-//     console.log(`App is running on http://localhost:${PORT}`);
-// });
+// Serve static assets in production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
