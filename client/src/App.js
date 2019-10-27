@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
 import Home from "./containers/Home";
-// import Routes from './components/routing/Routes';
+import Routes from './components/routing/Routes';
 import Sidebar from "./components/Sidebar/Sidebar";
 import Collection from "./containers/Collection";
 import Hosts from './containers/Hosts/Hosts';
@@ -15,6 +15,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
+import PrivateRoute from './components/routing/PrivateRoute'
 
 import './App.css';
 
@@ -36,13 +37,14 @@ const App = () => {
         <Sidebar />
         <div id="page-wrap">
         <Switch>
-        {/* <Route component={Routes} />   */}
-          <Route path="/collection" component={Collection} />
+        
+          <PrivateRoute path="/collection" component={Collection} />
           <Route path='/register' component={Register} />
           <Route path='/login' component={Login} />
-          <Route path="/hosts" component={Hosts} />
+          <PrivateRoute path="/hosts" component={Hosts} />
+          <Route path="/" component={Home} />
+      
           
-          <Route path="/*" component={Home} />
           
           
           
