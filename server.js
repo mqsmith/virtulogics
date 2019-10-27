@@ -101,14 +101,14 @@ influx
       return influx.createDatabase("telegraf");
     }
   })
-/*   .then(() => {
+.then(() => {
     app.listen(PORT, () => {
       console.log(`🌎 ==> API server now on port ${PORT}!`);
       console.log("Imflux DB connected successfully");
     });
     // writeDataToInflux(test);
   })
-  .catch(error => console.log({ error })); */
+  .catch(error => console.log({ error }));
 
   // to narrow down the fields we return we can do "select cpu, usagemhz_average, esxhostname from vsphere_host_cpu"
 app.get("/api/host-cpu/1", function(req, res) {
@@ -280,9 +280,11 @@ app.get("/api/cluster-cpu", function(req, res) {
         });
     });
     
+    //Filtered by hostname
     app.get("/api/chart-cpu/", function(req, res) {
         influx.query(`select mean("usage_average") as "CPU_Usage" from "vsphere_host_cpu"
-        where time > now() - 60m
+        WHERE ("esxhostname" = 'lab-esxi-01.vdilab.int')
+        and time > now() - 60m
         group by "esxhostname", time(120s), "cpu" FILL(null)
         `)
         .then(allClusterCpu => {
@@ -363,6 +365,68 @@ app.get("/api/cluster-cpu", function(req, res) {
         
       });
 
+      app.get("/api/host/cpu-mem/1/:esxhostname", async function (req, res) {
+        let newHashMap = {};
+        console.log(req.params.esxhostname);
+        await influx
+          .query(`select * from vsphere_host_mem
+          WHERE ("esxhostname" = '${req.params.esxhostname}')
+          ORDER BY DESC LIMIT 2
+           `)
+          .then(allHostsMem1 => {
+            for(let i = 0; i < allHostsMem1.length; i++){
+                console.log(allHostsMem1[i].usage_average);
+                let moid = allHostsMem1[i].moid;
+                console.log(allHostsMem1[i]);
+                if(newHashMap[moid]){
+                    console.log(allHostsMem1[i].usage_average);
+                    allHostsMem1[i].mem_usage_average = allHostsMem1[i]['usage_average'];
+                    newHashMap[moid] = allHostsMem1[i];
+                }else{
+                    newHashMap[moid] = allHostsMem1[i];
+                }
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+          
+          await influx
+          .query(`
+          select * from vsphere_host_cpu
+          WHERE ("esxhostname" = '${req.params.esxhostname}')
+          and "cpu"='instance-total'
+          ORDER BY DESC LIMIT 2
+          `)
+          .then(allHostsCpu1 => {
+            for(let i = 0; i < allHostsCpu1.length; i++){
+                
+                console.log(allHostsCpu1[i].usage_average);
+                let moid = allHostsCpu1[i].moid;
+                if(newHashMap[moid]){
+                    allHostsCpu1[i].cpu_usage_average = allHostsCpu1[i]['usage_average'];
+                    console.log(allHostsCpu1[i].usage_average);
+                    delete allHostsCpu1[i].usage_average;
+                    let oldValues = newHashMap[moid];
+                    let newValues = allHostsCpu1[i];
+                    newHashMap[moid] = {...oldValues, ...newValues};
+                }else{
+                    newHashMap[moid] = allHostsCpu1[i];
+                }
+            }
+
+          })
+          .catch((err) => {
+              console.log(err);
+          })
+
+          res.json({
+              ...newHashMap
+          })
+
+        
+      });
+
 influx.getMeasurements()
  .then(names => console.log('My measurement names are: ' + names.join(', ')))
 
@@ -378,5 +442,5 @@ app.get("*", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+// app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 

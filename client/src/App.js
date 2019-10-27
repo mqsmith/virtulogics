@@ -7,6 +7,7 @@ import Home from "./containers/Home";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Collection from "./containers/Collection";
 import Hosts from './containers/Hosts/Hosts';
+import Host from './containers/Host/Host';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 
@@ -41,7 +42,7 @@ const App = () => {
           <Route path='/register' component={Register} />
           <Route path='/login' component={Login} />
           <Route path="/hosts" component={Hosts} />
-          
+          <Route path="/host/:esxhostname" component={Host} />
           <Route path="/*" component={Home} />
           
           

@@ -4,11 +4,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
 // import LineChart from "../../components/LineChart";
-import "./Hosts.css";
+// import "./Hosts.css";
 import MEM_Card from "../..//components/MEM_Card/MEM_Card";
 import CPU_Card from "../..//components/CPU_Card/CPU_Card";
 
-class Hosts extends Component {
+class Host extends Component {
   state = {
     allData: [],
     usedMem: ""
@@ -20,7 +20,7 @@ class Hosts extends Component {
   
   getBoth = () => {
     axios
-    .get("/api/host/cpu-mem/1")
+    .get("/api/host/cpu-mem/1/" + this.props.match.params.esxhostname)
     .then(allData => {
       let  obj = allData.data
       const array = Object.values(obj)
@@ -43,14 +43,13 @@ class Hosts extends Component {
           <div className="col-md-12">
             {this.state.allData.map((host, i) => (
               <div className="card card-wrapper">
-              
-                <div  key={host.moid} className="card main-card" >
-               
+                <div  key={host.moid} className="card main-card">
                 <div className="row header-row">
+          
                 <div className="col-md-7 top-left">
-                <Link to={`/host/${host.esxhostname}`}>
+                <Link to="/hosts">
                 <button className="btn-dark btn-sm">
-                 Click to view host details
+                 Go back to your Host view
                 </button>     
                 </Link>
                   </div>
@@ -81,9 +80,8 @@ class Hosts extends Component {
                    </div>
                    </div>
                     <p>Device polled @ {moment(host.time).format("h:mm:ss a")}</p>
-                    
               </div>
-      
+                 
                 </div>
        
             ))}
@@ -96,4 +94,4 @@ class Hosts extends Component {
 }
 
 
-export default Hosts;
+export default Host;
