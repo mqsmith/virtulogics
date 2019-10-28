@@ -48,59 +48,62 @@ class Host extends Component {
         </div>
       );
     } else {
-    return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-12">
-            {this.state.allData.map((host, i) => (
-              <div className="card card-wrapper">
-                <div key={host.moid} className="card main-card">
-                  <div className="row header-row">
-                    <div className="col-md-7 top-left">
-                      <Link to="/hosts">
-                        <button className="btn-dark btn-sm">
-                          Go back to your Host view
-                        </button>
-                      </Link>
+      return (
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              {this.state.allData.map((host, i) => (
+                <div className="card card-wrapper">
+                  <div key={host.moid} className="card main-card">
+                    <div className="row header-row">
+                      <div className="col-md-7 top-left">
+                        <Link to="/hosts">
+                          <button className="btn-dark btn-sm">
+                            Go back to your Host view
+                          </button>
+                        </Link>
+                      </div>
+                      <div className="col-md-4 top-right"></div>
                     </div>
-                    <div className="col-md-4 top-right">
-                 
+                    <div className="row button-row">
+                      <div className="col-md-4 top-left">
+                        <img src="https://assets.webiconspng.com/uploads/2017/09/Server-PNG-Image-23361.png" />
+                        <div className="host-text-box">
+                          <p>Host: {host.esxhostname}</p>
+                          <p>Cluster: {host.clustername}</p>
+                          <p>vCente: {host.vcenter}</p>
+                          <p>CPU Ready: {host.utilization_average}</p>
+                        </div>
+                      </div>
+                      <div className="col-md-4 mem-col">
+                        <MEM_Card
+                          totalCapacity_average={(
+                            (host.totalCapacity_average * host.usage_average) /
+                            100000
+                          ).toFixed(2)}
+                          usage_average={host.usage_average}
+                        />
+                      </div>
+                      <div className="col-md-4 cpu-col">
+                        <CPU_Card
+                          usagemhz_average={host.usagemhz_average}
+                          utilization_average={host.cpu_usage_average}
+                        />
+                      </div>
                     </div>
+                    <p>
+                      Device polled @ {moment(host.time).format("h:mm:ss a")}
+                    </p>
                   </div>
-                  <div className="row button-row">
-                    <div className="col-md-4 top-left">
-                      <img src="https://assets.webiconspng.com/uploads/2017/09/Server-PNG-Image-23361.png" />
-                      <div className="host-text-box">
-                      <p>Host: {host.esxhostname}</p>
-                      <p>Cluster: {host.clustername}</p>
-                      <p>vCente: {host.vcenter}</p>
-                      <p>CPU Ready: {host.utilization_average}</p>
-                    </div>
-                    </div>
-                    <div className="col-md-4 mem-col">
-                      <MEM_Card
-                        totalCapacity_average={(host.totalCapacity_average * host.usage_average / 100000).toFixed(2) }
-                        usage_average={host.usage_average}
-                      />
-                    </div>
-                    <div className="col-md-4 cpu-col">
-                      <CPU_Card
-                        usagemhz_average={host.usagemhz_average}
-                        utilization_average={host.cpu_usage_average}
-                      />
-                    </div>
-                  </div>
-                  <p>Device polled @ {moment(host.time).format("h:mm:ss a")}</p>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
+    return <div>{content}</div>;
   }
-  return <div>{content}</div>;
-}
 }
 
 export default Host;
