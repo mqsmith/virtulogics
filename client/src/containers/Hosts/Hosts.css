@@ -32,3 +32,6 @@ img {
 .btn-sm {
     float: left;
 }
+.loading {
+    padding-top: 250px;
+}
