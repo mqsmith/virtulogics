@@ -305,6 +305,27 @@ app.get("/api/cluster-cpu", function(req, res) {
     });
 
     
+    app.get("/api/chart-mem/:clustername", function(req, res) {
+      influx.query(`SELECT mean("usage_average") FROM "vsphere_host_mem" 
+      WHERE ("clustername" = '${req.params.clustername}')
+      AND time > now() - 7d GROUP BY time(1h), "clustername" fill(none)
+      `)
+      .then(allClusterMem => {
+          console.log(allClusterMem);
+          res.json({
+          message: "Requested last hour of cluster MEM usage",
+          error: false,
+          data: allClusterMem
+          });
+      })
+      .catch(err => {
+          console.log(err);
+          res.json({
+          message: err.message,
+          error: true
+          });
+      });
+  });
 
     app.get("/api/host/cpu-mem/1", async function (req, res) {
         let newHashMap = {};
@@ -338,7 +359,6 @@ app.get("/api/cluster-cpu", function(req, res) {
           `)
           .then(allHostsCpu1 => {
             for(let i = 0; i < allHostsCpu1.length; i++){
-                
                 console.log(allHostsCpu1[i].usage_average);
                 let moid = allHostsCpu1[i].moid;
                 if(newHashMap[moid]){
@@ -352,17 +372,13 @@ app.get("/api/cluster-cpu", function(req, res) {
                     newHashMap[moid] = allHostsCpu1[i];
                 }
             }
-
           })
           .catch((err) => {
               console.log(err);
           })
-
           res.json({
               ...newHashMap
           })
-
-        
       });
 
       app.get("/api/host/cpu-mem/1/:esxhostname", async function (req, res) {
@@ -400,7 +416,6 @@ app.get("/api/cluster-cpu", function(req, res) {
           `)
           .then(allHostsCpu1 => {
             for(let i = 0; i < allHostsCpu1.length; i++){
-                
                 console.log(allHostsCpu1[i].usage_average);
                 let moid = allHostsCpu1[i].moid;
                 if(newHashMap[moid]){
@@ -414,18 +429,15 @@ app.get("/api/cluster-cpu", function(req, res) {
                     newHashMap[moid] = allHostsCpu1[i];
                 }
             }
-
           })
           .catch((err) => {
               console.log(err);
           })
-
           res.json({
               ...newHashMap
           })
-
-        
       });
+
 
 influx.getMeasurements()
  .then(names => console.log('My measurement names are: ' + names.join(', ')))
