@@ -8,11 +8,11 @@ const CPU_Card = props => (
   </div>
     <button className="btn btn-success">
       <p>CPU Usage:</p>
-      {props.usagemhz_average}Mhz
+      {props.usagemhz_average} Mhz
     </button>
     <button className="btn btn-success">
       <p>CPU Utilization:</p>
-      {props.utilization_average}%
+      {props.utilization_average} %
     </button>
   </div>
 );

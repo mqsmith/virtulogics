@@ -64,19 +64,22 @@ class Host extends Component {
                       </Link>
                     </div>
                     <div className="col-md-4 top-right">
-                      <p>vCenter {host.vcenter}</p>
-                      <p>CPU Ready: {host.utilization_average}</p>
+                 
                     </div>
                   </div>
                   <div className="row button-row">
-                    <div className="col-md-3 top-left">
+                    <div className="col-md-4 top-left">
                       <img src="https://assets.webiconspng.com/uploads/2017/09/Server-PNG-Image-23361.png" />
+                      <div className="host-text-box">
                       <p>Host: {host.esxhostname}</p>
                       <p>Cluster: {host.clustername}</p>
+                      <p>vCente: {host.vcenter}</p>
+                      <p>CPU Ready: {host.utilization_average}</p>
+                    </div>
                     </div>
                     <div className="col-md-4 mem-col">
                       <MEM_Card
-                        totalCapacity_average={host.totalCapacity_average}
+                        totalCapacity_average={(host.totalCapacity_average * host.usage_average / 100000).toFixed(2) }
                         usage_average={host.usage_average}
                       />
                     </div>
