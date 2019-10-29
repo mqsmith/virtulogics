@@ -9,7 +9,7 @@ import Login from './components/auth/Login';
 // import Routes from './components/routing/Routes';
 import Sidebar from "./components/Sidebar/Sidebar";
 
-import Home from "./containers/Home";
+//import Home from "./containers/Home";
 import Collection from "./containers/Collection";
 import Hosts from './containers/Hosts/Hosts';
 
@@ -47,20 +47,7 @@ const App = () => {
           <Route path='/login' component={Login} />
           <PrivateRoute path="/hosts" component={Hosts} />
           <Route path="/" component={Home} />
-      
-          
-          
-          
-          
-          
-          
-          
-        </Switch>
-      <Router>
-
-        <div>
-          <Switch>
-            <Route path="/collection" render={props =>
+          <Route path="/collection" render={props =>
                 <div className="page-wrap">
                   <Navbar />
                   <Sidebar />
@@ -92,14 +79,13 @@ const App = () => {
                 <Home />
               </div>
             } />
-          </Switch>
-
-        </div>
-
-      </Router>
+          
+        </Switch>
+        </div>  
+        </div>   
+        </Router>   
     </Provider>
   );
 };
-
 
 export default App;
