@@ -35,8 +35,8 @@ const App = () => {
   return (
     <Provider store={store}>
     <Router>
-   {/*  //<Fragment> */}
       <div>
+{/*       <Fragment> */}
         <Navbar />
         <Sidebar />
         <div id="page-wrap">
@@ -81,7 +81,8 @@ const App = () => {
             } />
           
         </Switch>
-        </div>  
+        </div> 
+{/*         </Fragment> */} 
         </div>   
         </Router>   
     </Provider>
