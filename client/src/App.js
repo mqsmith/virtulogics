@@ -4,12 +4,13 @@ import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
-// import Routes from './components/routing/Routes';
+import Routes from './components/routing/Routes';
 import Sidebar from "./components/Sidebar/Sidebar";
 
 import Home from "./containers/Home";
 import Collection from "./containers/Collection";
 import Hosts from './containers/Hosts/Hosts';
+import PrivateRoute from './components/routing/PrivateRoute'
 
 
 // Redux
@@ -31,11 +32,42 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <Router>
+    <Router>
+      <Fragment>
+        <Navbar />
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <PrivateRoute exact path='/collection' component={props => (
+                <div className="page-wrap">
+                  <Navbar />
+                  <Sidebar />
+                  <Collection {...props} />
+                </div>
+          )
 
-        <div>
-          <Switch>
-            <Route path="/collection" render={props =>
+          }/>
+
+<PrivateRoute exact path='/hosts' component={props => (
+                <div className="page-wrap">
+                  <Navbar />
+                  <Sidebar />
+                  <Hosts {...props} />
+                </div>
+          )
+
+          }/>
+
+
+         {/*  <PrivateRoute exact path='/hosts' component={Hosts} /> */}
+          <Route component={Routes} />
+        </Switch>
+      </Fragment>
+    </Router>
+  </Provider>
+);
+};
+
+{/* <Route path="/collection" render={props =>
                 <div className="page-wrap">
                   <Navbar />
                   <Sidebar />
@@ -48,33 +80,7 @@ const App = () => {
                   <Sidebar />
                   <Hosts />
                 </div>
-            } />
-            <Route path="/register" render={props =>
-              <div className="nav-style">
-                <Navbar />
-                <Register />
-              </div>
-            } />
-            <Route path="/login" render={props =>
-              <div className="nav-style">
-                <Navbar />
-                <Login />
-              </div>
-            } />
-            <Route path="/" render={props =>
-              <div className="nav-style">
-                <Navbar />
-                <Home />
-              </div>
-            } />
-          </Switch>
-
-        </div>
-
-      </Router>
-    </Provider>
-  );
-};
+            } /> */}
 
 
 export default App;
