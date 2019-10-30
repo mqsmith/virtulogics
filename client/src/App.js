@@ -39,9 +39,16 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <Navbar />
+        
         <Switch>
-          <Route exact path='/' component={Home} />
+          
+          <Route exact path='/' component={props => (
+            <div className="nav-style">
+              <Navbar />
+              <Home {...props}/>
+            </div>
+          )
+          } />
           <PrivateRoute exact path='/collection' component={props => (
             <div className="page-wrap">
               <Navbar />
@@ -88,7 +95,7 @@ const App = () => {
           } />
 
           <Route component={Routes} />
-
+          
         </Switch>
       </Router>
     </Provider>
