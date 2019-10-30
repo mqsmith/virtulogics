@@ -24,6 +24,7 @@ import store from './store';
 import { loadUser } from './actions/auth';
 import setAuthToken from './utils/setAuthToken';
 
+// Import Style Sheet
 import './App.css';
 
 if (localStorage.token) {
@@ -37,69 +38,60 @@ const App = () => {
 
   return (
     <Provider store={store}>
-    <Router> 
-    <Navbar />    
+      <Router>
+        <Navbar />
         <Switch>
           <Route exact path='/' component={Home} />
           <PrivateRoute exact path='/collection' component={props => (
-                <div className="page-wrap">
-                  <Navbar />
-                  <Sidebar />
-                  <Collection {...props} />
-                </div>
+            <div className="page-wrap">
+              <Navbar />
+              <Sidebar />
+              <Collection {...props} />
+            </div>
           )
+          } />
 
-          }/>
-
-<PrivateRoute exact path='/host/:esxhostname' component={props => (
-                <div className="page-wrap">
-                  <Navbar />
-                  <Sidebar />
-                  <Host {...props} />
-                </div>
+          <PrivateRoute exact path='/host/:esxhostname' component={props => (
+            <div className="page-wrap">
+              <Navbar />
+              <Sidebar />
+              <Host {...props} />
+            </div>
           )
+          } />
 
-          }/>
-
-<PrivateRoute exact path='/hosts' component={props => (
-                <div className="page-wrap">
-                  <Navbar />
-                  <Sidebar />
-                  <Hosts {...props} />
-                </div>
+          <PrivateRoute exact path='/hosts' component={props => (
+            <div className="page-wrap">
+              <Navbar />
+              <Sidebar />
+              <Hosts {...props} />
+            </div>
           )
+          } />
 
-          }/>
-
-<PrivateRoute exact path='/collection' component={props => (
-                <div className="page-wrap">
-                  <Navbar />
-                  <Sidebar />
-                  <Collection {...props} />
-                </div>
+          <PrivateRoute exact path='/collection' component={props => (
+            <div className="page-wrap">
+              <Navbar />
+              <Sidebar />
+              <Collection {...props} />
+            </div>
           )
+          } />
 
-          }/>
-
-<PrivateRoute exact path='/clusters' component={props => (
-                <div className="page-wrap">
-                  <Navbar />
-                  <Sidebar />
-                  <Clusters {...props} />
-                </div>
+          <PrivateRoute exact path='/clusters' component={props => (
+            <div className="page-wrap">
+              <Navbar />
+              <Sidebar />
+              <Clusters {...props} />
+            </div>
           )
+          } />
 
-          }/>
-    
           <Route component={Routes} />
 
-            <Route path="/" render={props =>
-              <div className="nav-style">
-                
-                <Home />
-              </div>
-            } />
-          </Switch>
+          
+          } />
+        </Switch>
       </Router>
     </Provider>
   );
