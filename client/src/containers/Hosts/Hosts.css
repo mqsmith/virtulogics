@@ -1,14 +1,16 @@
 .card {
     width: 90%;
-    padding: 20px
+    padding: 10px
 }
 .card-body {
     /* width: 100%; */
     float: left;
+  
 }
 
 p {
     font-weight: bold;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 .main-card {
     width: 100%;
@@ -28,4 +30,20 @@ img {
 }
 .card-wrapper {
     border-style: none;
+}
+.btn-sm {
+    float: left;
+}
+.loading {
+    padding-top: 250px;
+    font-size: 50px;
+}
+.top-left {
+    text-align: left;
+    line-height: 10px;
+}
+.host-text-box {
+    margin-left: 10px;
+    padding: 15px;
+    font-family: 'Roboto Condensed', sans-serif;
 }

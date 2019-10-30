@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
-import Landing from './components/layout/Landing';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 // import Routes from './components/routing/Routes';
@@ -10,6 +9,10 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import Home from "./containers/Home";
 import Collection from "./containers/Collection";
 import Hosts from './containers/Hosts/Hosts';
+import Clusters from './containers/Clusters/Clusters';
+import Host from './containers/Host/Host';
+// import Login from './components/auth/Login';
+import Wrapper from "./components/Wrapper/Wrapper";
 
 
 // Redux
@@ -35,6 +38,20 @@ const App = () => {
 
         <div>
           <Switch>
+          <Route path="/clusters" render={props =>
+                <div className="page-wrap">
+                  <Navbar />
+                  <Sidebar />
+                  <Clusters />
+                </div>
+            } />
+          <Route path="/host/:esxhostname" render={props =>
+                <div className="page-wrap">
+                  <Navbar />
+                  <Sidebar />
+                  <Host {...props}/>
+                </div>
+            } />
             <Route path="/collection" render={props =>
                 <div className="page-wrap">
                   <Navbar />
@@ -44,6 +61,7 @@ const App = () => {
             } />
             <Route path="/hosts" render={props =>
                 <div className="page-wrap">
+                <Wrapper />
                   <Navbar />
                   <Sidebar />
                   <Hosts />
@@ -68,7 +86,6 @@ const App = () => {
               </div>
             } />
           </Switch>
-
         </div>
 
       </Router>
