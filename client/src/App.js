@@ -1,19 +1,21 @@
 import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+// Import Components
 import Navbar from './components/layout/Navbar';
-import Register from './components/auth/Register';
-import Login from './components/auth/Login';
 import Routes from './components/routing/Routes';
 import Sidebar from "./components/Sidebar/Sidebar";
+import PrivateRoute from './components/routing/PrivateRoute';
+import Wrapper from "./components/Wrapper/Wrapper";
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
 
+// Import Containers
 import Home from "./containers/Home";
 import Collection from "./containers/Collection";
 import Hosts from './containers/Hosts/Hosts';
-import PrivateRoute from './components/routing/PrivateRoute'
 import Clusters from './containers/Clusters/Clusters';
 import Host from './containers/Host/Host';
-// import Login from './components/auth/Login';
-import Wrapper from "./components/Wrapper/Wrapper";
 
 
 // Redux
@@ -93,7 +95,7 @@ const App = () => {
 
             <Route path="/" render={props =>
               <div className="nav-style">
-                <Navbar />
+                
                 <Home />
               </div>
             } />
