@@ -3,12 +3,13 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
-// import Routes from './components/routing/Routes';
+import Routes from './components/routing/Routes';
 import Sidebar from "./components/Sidebar/Sidebar";
 
 import Home from "./containers/Home";
 import Collection from "./containers/Collection";
 import Hosts from './containers/Hosts/Hosts';
+import PrivateRoute from './components/routing/PrivateRoute'
 import Clusters from './containers/Clusters/Clusters';
 import Host from './containers/Host/Host';
 // import Login from './components/auth/Login';
@@ -34,51 +35,62 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <Router>
+    <Router> 
+    <Navbar />    
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <PrivateRoute exact path='/collection' component={props => (
+                <div className="page-wrap">
+                  <Navbar />
+                  <Sidebar />
+                  <Collection {...props} />
+                </div>
+          )
 
-        <div>
-          <Switch>
-          <Route path="/clusters" render={props =>
+          }/>
+
+<PrivateRoute exact path='/host/:esxhostname' component={props => (
                 <div className="page-wrap">
                   <Navbar />
                   <Sidebar />
-                  <Clusters />
+                  <Host {...props} />
                 </div>
-            } />
-          <Route path="/host/:esxhostname" render={props =>
+          )
+
+          }/>
+
+<PrivateRoute exact path='/hosts' component={props => (
                 <div className="page-wrap">
                   <Navbar />
                   <Sidebar />
-                  <Host {...props}/>
+                  <Hosts {...props} />
                 </div>
-            } />
-            <Route path="/collection" render={props =>
+          )
+
+          }/>
+
+<PrivateRoute exact path='/collection' component={props => (
                 <div className="page-wrap">
                   <Navbar />
                   <Sidebar />
-                  <Collection />
+                  <Collection {...props} />
                 </div>
-            } />
-            <Route path="/hosts" render={props =>
+          )
+
+          }/>
+
+<PrivateRoute exact path='/clusters' component={props => (
                 <div className="page-wrap">
-                <Wrapper />
                   <Navbar />
                   <Sidebar />
-                  <Hosts />
+                  <Clusters {...props} />
                 </div>
-            } />
-            <Route path="/register" render={props =>
-              <div className="nav-style">
-                <Navbar />
-                <Register />
-              </div>
-            } />
-            <Route path="/login" render={props =>
-              <div className="nav-style">
-                <Navbar />
-                <Login />
-              </div>
-            } />
+          )
+
+          }/>
+    
+          <Route component={Routes} />
+
             <Route path="/" render={props =>
               <div className="nav-style">
                 <Navbar />
@@ -86,8 +98,6 @@ const App = () => {
               </div>
             } />
           </Switch>
-        </div>
-
       </Router>
     </Provider>
   );
