@@ -48,6 +48,15 @@ app.use('/api/auth', require('./routes/api/auth'));
 //     })
 // });
 
+influx.getMeasurements()
+ .then(names => console.log('My measurement names are: ' + names.join(', ')))
+
+app.use(express.static(__dirname + "/client/build"));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/build/index.html"));
+});
+
 app.get("/api/hosts", function(req, res) {
   db.HostCpu.find({})
     .then(allHosts => {
@@ -439,14 +448,7 @@ app.get("/api/cluster-cpu", function(req, res) {
       });
 
 
-influx.getMeasurements()
- .then(names => console.log('My measurement names are: ' + names.join(', ')))
 
-app.use(express.static(__dirname + "/client/build"));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/client/build/index.html"));
-});
 
 // app.listen(PORT, function() {
 //     console.log(`App is running on http://localhost:${PORT}`);
