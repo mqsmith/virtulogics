@@ -4,23 +4,30 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import Loading from "../../components/Loading/Loading";
-import "./Hosts.css";
+// import "./Hosts.css";
 import MEM_Card from "../..//components/MEM_Card/MEM_Card";
 import CPU_Card from "../..//components/CPU_Card/CPU_Card";
 
-class Hosts extends Component {
+class Host extends Component {
+  
   state = {
     allData: [],
     loading: true
   };
 
   componentDidMount() {
+    console.log("Host props: ", this.props);
     this.getBoth();
+  }
+
+  componentDidUpdate(prevProps){
+    console.log("Host updated props: ", this.props);
   }
 
   getBoth = () => {
     axios
-      .get("/api/host/cpu-mem/1")
+    .get("/api/host/cpu-mem/1/" + this.props.match.params.esxhostname) 
+    // .get("/api/host/cpu-mem/1/")
       .then(allData => {
         let obj = allData.data;
         const array = Object.values(obj);
@@ -64,9 +71,9 @@ class Hosts extends Component {
                   <div key={host.moid} className="card main-card">
                     <div className="row header-row">
                       <div className="col-md-7 top-left">
-                        <Link to={`/host/${host.esxhostname}`}>
+                        <Link to="/hosts">
                           <button className="btn-dark btn-sm">
-                            Click to view host details
+                            Click to back to the hosts view
                           </button>
                         </Link>
                       </div>
@@ -112,4 +119,4 @@ class Hosts extends Component {
     return <div>{content}</div>;
   }
 }
-export default Hosts;
+export default Host;
