@@ -89,8 +89,6 @@ const App = () => {
 
           <Route component={Routes} />
 
-          
-          } />
         </Switch>
       </Router>
     </Provider>
