@@ -24,6 +24,7 @@ connectDB();
 
 // Initialize Middleware
 app.use(express.json({ extended: false }));
+app.use(express.static(__dirname + "/client/build"));
 
 // Define Routes
 app.use('/api/users', require('./routes/api/users'));
@@ -442,7 +443,7 @@ app.get("/api/cluster-cpu", function(req, res) {
 influx.getMeasurements()
  .then(names => console.log('My measurement names are: ' + names.join(', ')))
 
-app.use(express.static(__dirname + "/client/build"));
+
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/client/build/index.html"));
