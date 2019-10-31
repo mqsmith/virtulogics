@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import GaugeChart from 'react-gauge-chart'
 import axios from "axios";
 import { Link } from "react-router-dom";
 import PieComponent from "../..//components/Pie/Pie"
@@ -33,6 +32,15 @@ class Clusters extends Component {
         const array = Object.values(obj);
         // console.log(array);
         this.setState({ allData: array, loading: false });
+        console.log("===================================================================");
+        let combined = [];
+
+        for (let i = 0; i < this.state.allData.length; i++) {
+          console.log(this.state.allData[i].usage_average)
+          combined.push(this.state.allData[i].usage_average);
+
+        }
+        console.log(combined);
        
         // console.log(array);
         // let cluster = this.state.allData.filter(
@@ -72,8 +80,6 @@ class Clusters extends Component {
       .catch(err => {
         console.log(err);
       });
-
-      
   };
   render() {
     let content;
@@ -88,19 +94,17 @@ class Clusters extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-                <div className="card card-wrapper">
-                  <div className="card main-card">
-                    <div className="row header-row">
-                      <div className="col-md-7 top-left">
-                        <Link to="/hosts">
-                          <button className="btn-dark btn-sm">
-                            Click to view host details
+              <div className="card card-wrapper">
+                <div className="card main-card">
+                  <div className="row header-row">
+                    <div className="col-md-7 top-left">
+                      <Link to="/hosts">
+                        <button className="btn-dark btn-sm">
+                          Click to view host details
                           </button>
-                        </Link>
-                      </div>
-                      <div className="col-md-4 top-right">
-                        
-                      </div>
+                      </Link>
+                    </div>
+                    <div className="col-md-4 top-right">
                     </div>
                     <div className="row button-row">
                       <div className="col-md-sm top-left">
@@ -127,11 +131,16 @@ class Clusters extends Component {
                      
                       </div>
                     </div>
-                    <p>
-                      {/* Device polled @ {moment(host.time).format("h:mm:ss a")} */}
-                    </p>
+                    <div className="col-md-4 mem-col">
+
+                    </div>
+                    <div className="col-md-4 cpu-col">
+
+                    </div>
                   </div>
                 </div>
+              </div>
+              )
             </div>
           </div>
         </div>
