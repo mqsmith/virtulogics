@@ -1,14 +1,11 @@
 import React, { Component } from "react";
-// import Moment from "react-moment";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import Loading from "../../components/Loading/Loading";
-// import "./Hosts.css";
 import Dual_Button_Card from "../../components/Dual_Button_Card/";
 
 class Host extends Component {
-  
   state = {
     allData: [],
     loading: true
@@ -26,11 +23,9 @@ class Host extends Component {
   getBoth = () => {
     axios
     .get("/api/host/cpu-mem/1/" + this.props.match.params.esxhostname) 
-    // .get("/api/host/cpu-mem/1/")
       .then(allData => {
         let obj = allData.data;
         const array = Object.values(obj);
-        // console.log(array);
         this.setState({ allData: array, loading: false });
         console.log(this.state.allData[0].esxhostname);
         console.log(this.state.allData[0].totalCapacity_average);
