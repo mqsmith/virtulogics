@@ -4,7 +4,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import PieComponent from "../..//components/Pie/Pie"
 import Loading from "../../components/Loading/Loading";
-import MEM_Card from "../..//components/MEM_Card/MEM_Card";
+import Dual_Button_Card from "../..//components/Dual_Button_Card/";
 // import "./Hosts.css";
 
 
@@ -118,9 +118,10 @@ class Clusters extends Component {
                       </div>
                      
                       <div className="col-md-4 cpu-col">
-                      <MEM_Card
+                      <Dual_Button_Card
                           title="Cluster CPU/MEM Usage"
-                          text="CPU Usage:"
+                          text1="CPU Usage (%):"
+                          text2="MEM Usage (%):"
                           firstButton={this.state.cputotal}
                           secondButton={this.state.totalmemoryusage}
                         />

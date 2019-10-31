@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import Loading from "../../components/Loading/Loading";
 // import "./Hosts.css";
-import MEM_Card from "../..//components/MEM_Card/MEM_Card";
-import CPU_Card from "../..//components/CPU_Card/CPU_Card";
+import Dual_Button_Card from "../../components/Dual_Button_Card/";
 
 class Host extends Component {
   
@@ -90,9 +89,10 @@ class Host extends Component {
                         </div>
                       </div>
                       <div className="col-md-4 mem-col">
-                        <MEM_Card
+                        <Dual_Button_Card
                           title="Host Memory Usage"
-                          text="MEM Usage:"
+                          text1="MEM Usage (GB):"
+                          text2="MEM Usage (%):"
                           firstButton={(
                             (host.totalCapacity_average * host.usage_average) /
                             100000
@@ -101,9 +101,12 @@ class Host extends Component {
                         />
                       </div>
                       <div className="col-md-4 cpu-col">
-                        <CPU_Card
-                          usagemhz_average={host.usagemhz_average}
-                          utilization_average={host.cpu_usage_average}
+                        <Dual_Button_Card
+                          title="Host CPU Usage"
+                          text1="CPU Usage (Mhz):"
+                          text2="CPU Usage (%):"
+                          firstButton={host.usagemhz_average}
+                          secondButton={host.cpu_usage_average}
                         />
                       </div>
                     </div>

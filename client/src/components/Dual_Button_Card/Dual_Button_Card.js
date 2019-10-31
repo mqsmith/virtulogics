@@ -1,21 +1,21 @@
 import React from "react";
-import "./MEM_Card.css";
+import "./Dual_Button_Card.css";
 
-const MEM_Card = props => (
+const Dual_Button_Card = props => (
   <div className="card card-stats">
     <div id="inner" className="card-header">
       {props.title}
     </div>
 
     <button className="btn btn-success">
-      <p>{props.text}</p>
-      {props.firstButton} %
+      <p>{props.text1}</p>
+      {props.firstButton}
     </button>
     <button className="btn btn-success">
-      <p>MEM Utilization:</p>
-      {props.secondButton} %
+      <p>{props.text2}</p>
+      {props.secondButton}
     </button>
   </div>
 );
 
-export default MEM_Card;
+export default Dual_Button_Card;
