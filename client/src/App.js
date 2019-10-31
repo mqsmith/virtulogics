@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, {useEffect} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Import Components
@@ -6,9 +6,6 @@ import Navbar from './components/layout/Navbar';
 import Routes from './components/routing/Routes';
 import Sidebar from "./components/Sidebar/Sidebar";
 import PrivateRoute from './components/routing/PrivateRoute';
-import Wrapper from "./components/Wrapper/Wrapper";
-import Register from './components/auth/Register';
-import Login from './components/auth/Login';
 
 // Import Containers
 import Home from "./containers/Home";
@@ -49,6 +46,7 @@ const App = () => {
             </div>
           )
           } />
+
           <PrivateRoute exact path='/collection' component={props => (
             <div className="page-wrap">
               <Navbar />
