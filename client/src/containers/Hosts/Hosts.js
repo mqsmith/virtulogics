@@ -74,7 +74,7 @@ class Hosts extends Component {
                     </div>
                     <div className="row button-row">
                       <div className="col-md-4 top-left">
-                        <img src="https://assets.webiconspng.com/uploads/2017/09/Server-PNG-Image-23361.png" />
+                        <img src="/img/host.png" />
                         <div className="host-text-box">
                           <p>Host: {host.esxhostname}</p>
                           <p>Cluster: {host.clustername}</p>
@@ -84,11 +84,13 @@ class Hosts extends Component {
                       </div>
                       <div className="col-md-4 mem-col">
                         <MEM_Card
-                          totalCapacity_average={(
+                          title="Host Memory Usage"
+                          text="MEM Usage:"
+                          firstButton={(
                             (host.totalCapacity_average * host.usage_average) /
                             100000
                           ).toFixed(2)}
-                          usage_average={host.usage_average}
+                          secondButton={host.usage_average}
                         />
                       </div>
                       <div className="col-md-4 cpu-col">
