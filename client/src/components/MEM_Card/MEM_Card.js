@@ -4,16 +4,16 @@ import "./MEM_Card.css";
 const MEM_Card = props => (
   <div className="card card-stats">
     <div id="inner" className="card-header">
-      Host Memory Stats:
+      {props.title}
     </div>
 
     <button className="btn btn-success">
-      <p>MEM Usage:</p>
-      {props.totalCapacity_average} GB
+      <p>{props.text}</p>
+      {props.firstButton} %
     </button>
     <button className="btn btn-success">
       <p>MEM Utilization:</p>
-      {props.usage_average} %
+      {props.secondButton} %
     </button>
   </div>
 );
