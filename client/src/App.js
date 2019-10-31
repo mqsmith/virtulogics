@@ -94,7 +94,12 @@ const App = () => {
           )
           } />
 
-          <Route component={Routes} />
+          <Route component={props =>(
+            <div className="nav-style">
+              <Navbar />
+              <Routes {...props}/>
+            </div>
+          )} />
           
         </Switch>
       </Router>
