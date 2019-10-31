@@ -17,9 +17,10 @@ p {
     padding: 10px;
 }
 img {
-    width: 128px;
-    height: 128px;
+    /* width: 128px;
+    height: 128px; */
     margin: 20px;
+    background-color: white;
 }
 .card-stats {
     box-shadow: 0 2px 2px #999, 0 2px 2px #999;
