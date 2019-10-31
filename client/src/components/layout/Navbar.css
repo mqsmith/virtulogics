@@ -5,3 +5,10 @@
     left: 0;
     z-index: 1030;
 }
+
+.nav-header {
+    height: 90px;
+    background-image: url("/img/header-sm.png");
+    /* background-size: cover; */
+    background-repeat: no-repeat;
+}
