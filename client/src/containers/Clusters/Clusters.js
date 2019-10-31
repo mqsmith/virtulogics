@@ -12,11 +12,11 @@ class Clusters extends Component {
   state = {
     allData: [],
     loading: true,
-    totalMemoryUsage: [],
+    totalmemoryusage: [],
     label: [],
     data: [],
-    clusterName: [],
-    singlelClusterName: [],
+    singlevcentername: [],
+    singleclustername: [],
 
 
   };
@@ -46,17 +46,16 @@ class Clusters extends Component {
             memTotal += memData[i]
           }
         const cpuData = this.state.allData.map(data => data.cpu_usage_average);
-        let cpuTotal = 0;
+        let cputotal = 0;
           //Add the to values together to make the total
           for ( let e =0; e < cpuData.length; e++ ) {
-            cpuTotal += cpuData[e]
+            cputotal += cpuData[e]
           }
         const labelData = this.state.allData.map(data => data.esxhostname);
         const clusterName = this.state.allData.map(data => data.clustername);
-        const singlelClusterName = [...new Set(clusterName)];
-        console.log(singlelClusterName);
+        const singleclustername = [...new Set(clusterName)];
         const vcenterName = this.state.allData.map(data => data.vcenter);
-        const singleVcenterName = [...new Set(vcenterName)];
+        const singlevcentername = [...new Set(vcenterName)];
         
       
       
@@ -64,10 +63,10 @@ class Clusters extends Component {
         // labelData.push("Total");
 
         //Set state
-        this.setState({ cpuTotal: cpuTotal, totalMemoryUsage: memTotal, label: labelData, data: memData, singlelClusterName: singlelClusterName,  singleVcenterName: singleVcenterName});
+        this.setState({ cputotal: cputotal, totalmemoryusage: memTotal, label: labelData, data: memData, singleclustername: singleclustername,  singlevcentername: singlevcentername});
         // console.log(memData);
         // console.log(labelData.length);
-        // console.log(memTotal);
+        console.log(memTotal);
      
       })
       .catch(err => {
@@ -104,28 +103,28 @@ class Clusters extends Component {
                       </div>
                     </div>
                     <div className="row button-row">
-                      <div className="col-md-4 top-left">
+                      <div className="col-md-sm top-left">
                         <img src="/img/cluster.png" />
                         <div className="host-text-box">
-                        <p>Cluster: {this.state.singlelClusterName}</p>
-                        <p>vCenter: {this.state.singleVcenterName}</p>
+                        <p>Cluster: {this.state.singleclustername}</p>
+                        <p>vCenter: {this.state.singlevcentername}</p>
                         <p>Number of ESXi Hosts: {this.state.label.length}</p>
                         </div>
                       </div>
-                      <div className="col-md-4 mem-col">
-                      <MEM_Card
-                          title="Cluster CPU/MEM Usage"
-                          text="CPU Usage:"
-                          firstButton={this.state.cpuTotal}
-                          secondButton={this.state.totalMemoryUsage}
-                        />
+                      <div className="col-sm-4 mem-col">
+                      <p>Cluster memory usage by host</p>
+                      <PieComponent {...this.state}
+                       />
                       </div>
                      
                       <div className="col-md-4 cpu-col">
-                      <p>Cluster memory usage by host</p>
-                      <PieComponent {...this.state}
+                      <MEM_Card
+                          title="Cluster CPU/MEM Usage"
+                          text="CPU Usage:"
+                          firstButton={this.state.cputotal}
+                          secondButton={this.state.totalmemoryusage}
+                        />
                      
-                       />
                       </div>
                     </div>
                     <p>
