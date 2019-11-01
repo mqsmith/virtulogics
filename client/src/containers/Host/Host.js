@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import LineChart from "../../components/LineMemChart";
+// import LineChart from "../../components/LineMemChart";
 import Loading from "../../components/Loading/Loading";
 import MEM_Card from "../..//components/MEM_Card/MEM_Card";
 import CPU_Card from "../..//components/CPU_Card/CPU_Card";

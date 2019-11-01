@@ -47,14 +47,14 @@ class Collection extends Component {
     axios
       .get("/api/host/cpu/7days/" + this.props.hostName)
       .then(hostCPUData => {
-        const { time, hostCpuData} = hostCPUData.data.data
-        console.log(hostCPUData);
-        let formattedTime = time.map(time => moment(time).format("M/D/YY, h:mm a"));
+        const {hostCpuData} = hostCPUData.data.data
+        // console.log(hostCPUData);
+        // let formattedTime = time.map(time => moment(time).format("M/D/YY, h:mm a"));
         // console.log(formattedTime);
         this.setState({
           hostCpuData: hostCpuData,
           hostCpuLabels: this.props.hostName + " CPU usage",
-          time: formattedTime
+          // time: formattedTime
         });
         // console.log(this.state);
       })
@@ -81,7 +81,7 @@ class Collection extends Component {
             hostData={this.state.hostCpuData}
             hostLabels={this.state.hostCpuLabels}
             time={this.state.time}
-            color="rgba(255, 0, 0, 0.68)"
+            color="rgba(0, 149, 255, 0.68)"
           />
         </div>
       </>
