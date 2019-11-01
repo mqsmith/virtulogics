@@ -38,7 +38,7 @@ class PieComponent extends React.Component {
     // }
   
     componentDidUpdate() {
-        // console.log(this.props.data);
+        console.log(this.props);
         this.myChart = new Chart(this.chartRef.current, {
             type: 'doughnut',
             data: {

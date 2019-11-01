@@ -6,7 +6,7 @@ import moment from "moment";
 import Loading from "../../components/Loading/Loading";
 import MEM_Card from "../..//components/MEM_Card/MEM_Card";
 import CPU_Card from "../..//components/CPU_Card/CPU_Card";
-import Collection from "../../components/Collection";
+import Collection from "../../components/HostChart/HostChartContainer";
 
 class Host extends Component {
   state = {
