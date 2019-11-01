@@ -3,9 +3,9 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import PieComponent from "../..//components/Pie/Pie"
 import Loading from "../../components/Loading/Loading";
-import MEM_Card from "../..//components/MEM_Card/MEM_Card";
+import Dual_Button_Card from "../..//components/Dual_Button_Card/";
 import ClusterChartContainer from "../../components/ClusterChart/ClusterChartContainer"
-// import "./Hosts.css";
+import "./Clusters.css";
 
 
 class Clusters extends Component {
@@ -33,7 +33,6 @@ class Clusters extends Component {
         const array = Object.values(obj);
         // console.log(array);
         this.setState({ allData: array, loading: false });
-        console.log("===================================================================");
         let combined = [];
 
         for (let i = 0; i < this.state.allData.length; i++) {
@@ -108,24 +107,26 @@ class Clusters extends Component {
                     <div className="col-md-4 top-right">
                     </div>
                     <div className="row button-row">
-                      <div className="col-md-sm top-left">
+                      <div className="col-md-4 top-left">
                         <img src="/img/cluster.png" />
                         <div className="host-text-box">
                         <p>Cluster: {this.state.singleclustername}</p>
-                        <p>vCenter: {this.state.singlevcentername}</p>
+                        <p>vCenter: 
+                        {this.state.singlevcentername}</p>
                         <p>Number of ESXi Hosts: {this.state.label.length}</p>
                         </div>
                       </div>
-                      <div className="col-sm-4 mem-col">
+                      <div className="col-md-5 doughnut-chart">
                       <p>Cluster memory usage by host</p>
                       <PieComponent {...this.state}
                        />
                       </div>
                      
-                      <div className="col-md-4 cpu-col">
-                      <MEM_Card
+                      <div className="col-md-3 cpu-col">
+                      <Dual_Button_Card
                           title="Cluster CPU/MEM Usage"
-                          text="CPU Usage:"
+                          text1="CPU Usage (%):"
+                          text2="MEM Usage (%):"
                           firstButton={this.state.cputotal}
                           secondButton={this.state.totalmemoryusage}
                         />

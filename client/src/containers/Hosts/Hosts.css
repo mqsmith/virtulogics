@@ -44,7 +44,10 @@ img {
     line-height: 10px;
 }
 .host-text-box {
-    margin-left: 10px;
+    margin-left: 0px;
     padding: 15px;
     font-family: 'Roboto Condensed', sans-serif;
+}
+.image-holder {
+    margin-left: 15px;
 }
