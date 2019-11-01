@@ -1,5 +1,5 @@
 {
-  "mongoURI": "mongodb://localhost/virtulogics",
+  "MONGODB_URI": "mongodb://localhost/virtulogics",
   "jwtSecret": "secret",
   "githubClientId": "",
   "githubSecret": ""
