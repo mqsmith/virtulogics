@@ -332,7 +332,7 @@ app.get("/api/chart-mem/:clustername", function(req, res) {
     .then(allClusterMem => {
       console.log(allClusterMem);
       res.json({
-        message: "Requested last hour of cluster MEM usage",
+        message: "Requested last 7 days of cluster MEM usage",
         error: false,
         data: allClusterMem
       });
@@ -404,8 +404,79 @@ app.get("/api/host/cpu-mem/1", async function(req, res) {
   });
 });
 
+app.get("/api/host/mem/1day", function(req, res) {
+  influx
+    .query(
+      `SELECT mean("usage_average") FROM "vsphere_host_mem" 
+      WHERE time > now() - 1d GROUP BY time(1h), "esxhostname"
+      `
+    )
+    .then(hostMem => {
+      // console.log(singleHostMem);
+      const hostData = hostMem.map(data => data.mean);
+      const hostOne = hostMem.filter(
+        data => data.esxhostname === "lab-esxi-01.vdilab.int"
+      );
+      const hostTwo = hostMem.filter(
+        data => data.esxhostname === "lab-esxi-02.vdilab.int"
+      );
+      const memUsageOne = hostOne.map(data => data.mean);
+      const memUsageTwo = hostTwo.map(data => data.mean);
+      const hostName = hostMem.map(data => data.esxhostname);
+      const time = hostOne.map(data => data.time);
+      console.log(time);
+      res.json({
+        message: "Requested last 24 hours of Host Mem Usage",
+        error: false,
+        data: { memUsageOne, memUsageTwo, hostName, time }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.json({
+        message: err.message,
+        error: true
+      });
+    });
+});
+
+app.get("/api/host/cpu/1day", function(req, res) {
+  influx
+    .query(
+      `SELECT mean("usage_average") FROM "vsphere_host_cpu" 
+      WHERE time > now() - 1d GROUP BY time(1h), "esxhostname"
+      `
+    )
+    .then(hostCpu => {
+      // console.log(singleHostMem);
+      const hostData = hostCpu.map(data => data.mean);
+      const hostOne = hostCpu.filter(
+        data => data.esxhostname === "lab-esxi-01.vdilab.int"
+      );
+      const hostTwo = hostCpu.filter(
+        data => data.esxhostname === "lab-esxi-02.vdilab.int"
+      );
+      const cpuUsageOne = hostOne.map(data => data.mean);
+      const cpuUsageTwo = hostTwo.map(data => data.mean);
+      const hostName = hostCpu.map(data => data.esxhostname);
+      const time = hostOne.map(data => data.time);
+      console.log(time);
+      res.json({
+        message: "Requested last 24 hours of Host CPU Usage",
+        error: false,
+        data: { cpuUsageOne, cpuUsageTwo, hostName, time }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.json({
+        message: err.message,
+        error: true
+      });
+    });
+});
+
 app.get("/api/host/mem/7days/:esxhostname", function(req, res) {
-  
   influx
     .query(
       `SELECT mean("usage_average") FROM "vsphere_host_mem" 
@@ -415,17 +486,13 @@ app.get("/api/host/mem/7days/:esxhostname", function(req, res) {
     )
     .then(singleHostMem => {
       // console.log(singleHostMem);
-      const hostData = singleHostMem.map(
-        data => data.mean
-      );
-      const time = singleHostMem.map(
-        data => data.time
-      );
+      const hostData = singleHostMem.map(data => data.mean);
+      const time = singleHostMem.map(data => data.time);
       console.log(time);
       res.json({
         message: "Requested last 7 days of Host Mem Usage",
         error: false,
-        data: {hostData, time}
+        data: { hostData, time }
       });
     })
     .catch(err => {
@@ -438,7 +505,6 @@ app.get("/api/host/mem/7days/:esxhostname", function(req, res) {
 });
 
 app.get("/api/host/cpu/7days/:esxhostname", function(req, res) {
-  
   influx
     .query(
       `SELECT mean("usage_average") FROM "vsphere_host_cpu" 
@@ -448,17 +514,13 @@ app.get("/api/host/cpu/7days/:esxhostname", function(req, res) {
     )
     .then(singleHostCpu => {
       // console.log(singleHostMem);
-      const hostCpuData = singleHostCpu.map(
-        data => data.mean
-      );
-      const time = singleHostCpu.map(
-        data => data.time
-      );
+      const hostCpuData = singleHostCpu.map(data => data.mean);
+      const time = singleHostCpu.map(data => data.time);
       console.log(time);
       res.json({
         message: "Requested last 7 days of Host Mem Usage",
         error: false,
-        data: {hostCpuData, time}
+        data: { hostCpuData, time }
       });
     })
     .catch(err => {

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import PieComponent from "../..//components/Pie/Pie"
 import Loading from "../../components/Loading/Loading";
 import MEM_Card from "../..//components/MEM_Card/MEM_Card";
+import ClusterChartContainer from "../../components/ClusterChart/ClusterChartContainer"
 // import "./Hosts.css";
 
 
@@ -138,9 +139,9 @@ class Clusters extends Component {
 
                     </div>
                   </div>
+                  <ClusterChartContainer/>
                 </div>
               </div>
-              )
             </div>
           </div>
         </div>
