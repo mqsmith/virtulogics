@@ -13,16 +13,11 @@ class Host extends Component {
   state = {
     allData: [],
     loading: true
-    // sevenDayMem: [],
-    // sevenDayCpu: [],
-    // hostLabels: [],
-    // time: []
   };
 
   componentDidMount() {
     console.log("Host props: ", this.props);
     this.getBoth();
-    // this.getSevenDayMem();
   }
 
   componentDidUpdate(prevProps) {
@@ -57,27 +52,6 @@ class Host extends Component {
       });
   };
 
-  // getSevenDayMem = () => {
-  //   axios
-  //     .get("/api/host/mem/7days/" + this.props.match.params.esxhostname)
-  //     .then(hostMemData => {
-  //       const { time, hostData } = hostMemData.data.data;
-  //       // console.log(time);
-  //       let formattedTime = time.map(time =>
-  //         moment(time).format("M/D/YY, h:mm a")
-  //       );
-  //       // console.log(formattedTime);
-  //       this.setState({
-  //         sevenDayMem: hostData,
-  //         hostLabels: this.props.match.params.esxhostname,
-  //         time: formattedTime
-  //       });
-  //       console.log(this.state);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // };
 
   render() {
     let content;
