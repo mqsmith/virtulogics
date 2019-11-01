@@ -33,7 +33,7 @@ class Collection extends Component {
         // console.log(formattedTime);
         this.setState({
           hostData: hostData,
-          hostLabels: this.props.hostName + " Mem usage",
+          hostLabels: this.props.hostName + " Mem utilization",
           time: formattedTime
         });
         // console.log(this.state);
@@ -53,7 +53,7 @@ class Collection extends Component {
         // console.log(formattedTime);
         this.setState({
           hostCpuData: hostCpuData,
-          hostCpuLabels: this.props.hostName + " CPU usage",
+          hostCpuLabels: this.props.hostName + " CPU utilization",
           // time: formattedTime
         });
         // console.log(this.state);
