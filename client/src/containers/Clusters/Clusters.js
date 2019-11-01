@@ -107,21 +107,22 @@ class Clusters extends Component {
                     <div className="col-md-4 top-right">
                     </div>
                     <div className="row button-row">
-                      <div className="col-md-sm top-left">
+                      <div className="col-md-3.5 top-left">
                         <img src="/img/cluster.png" />
                         <div className="host-text-box">
                         <p>Cluster: {this.state.singleclustername}</p>
-                        <p>vCenter: {this.state.singlevcentername}</p>
+                        <p>vCenter: 
+                        {this.state.singlevcentername}</p>
                         <p>Number of ESXi Hosts: {this.state.label.length}</p>
                         </div>
                       </div>
-                      <div className="col-sm-4 mem-col">
+                      <div className="col-lg-6 mem-col">
                       <p>Cluster memory usage by host</p>
                       <PieComponent {...this.state}
                        />
                       </div>
                      
-                      <div className="col-md-4 cpu-col">
+                      <div className="col-md-3 cpu-col">
                       <Dual_Button_Card
                           title="Cluster CPU/MEM Usage"
                           text1="CPU Usage (%):"
@@ -141,7 +142,6 @@ class Clusters extends Component {
                   </div>
                 </div>
               </div>
-              )
             </div>
           </div>
         </div>
