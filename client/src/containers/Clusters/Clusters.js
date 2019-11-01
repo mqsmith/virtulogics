@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import PieComponent from "../..//components/Pie/Pie"
 import Loading from "../../components/Loading/Loading";
 import Dual_Button_Card from "../..//components/Dual_Button_Card/";
-// import "./Hosts.css";
+import ClusterChartContainer from "../../components/ClusterChart/ClusterChartContainer"
+import "./Clusters.css";
 
 
 class Clusters extends Component {
@@ -32,7 +33,6 @@ class Clusters extends Component {
         const array = Object.values(obj);
         // console.log(array);
         this.setState({ allData: array, loading: false });
-        console.log("===================================================================");
         let combined = [];
 
         for (let i = 0; i < this.state.allData.length; i++) {
@@ -107,7 +107,7 @@ class Clusters extends Component {
                     <div className="col-md-4 top-right">
                     </div>
                     <div className="row button-row">
-                      <div className="col-md-3.5 top-left">
+                      <div className="col-md-4 top-left">
                         <img src="/img/cluster.png" />
                         <div className="host-text-box">
                         <p>Cluster: {this.state.singleclustername}</p>
@@ -116,7 +116,7 @@ class Clusters extends Component {
                         <p>Number of ESXi Hosts: {this.state.label.length}</p>
                         </div>
                       </div>
-                      <div className="col-lg-6 mem-col">
+                      <div className="col-md-5 doughnut-chart">
                       <p>Cluster memory usage by host</p>
                       <PieComponent {...this.state}
                        />
@@ -140,6 +140,7 @@ class Clusters extends Component {
 
                     </div>
                   </div>
+                  <ClusterChartContainer/>
                 </div>
               </div>
             </div>

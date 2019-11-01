@@ -5,7 +5,7 @@ import moment from "moment";
 // import LineChart from "../../components/LineMemChart";
 import Loading from "../../components/Loading/Loading";
 import Dual_Button_Card from "../..//components/Dual_Button_Card/Dual_Button_Card";
-import Collection from "../../components/Collection";
+import Collection from "../../components/HostChart/HostChartContainer";
 
 class Host extends Component {
   state = {
@@ -78,7 +78,9 @@ class Host extends Component {
                     </div>
                     <div className="row button-row">
                       <div className="col-md-4 top-left">
+                      <div className="image-holder">
                         <img src="/img/host.png" />
+                        </div>
                         <div className="host-text-box">
                           <p>Host: {host.esxhostname}</p>
                           <p>Cluster: {host.clustername}</p>

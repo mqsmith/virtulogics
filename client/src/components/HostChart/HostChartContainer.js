@@ -5,10 +5,10 @@ import axios from "axios";
 // import moment from "moment";
 // import BarChart from "../components/BarChart"
 import moment from "moment";
-import LineMemChart from "./LineMemChart";
-import LineCpuChart from "./LineCpuChart"
+import LineMemChart from "../LineChart/LineMemChart";
+import LineCpuChart from "../LineChart/LineCpuChart"
 
-class Collection extends Component {
+class HostChartContainer extends Component {
   state = {
     hostMemData: [],
     hostLabels: "",
@@ -89,4 +89,4 @@ class Collection extends Component {
   }
 }
 
-export default Collection;
+export default HostChartContainer;
