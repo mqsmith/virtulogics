@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
+// import LineChart from "../../components/LineMemChart";
 import Loading from "../../components/Loading/Loading";
 import MEM_Card from "../..//components/MEM_Card/MEM_Card";
 import CPU_Card from "../..//components/CPU_Card/CPU_Card";
+import Collection from "../../components/Collection";
 
 class Host extends Component {
   state = {
@@ -17,13 +19,13 @@ class Host extends Component {
     this.getBoth();
   }
 
-  componentDidUpdate(prevProps){
+  componentDidUpdate(prevProps) {
     console.log("Host updated props: ", this.props);
   }
 
   getBoth = () => {
     axios
-    .get("/api/host/cpu-mem/1/" + this.props.match.params.esxhostname) 
+      .get("/api/host/cpu-mem/1/" + this.props.match.params.esxhostname)
       .then(allData => {
         let obj = allData.data;
         const array = Object.values(obj);
@@ -48,6 +50,7 @@ class Host extends Component {
         console.log(err);
       });
   };
+
   render() {
     let content;
     if (this.state.loading) {
@@ -105,6 +108,9 @@ class Host extends Component {
                     <p>
                       Device polled @ {moment(host.time).format("h:mm:ss a")}
                     </p>
+                    <Collection
+                      hostName={this.props.match.params.esxhostname}
+                    />
                   </div>
                 </div>
               ))}

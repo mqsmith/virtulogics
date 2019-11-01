@@ -50,7 +50,7 @@ class Sidebar extends Component {
                   Hosts View
                 </a>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a className="nav-link active" href="/collection">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +70,7 @@ class Sidebar extends Component {
                   </svg>
                   Collection
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </nav>
