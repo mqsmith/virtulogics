@@ -8,7 +8,6 @@ import MEM_Card from "../..//components/MEM_Card/MEM_Card";
 import CPU_Card from "../..//components/CPU_Card/CPU_Card";
 import Collection from "../../components/Collection";
 
-
 class Host extends Component {
   state = {
     allData: [],
@@ -51,7 +50,6 @@ class Host extends Component {
         console.log(err);
       });
   };
-
 
   render() {
     let content;
@@ -110,13 +108,13 @@ class Host extends Component {
                     <p>
                       Device polled @ {moment(host.time).format("h:mm:ss a")}
                     </p>
+                    <Collection
+                      hostName={this.props.match.params.esxhostname}
+                    />
                   </div>
                 </div>
               ))}
             </div>
-          </div>
-          <div className="row">
-            <Collection hostName={this.props.match.params.esxhostname}/>
           </div>
         </div>
       );

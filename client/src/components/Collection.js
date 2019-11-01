@@ -29,7 +29,7 @@ class Collection extends Component {
       .then(hostMemData => {
         const { time, hostData} = hostMemData.data.data
         // console.log(time);
-        let formattedTime = time.map(time => moment(time).format("M/D/YY, h:mm a"));
+        let formattedTime = time.map(time => moment(time).format("M/D, ha"));
         // console.log(formattedTime);
         this.setState({
           hostData: hostData,
