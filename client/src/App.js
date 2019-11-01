@@ -9,7 +9,6 @@ import PrivateRoute from './components/routing/PrivateRoute';
 
 // Import Containers
 import Home from "./containers/Home";
-// import Collection from "./containers/Collection";
 import Hosts from './containers/Hosts/Hosts';
 import Clusters from './containers/Clusters/Clusters';
 import Host from './containers/Host/Host';
@@ -47,15 +46,6 @@ const App = () => {
           )
           } />
 
-          {/* <PrivateRoute exact path='/collection' component={props => (
-            <div className="page-wrap">
-              <Navbar />
-              <Sidebar />
-              <Collection {...props} />
-            </div>
-          )
-          } /> */}
-
           <PrivateRoute exact path='/host/:esxhostname' component={props => (
             <div className="page-wrap">
               <Navbar />
@@ -73,15 +63,6 @@ const App = () => {
             </div>
           )
           } />
-
-          {/* <PrivateRoute exact path='/collection' component={props => (
-            <div className="page-wrap">
-              <Navbar />
-              <Sidebar />
-              <Collection {...props} />
-            </div>
-          )
-          } /> */}
 
           <PrivateRoute exact path='/clusters' component={props => (
             <div className="page-wrap">
