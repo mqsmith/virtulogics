@@ -41,7 +41,7 @@ class ClusterChartContainer extends Component {
         //             hostTwoLabels: hostNameTwo,
         //             time:formattedTime
                   });
-                  console.log(this.state);
+        //           console.log(this.state);
         })
       .catch(err => {
         console.log(err);
@@ -70,7 +70,7 @@ class ClusterChartContainer extends Component {
                   hostTwoLabels: hostNameTwo,
                   time:formattedTime
                 });
-                console.log(this.state);
+        //         console.log(this.state);
       })
       .catch(err => {
         console.log(err);
