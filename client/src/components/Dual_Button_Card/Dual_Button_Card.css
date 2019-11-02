@@ -9,3 +9,8 @@
     font-family: 'Roboto Condensed', sans-serif;
     /* padding: -12; */
 }
+
+.themed-btn{
+    background-color: #2FBD79;
+    color: white
+}
