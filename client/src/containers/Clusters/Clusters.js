@@ -36,11 +36,11 @@ class Clusters extends Component {
         let combined = [];
 
         for (let i = 0; i < this.state.allData.length; i++) {
-          console.log(this.state.allData[i].usage_average)
+          // console.log(this.state.allData[i].usage_average)
           combined.push(this.state.allData[i].usage_average);
 
         }
-        console.log(combined);
+        // console.log(combined);
        
         // console.log(array);
         // let cluster = this.state.allData.filter(
@@ -59,22 +59,38 @@ class Clusters extends Component {
           for ( let e =0; e < cpuData.length; e++ ) {
             cputotal += cpuData[e]
           }
+       
         const labelData = this.state.allData.map(data => data.esxhostname);
         const clusterName = this.state.allData.map(data => data.clustername);
         const singleclustername = [...new Set(clusterName)];
         const vcenterName = this.state.allData.map(data => data.vcenter);
         const singlevcentername = [...new Set(vcenterName)];
-        
-      
+        const memCapcity =  this.state.allData.map(data => data.totalCapacity_average);
+        let clusterMemTotal = 0;
+          //Add the to values together to make the total
+          for ( let f =0; f < memCapcity.length; f++ ) {
+            clusterMemTotal += memCapcity[f]
+          }
+        let hostmemory = 28383;
+        //Uses real data but may be a liittle off
+        // let totalhostcapacity = clusterMemTotal / 1000
+
+        let totalhosts = labelData.length
+        let totalhostmemory = ((hostmemory * memTotal)/ 100000).toFixed(2);
+        console.log("This is the MEM total");
+        console.log(totalhostmemory);
+        let n1 = ((64 - totalhostmemory) / 32).toFixed(2);
+        console.log(n1);
+        console.log(clusterMemTotal / 1000 / 32 - totalhostmemory);
       
         // memTotal.push(this.state.data);
         // labelData.push("Total");
 
         //Set state
-        this.setState({ cputotal: cputotal, totalmemoryusage: memTotal, label: labelData, data: memData, singleclustername: singleclustername,  singlevcentername: singlevcentername});
-        // console.log(memData);
+        this.setState({ n1: n1, cputotal: cputotal, totalmemoryusage: memTotal, label: labelData, data: memData, singleclustername: singleclustername,  singlevcentername: singlevcentername});
+   
         // console.log(labelData.length);
-        console.log(memTotal);
+        // console.log(memTotal);
      
       })
       .catch(err => {
@@ -114,6 +130,7 @@ class Clusters extends Component {
                         <p>vCenter: 
                         {this.state.singlevcentername}</p>
                         <p>Number of ESXi Hosts: {this.state.label.length}</p>
+                        <p>N+RAM: {this.state.n1}</p>
                         </div>
                       </div>
                       <div className="col-md-5 doughnut-chart">
