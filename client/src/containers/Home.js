@@ -22,6 +22,10 @@ const mainButton = {
   borderColor: 'black'
 };
 
+const mainButtonText = {
+  color: 'white'
+};
+
 const containerMarketing = {
   backgroundColor: 'white'
 };
@@ -47,6 +51,11 @@ const signUpButton = {
   backgroundColor: '#ff5235'
 };
 
+const pricingColumn = {
+  textAlign: 'center',
+  display: 'inline-block'
+}
+
 class Home extends Component {
     render() {
         return (
@@ -56,7 +65,7 @@ class Home extends Component {
     <div class="jumbotron" style={jumbotron}>
             <h1>Virtulogics</h1>
             <p>Simple, Seamless Capacity Planning</p>
-            <p><button className="btn btn-primary btn-lg" style={mainButton}>Try it Free</button></p>
+            <p><button className="btn btn-primary btn-lg" style={mainButton}><a href="/register" style={mainButtonText}>Try it Free</a></button></p>
           </div>
 
 
@@ -73,7 +82,7 @@ class Home extends Component {
           <br />
           <p className="lead">Easily customize each of your graphs or extend the time frame visible. </p>
           <br />
-          <p><a className="btn btn-secondary" href="#" role="button" style={featureButton}>Try for Free</a></p>
+          <p><a className="btn btn-secondary" href="/register" role="button" style={featureButton}>Try for Free</a></p>
         </div>
         <div className="col-md-5">
           <img className="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" style={newImage} src="https://howto.socialchorus.com/hc/article_attachments/360003206494/Dashboard.gif" data-holder-rendered="true" />
@@ -92,7 +101,7 @@ class Home extends Component {
           <br />
           <p className="lead">Data is displayed in a clear and concise way where you can easy get an overview of your current load. Exactly what you need. </p>
           <br />
-          <p><a className="btn btn-secondary" href="#" role="button" style={featureButton}>Try for Free</a></p>
+          <p><a className="btn btn-secondary" href="/register" role="button" style={featureButton}>Try for Free</a></p>
         </div>
         
       </div>
@@ -108,11 +117,11 @@ class Home extends Component {
           <p className="lead">Flat Monthly rates with no caps on the number of users in your account</p>
           <p className="lead">Robust referal program makes it even easier to save!</p>
           <br />
-          <p><a className="btn btn-secondary" href="#" role="button" style={featureButton}>Try for Free</a></p>
+          <p><a className="btn btn-secondary" href="/register" role="button" style={featureButton}>Try for Free</a></p>
           
         </div>
         <div className="col-md-5">
-          <img className="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80" data-holder-rendered="true"  style={newImage}  />
+          <img className="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="https://cdn.slidemodel.com/wp-content/uploads/7942-01-infinite-business-powerpoint-template-16x9-23-1-870x489.jpg" data-holder-rendered="true"  style={newImage}  />
         </div>
 
         </div>
@@ -120,8 +129,8 @@ class Home extends Component {
 <hr></hr>
 
         <div className="row">
-        <div className="col-lg-4">
-          <img className="rounded-circle" src="https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80" alt="Generic placeholder image" width="140" height="140" />
+        <div className="col-lg-4" style={pricingColumn}>
+          <img className="rounded-circle" src="https://image.flaticon.com/icons/svg/179/179250.svg" alt="Generic placeholder 1" width="140" height="140" />
           <h2>Bronze Plan</h2>
           <ul style={planList}>
             <li>Capacity Planner Dashboard</li>
@@ -129,10 +138,10 @@ class Home extends Component {
             <li>2 Users</li>
             <li>Load Alert Notifications </li>
           </ul>
-          <p><a className="btn btn-secondary" href="#" role="button" style={signUpButton}>Sign Up »</a></p>
+          <p><a className="btn btn-secondary" href="/register" role="button" style={signUpButton}>Sign Up »</a></p>
         </div>
-        <div className="col-lg-4" >
-          <img className="rounded-circle" src="https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80" alt="Generic placeholder image" width="140" height="140" />
+        <div className="col-lg-4" style={pricingColumn}>
+          <img className="rounded-circle" src="https://image.flaticon.com/icons/svg/179/179251.svg" alt="Generic placeholder 2" width="140" height="140" />
           <div >
           <h2 >Silver Plan</h2>
           <ul style={planList}>
@@ -141,20 +150,19 @@ class Home extends Component {
             <li>5 Users</li>
             <li>Smart Load Balance</li>
           </ul>
-          <p><a className="btn btn-secondary" href="#" role="button" style={signUpButton}>Sign Up »</a></p>
+          <p><a className="btn btn-secondary" href="/register" role="button" style={signUpButton}>Sign Up »</a></p>
           </div>
         </div>
-        <div className="col-lg-4">
-          <img className="rounded-circle" src="https://images.unsplash.com/photo-1571786256017-aee7a0c009b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80" alt="Generic placeholder image" width="140" height="140" />
+        <div className="col-lg-4" style={pricingColumn}>
+          <img className="rounded-circle" src="https://image.flaticon.com/icons/svg/179/179249.svg" alt="Generic placeholder 3" width="140" height="140" />
           <h2>Gold Plan</h2>
           <ul style={planList}>
             <li>Everything in the Bronze and Silver Plan</li>
             <li>Ability to add up to 10 clusters</li>
             <li>10 Users</li>
             <li>Priority Integrations</li>
-            <li>24/7Phone Support</li>
           </ul>
-          <p><a className="btn btn-secondary" href="#" role="button" style={signUpButton}>Sign Up »</a></p>
+          <p><a className="btn btn-secondary" href="/register" role="button" style={signUpButton}>Sign Up »</a></p>
         </div>
       </div>
 

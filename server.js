@@ -374,8 +374,7 @@ app.get("/api/host/cpu-mem/1", async function(req, res) {
 
   await influx
     .query(
-      `
-          select * from vsphere_host_cpu
+      `select * from vsphere_host_cpu
           where "cpu"='instance-total'
           ORDER BY DESC LIMIT 2
           `
