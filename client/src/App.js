@@ -8,7 +8,7 @@ import Sidebar from "./components/Sidebar/Sidebar";
 import PrivateRoute from './components/routing/PrivateRoute';
 
 // Import Containers
-import Home from "./containers/Home";
+import Home from "./containers/Home/Home";
 import Hosts from './containers/Hosts/Hosts';
 import Clusters from './containers/Clusters/Clusters';
 import Host from './containers/Host/Host';
