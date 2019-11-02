@@ -7,11 +7,11 @@ const Dual_Button_Card = props => (
       {props.title}
     </div>
 
-    <button className="btn btn-success">
+    <button className="btn themed-btn">
       <p>{props.text1}</p>
       {props.firstButton}
     </button>
-    <button className="btn btn-success">
+    <button className="btn themed-btn">
       <p>{props.text2}</p>
       {props.secondButton}
     </button>

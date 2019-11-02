@@ -72,7 +72,7 @@ class HostChartContainer extends Component {
             hostData={this.state.hostData}
             hostLabels={this.state.hostLabels}
             time={this.state.time}
-            color="rgba(255, 0, 0, 0.68)"
+            color="rgba(106, 164, 176, .68)"
           />
         </div>
         <div className="main chart-wrapper container">
@@ -81,7 +81,7 @@ class HostChartContainer extends Component {
             hostData={this.state.hostCpuData}
             hostLabels={this.state.hostCpuLabels}
             time={this.state.time}
-            color="rgba(0, 149, 255, 0.68)"
+            color="rgba(65, 103, 144, .68)"
           />
         </div>
       </>
