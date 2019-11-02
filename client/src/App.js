@@ -13,7 +13,6 @@ import Hosts from './containers/Hosts/Hosts';
 import Clusters from './containers/Clusters/Clusters';
 import Host from './containers/Host/Host';
 
-
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
