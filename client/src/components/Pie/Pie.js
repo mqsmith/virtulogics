@@ -1,5 +1,4 @@
 import React from "react";
-import { Pie } from "react-chartjs-2";
 import Chart from "chart.js";
 Chart.defaults.global.defaultFontFamily = "Roboto, sans-serif";
 
@@ -8,11 +7,6 @@ class PieComponent extends React.Component {
     super(props);
     this.chartRef = React.createRef();
   }
-  // componentDidUpdate() {
-  //   this.myChart.data.labels = this.props.esxhostname.map(d => console.log(d.name));
-  //   // this.myChart.data.datasets[0].data = this.props.data.map(d => d.value);
-  //   this.myChart.update();
-  // }
 
   componentDidUpdate() {
     console.log(this.props);

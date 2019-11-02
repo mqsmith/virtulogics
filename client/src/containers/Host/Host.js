@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
-// import LineChart from "../../components/LineMemChart";
 import Loading from "../../components/Loading/Loading";
 import Dual_Button_Card from "../..//components/Dual_Button_Card/Dual_Button_Card";
 import Collection from "../../components/HostChart/HostChartContainer";
