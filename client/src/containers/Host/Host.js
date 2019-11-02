@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
+// import LineChart from "../../components/LineMemChart";
 import Loading from "../../components/Loading/Loading";
-import MEM_Card from "../..//components/MEM_Card/MEM_Card";
-import CPU_Card from "../..//components/CPU_Card/CPU_Card";
+import Dual_Button_Card from "../..//components/Dual_Button_Card/Dual_Button_Card";
+import Collection from "../../components/HostChart/HostChartContainer";
 
 class Host extends Component {
   state = {
@@ -17,13 +18,13 @@ class Host extends Component {
     this.getBoth();
   }
 
-  componentDidUpdate(prevProps){
+  componentDidUpdate(prevProps) {
     console.log("Host updated props: ", this.props);
   }
 
   getBoth = () => {
     axios
-    .get("/api/host/cpu-mem/1/" + this.props.match.params.esxhostname) 
+      .get("/api/host/cpu-mem/1/" + this.props.match.params.esxhostname)
       .then(allData => {
         let obj = allData.data;
         const array = Object.values(obj);
@@ -48,6 +49,7 @@ class Host extends Component {
         console.log(err);
       });
   };
+
   render() {
     let content;
     if (this.state.loading) {
@@ -76,7 +78,9 @@ class Host extends Component {
                     </div>
                     <div className="row button-row">
                       <div className="col-md-4 top-left">
+                      <div className="image-holder">
                         <img src="/img/host.png" />
+                        </div>
                         <div className="host-text-box">
                           <p>Host: {host.esxhostname}</p>
                           <p>Cluster: {host.clustername}</p>
@@ -85,9 +89,10 @@ class Host extends Component {
                         </div>
                       </div>
                       <div className="col-md-4 mem-col">
-                        <MEM_Card
+                        <Dual_Button_Card
                           title="Host Memory Usage"
-                          text="MEM Usage:"
+                          text1="MEM Usage (GB):"
+                          text2="MEM Usage (%):"
                           firstButton={(
                             (host.totalCapacity_average * host.usage_average) /
                             100000
@@ -96,15 +101,21 @@ class Host extends Component {
                         />
                       </div>
                       <div className="col-md-4 cpu-col">
-                        <CPU_Card
-                          usagemhz_average={host.usagemhz_average}
-                          utilization_average={host.cpu_usage_average}
+                        <Dual_Button_Card
+                          title="Host CPU Usage"
+                          text1="CPU Usage (Mhz):"
+                          text2="CPU Usage (%):"
+                          firstButton={host.usagemhz_average}
+                          secondButton={host.cpu_usage_average}
                         />
                       </div>
                     </div>
                     <p>
                       Device polled @ {moment(host.time).format("h:mm:ss a")}
                     </p>
+                    <Collection
+                      hostName={this.props.match.params.esxhostname}
+                    />
                   </div>
                 </div>
               ))}
