@@ -29,13 +29,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   );
 
   return (
-    <nav className='navbar bg-dark nav-header'>
-      <h1>
-        <Link to='/'>
-          {/* <i className='fas fa-code' /> Virtulogics */}
-          {/* <img className="logo-header" src="/img/header.png" /> */}
-        </Link>
-      </h1>
+    <nav className='navbar bg-dark nav-header justify-content-end'>
+      
+
       {!loading && (
         <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
       )}
