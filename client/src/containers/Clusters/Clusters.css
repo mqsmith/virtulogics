@@ -2,3 +2,12 @@
     padding-left: 0px;
     padding-right: 0px;
 }
+
+.CircularProgressbar {
+    height: 128px;
+    margin: 5px;
+  }
+  .progress {
+    font-size: 15px;
+    font-weight: bold;
+  }

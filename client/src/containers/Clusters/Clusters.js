@@ -5,7 +5,12 @@ import PieComponent from "../..//components/Pie/Pie";
 import Loading from "../../components/Loading/Loading";
 import Dual_Button_Card from "../..//components/Dual_Button_Card/";
 import ClusterChartContainer from "../../components/ClusterChart/ClusterChartContainer";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 import "./Clusters.css";
+
+
+const needDominantBaselineFix = true;
 
 class Clusters extends Component {
   state = {
@@ -112,7 +117,7 @@ class Clusters extends Component {
         // memTotal.push(this.state.data);
         // labelData.push("Total");
 
-        //Set state
+        //Set state 
         this.setState({
           clusterusagetotal: clusterusagetotal,
           clustercputotal: clusterCpuTotal,
@@ -120,7 +125,7 @@ class Clusters extends Component {
           totalclustermemory: totalclustermemory,
           n1mem: n1mem,
           cputotal: cputotal,
-          totalmemoryusage: memTotal,
+          totalmemoryusage: memTotal.toFixed(2),
           label: labelData,
           data: memData,
           singleclustername: singleclustername,
@@ -184,12 +189,26 @@ class Clusters extends Component {
                   </div>
                   <div className="row header-row">
                     <div className="col-md-7 top-left">
-               
+                    
+                    {/* <CircularProgressbar
+                      value={this.state.totalmemoryusage}
+                      text={
+                        <tspan className="progress" dy={needDominantBaselineFix ? -15 : 0}>{this.state.totalmemoryusage}%</tspan>
+                      }
+                    /> */}
                     </div>
                     </div>
                   <div className="row">
                  
-                      <div className="col-md-4 cpu-col"></div>
+                      <div className="col-md-4 cpu-col">
+                      <p>Memory Usage</p>
+                      <CircularProgressbar
+                     value={this.state.totalmemoryusage}
+                      text={
+                      <tspan className="progress" dy={needDominantBaselineFix ? -15 : 0}>{this.state.totalmemoryusage}%</tspan>
+                      } 
+                      />
+                      </div>
                       <div className="col-md-5 doughnut-chart">
                         <p>Cluster CPU usage by host</p>
                         <PieComponent {...this.state} />
