@@ -24,8 +24,8 @@ class PieComponent extends React.Component {
           {
             data: this.props.data,
             label: "Points",
-            backgroundColor: ["#696969", "#A9A9A9", "#2FDE00"],
-            hoverBackgroundColor: ["#808080", "#C0C0C0", "#175000"]
+            backgroundColor: ["RGBA(255,0,0,0.26)", "RGBA(0,173,255,0.26)", "#2FDE00"],
+            hoverBackgroundColor: ["RGBA(255,0,0,0.50)", "RGBA(0,173,255,0.50)", "#175000"]
           }
         ]
       }
