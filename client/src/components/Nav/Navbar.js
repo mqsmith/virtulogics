@@ -1,3 +1,4 @@
+// Import Links
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -5,6 +6,7 @@ import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 import './Navbar.css';
 
+// Layout for default status Navbar
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <ul>
@@ -16,7 +18,8 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       </li>
     </ul>
   );
-
+  
+// Links on Navbar
   const guestLinks = (
     <ul>
       <li>
@@ -28,10 +31,9 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     </ul>
   );
 
+// Logic to handle Navbar 
   return (
     <nav className='navbar bg-dark nav-header justify-content-end'>
-      
-
       {!loading && (
         <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
       )}

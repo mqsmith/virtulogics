@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Import Components
-import Navbar from './components/layout/Navbar';
+import Navbar from './components/Nav/Navbar';
 import Routes from './components/routing/Routes';
 import Sidebar from "./components/Sidebar/Sidebar";
 import PrivateRoute from './components/routing/PrivateRoute';
