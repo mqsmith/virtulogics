@@ -1,13 +1,15 @@
 /* Sidebar Style Sheet */
 
 .sidebar {
+  background-color: #2B4560;
+  /* opacity: 0.9; */
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   z-index: 100;
   padding: 80px 0px 0;
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+  /* box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1); */
 }
 
 .sidebar-sticky {
@@ -20,12 +22,12 @@
 }
 
 a {
-  color: #007bff;
+  color: #E1E7E0;
   text-decoration: none;
   background-color: transparent;
 }
 .sidebar .nav-link.active {
-  color: #007bff;
+  color: #E1E7E0;
 }
 
 .sidebar .nav-link {

@@ -29,7 +29,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   );
 
   return (
-    <nav className='navbar bg-dark nav-header justify-content-end'>
+    <nav className='navbar nav-header justify-content-end'>
       
 
       {!loading && (
