@@ -18,7 +18,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
       </li>
     </ul>
   );
-  
+
 // Links on Navbar
   const guestLinks = (
     <ul>
@@ -41,6 +41,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   );
 };
 
+// Handling Authentication
 Navbar.propTypes = {
   logout: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
@@ -50,6 +51,7 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
+// Export
 export default connect(
   mapStateToProps,
   { logout }
