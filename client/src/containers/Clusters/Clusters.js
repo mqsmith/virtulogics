@@ -1,3 +1,4 @@
+// Import Links
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -28,21 +29,14 @@ class Clusters extends Component {
       .then(allData => {
         let obj = allData.data;
         const array = Object.values(obj);
-        // console.log(array);
         this.setState({ allData: array, loading: false });
         let combined = [];
 
         for (let i = 0; i < this.state.allData.length; i++) {
-          // console.log(this.state.allData[i].usage_average)
+          
           combined.push(this.state.allData[i].usage_average);
         }
-        // console.log(combined);
-
-        // console.log(array);
-        // let cluster = this.state.allData.filter(
-        //   data => data.usage_average === "lab-esxi-01.vdilab.int"
-
-        // );
+        
         const memData = this.state.allData.map(data => data.usage_average);
         let memTotal = 0;
         //Add the to values together to make the total
@@ -107,10 +101,6 @@ class Clusters extends Component {
         console.log(totalclustercpu);
         let n1cpu = totalclustercpu;
         console.log(clusterusagetotal);  
-     
-
-        // memTotal.push(this.state.data);
-        // labelData.push("Total");
 
         //Set state
         this.setState({
@@ -206,18 +196,14 @@ class Clusters extends Component {
                         </div>
                         <ClusterChartContainer />
                       </div>
-                      {/* <div className="col-md-5 doughnut-chart">  </div> */}
-                  
-                
-                 
-                  </div>
-               
-                  </div>
-               
-           
+                     
+                  </div>               
+                  </div>                       
       );
     }
     return <div>{content}</div>;
   }
 }
+
+// Export
 export default Clusters;
