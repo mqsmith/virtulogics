@@ -1,5 +1,5 @@
+// Import Links
 import React, { Component } from "react";
-// import Moment from "react-moment";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
@@ -45,6 +45,8 @@ class Hosts extends Component {
         console.log(err);
       });
   };
+
+  // Layout for Hosts
   render() {
     let content;
     if (this.state.loading) {
@@ -117,4 +119,6 @@ class Hosts extends Component {
     return <div>{content}</div>;
   }
 }
+
+// Export
 export default Hosts;
