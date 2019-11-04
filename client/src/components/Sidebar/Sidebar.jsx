@@ -1,3 +1,4 @@
+// Import Links
 import React, { Component } from "react";
 import "./Sidebar.css";
 
@@ -59,4 +60,5 @@ class Sidebar extends Component {
   }
 }
 
+// Export
 export default Sidebar;
