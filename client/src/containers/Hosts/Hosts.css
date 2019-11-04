@@ -10,7 +10,7 @@
 }
 
 p {
-    font-weight: bold;
+    /* font-weight: bold; */
     font-family: 'Roboto Condensed', sans-serif;
 }
 .main-card {
@@ -50,4 +50,11 @@ img {
 }
 .image-holder {
     margin-left: 15px;
+}
+.cpu-ready-text {
+    text-align: center;
+    font-size: 75px;
+}
+.polled {
+    text-align: center;
 }

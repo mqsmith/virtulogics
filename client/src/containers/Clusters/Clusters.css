@@ -1,6 +1,96 @@
+<<<<<<< HEAD
 /*  Cluster Style Sheet  */
 
+=======
+body {
+    background-color: rgb(106, 164, 176, 0.1);
+        opacity: 0.9;
+}
+.host-text {
+    line-height: 0.3em;
+}
+
+h3 {
+    text-align: center;
+    font-size: 110px;
+    color: #2B4560;
+}
+h4 {
+    text-align: center;
+    font-size: 85px;
+    color: #2B4560;
+}
+.bold-text {
+    padding-top: 15px;
+    font-weight: bold;
+
+}
+.card-header {
+    text-align: center;
+}
+>>>>>>> 189bf398f066eebb30212e77c4351228e6f4fede
 .doughnut-chart {
     padding-left: 0px;
     padding-right: 0px;
 }
+.chart {
+    margin-top: 20px;
+}
+.CircularProgressbar {
+    height: 128px;
+    margin: 5px;
+  }
+  .progress {
+    font-size: 15px;
+    font-weight: bold;
+  }
+  .title-row {
+      font-size: 20px;
+      padding-left: 10px;
+      /* margin-top: 10px; */
+      color: 2B4560;
+      text-align: left;
+      background-color: white;
+  }
+  .host-card {
+      text-align: left;
+      width: 98%;
+  }
+  .tile-container {
+      width: 30%;
+      margin: 10px;
+    background-color: white;
+  }
+  .tile-header {
+    background-color: #2B4560;
+    /* padding-left: 10px; */
+    opacity: 0.9;
+  }
+  .tile-body {
+    /* width: 100%; */
+    text-align: left;
+    padding-left: 10px;
+    color: white;
+    /* background-color: #2B4560; */
+    opacity: 0.9;
+  }
+  .host-text-box {
+      color: white;
+  }
+  .link-button {
+      width: 100%;
+      margin-bottom: 20px;
+  }
+  .page-title {
+      margin-bottom: 0px;
+  }
+  .triple {
+    margin-bottom: -20px;
+      text-align: center;
+      font-size: 70px;
+  }
+  .triple-label {
+      padding-top: 15px; 
+    margin-bottom: -20px;
+    text-align: center;
+  }

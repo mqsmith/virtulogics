@@ -1,7 +1,7 @@
   /* Global Styles */
 :root {
     --primary-color: #17a2b8;
-    --dark-color: #343a40;
+    --dark-color: #2B4560;
     --light-color: #f4f4f4;
     --danger-color: #dc3545;
     --success-color: #28a745;
@@ -198,6 +198,7 @@
   }
   /* Navbar */
   .navbar {
+    background-color: #2B4560;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -207,7 +208,7 @@
     width: 100%;
     top: 0;
     border-bottom: solid 1px var(--primary-color);
-    opacity: 0.9;
+    /* opacity: 0.9; */
   }
   .navbar ul {
     display: flex;
@@ -235,7 +236,6 @@
     .nav-header {
         height: 90px;
         background-image: url("/img/header-sm.png");
-        /* background-size: cover; */
         background-repeat: no-repeat;
     }
   /* Mobile Styles */

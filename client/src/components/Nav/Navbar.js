@@ -33,7 +33,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
 // Logic to handle Navbar 
   return (
-    <nav className='navbar bg-dark nav-header justify-content-end'>
+    <nav className='navbar nav-header justify-content-end'>
       {!loading && (
         <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
       )}
