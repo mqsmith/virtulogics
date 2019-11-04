@@ -1,3 +1,4 @@
+// Import Links
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -58,6 +59,8 @@ class Host extends Component {
         </div>
       );
     } else {
+
+      // Layout for Host Container
       return (
         <div className="container">
           <div className="row">
@@ -126,4 +129,6 @@ class Host extends Component {
     return <div>{content}</div>;
   }
 }
+
+// Export
 export default Host;
