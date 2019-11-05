@@ -158,6 +158,18 @@ class Clusters extends Component {
                   Click to view "Hosts"
                 </button>
               </Link>
+              {this.state.showHostChart ? (
+                  <></>
+                ) : (
+                  <button
+                    className="btn-dark btn-sm link-button"
+                    onClick={() => {
+                      this.setState({ showHostChart: true });
+                    }}
+                  >
+                    View Host CPU and MEM Usage
+                  </button>
+                )}
 
               <div className="card host-card">
                 <div id="inner" className="card-header">
@@ -211,19 +223,12 @@ class Clusters extends Component {
                 <div id="inner" className="card-header">
                   ESXi Hosts
                 </div>
-                <h3>{this.state.label.length}</h3>
-                {this.state.showHostChart ? (
-                  <></>
-                ) : (
-                  <button
-                    className="btn-dark btn-sm"
-                    onClick={() => {
-                      this.setState({ showHostChart: true });
-                    }}
-                  >
-                    View Host CPU and MEM Usage
-                  </button>
-                )}
+                <div className="normal">   
+                <h4>
+                {this.state.label.length}
+                </h4>
+                </div>
+                
               </div>
             </div>
 
@@ -238,12 +243,21 @@ class Clusters extends Component {
           </div>
 
           <div className="row">
-            <div className="col-md-2">
+          
+          <div className="col-md-2">
               <div className="card host-card">
                 <div id="inner" className="card-header">
                   N+1 MEM
                 </div>
-                <h4>{this.state.n1mem}</h4>
+                {this.state.n1mem > 1 ? (
+                  <div className="normal">
+                    <h4>{this.state.n1mem}</h4>
+                  </div>
+                ) : (
+                  <div className="warning">
+                    <h4>{this.state.n1mem}</h4>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -252,28 +266,41 @@ class Clusters extends Component {
                 <div id="inner" className="card-header">
                   N+1 CPU
                 </div>
-                <h4>{this.state.n1cpu}</h4>
+                {this.state.n1cpu > 1 ? (
+                  <div className="normal">
+                    <h4>{this.state.n1cpu}</h4>
+                  </div>
+                ) : (
+                  <div className="warning">
+                    <h4>{this.state.n1cpu}</h4>
+                  </div>
+                )}
               </div>
             </div>
 
-            <div className="col-md-4">
-              <div className="card host-card">
-                <div id="inner" className="card-header">
-                  CPU Performance
-                </div>
+            <div className="col-md-3">
+            <div className="card host-card">
+            <div id="inner" className="card-header">
+            CPU Performance
+            </div>
                 <div className="row">
                   <div className="col">
-                    <p className="triple-label">CPU Ready</p>
-                    <p className="triple">2%</p>
+                    <p className="triple-label">
+                      CPU Ready
+                    </p>
+                    <div className="normal">
+                      <h4>2%</h4>
+                    </div>
                   </div>
                   <div className="col">
-                    <p className="triple-label">CO-Stop</p>
-                    <p className="triple">3%</p>
+                  <p className="triple-label">
+                      CO-Stop
+                    </p>
+                    <div className="normal">
+                    <h4>3%</h4>
+                    </div>
                   </div>
-                  <div className="col">
-                    <p className="triple-label">Latency Avg.</p>
-                    <p className="triple">.54</p>
-                  </div>
+             
                 </div>
               </div>
             </div>
