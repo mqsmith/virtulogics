@@ -69,7 +69,7 @@ class Hosts extends Component {
                 <div className="col-md-2">
                   <Link to={`/host/${host.esxhostname}`}>
                     <button className="btn-dark btn-sm link-button">
-                      Click to view "Host" details
+                      View Single Host Details
                     </button>
                   </Link>
 
