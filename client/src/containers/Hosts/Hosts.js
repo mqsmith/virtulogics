@@ -103,6 +103,7 @@ class Hosts extends Component {
   }
 }
 export default Hosts;
+            
 
 {
   /* {this.state.allData.map((host, i) => (
