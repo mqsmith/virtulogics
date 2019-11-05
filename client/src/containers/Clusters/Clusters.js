@@ -210,9 +210,11 @@ class Clusters extends Component {
             <div id="inner" className="card-header">
             ESXi Hosts
             </div>
-            <h3>            
+            <div className="normal">          
+            <h4>
             {this.state.label.length}
-            </h3>
+            </h4>
+            </div>
             </div>
             </div>
 
@@ -230,30 +232,40 @@ class Clusters extends Component {
           <div className="row">
           
           <div className="col-md-2">
-            <div className="card host-card">
-            <div id="inner" className="card-header">
-            N+1 MEM
+              <div className="card host-card">
+                <div id="inner" className="card-header">
+                  N+1 MEM
+                </div>
+                {this.state.n1mem > 1 ? (
+                  <div className="normal">
+                    <h4>{this.state.n1mem}</h4>
+                  </div>
+                ) : (
+                  <div className="warning">
+                    <h4>{this.state.n1mem}</h4>
+                  </div>
+                )}
+              </div>
             </div>
-            <h4>            
-            {this.state.n1mem}
-            </h4>
-            </div>
-            </div>
-
-         
 
             <div className="col-md-2">
-            <div className="card host-card">
-            <div id="inner" className="card-header">
-            N+1 CPU
-            </div>
-            <h4>            
-            {this.state.n1cpu}
-            </h4>
-            </div>
+              <div className="card host-card">
+                <div id="inner" className="card-header">
+                  N+1 CPU
+                </div>
+                {this.state.n1cpu > 1 ? (
+                  <div className="normal">
+                    <h4>{this.state.n1cpu}</h4>
+                  </div>
+                ) : (
+                  <div className="warning">
+                    <h4>{this.state.n1cpu}</h4>
+                  </div>
+                )}
+              </div>
             </div>
 
-            <div className="col-md-4">
+            <div className="col-md-3">
             <div className="card host-card">
             <div id="inner" className="card-header">
             CPU Performance
@@ -263,26 +275,19 @@ class Clusters extends Component {
                     <p className="triple-label">
                       CPU Ready
                     </p>
-                    <p className="triple">
-                      2%
-                    </p>
+                    <div className="normal">
+                      <h4>2%</h4>
+                    </div>
                   </div>
                   <div className="col">
                   <p className="triple-label">
                       CO-Stop
                     </p>
-                    <p className="triple">
-                      3%
-                    </p>
+                    <div className="normal">
+                    <h4>3%</h4>
+                    </div>
                   </div>
-                  <div className="col">
-                  <p className="triple-label">
-                      Latency Avg.
-                    </p>
-                    <p className="triple">
-                      .54
-                    </p>
-                  </div>
+             
                 </div>
             </div>
             </div>
