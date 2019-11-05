@@ -74,7 +74,7 @@ class Host extends Component {
                 <div className="col-md-2">
                   <Link to="/hosts">
                     <button className="btn-dark btn-sm link-button">
-                      Click tp back to "Hosts"
+                      Back to "Hosts"
                     </button>
                   </Link>
 
