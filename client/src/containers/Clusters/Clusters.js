@@ -20,7 +20,8 @@ class Clusters extends Component {
     label: [],
     data: [],
     singlevcentername: [],
-    singleclustername: []
+    singleclustername: [],
+    showHostChart: false
   };
 
   componentDidMount() {
@@ -144,116 +145,140 @@ class Clusters extends Component {
     } else {
       return (
         <div className="wrapper">
-
           <div className="title-row shadow mb-3 bg-white rounded">
-            <p className="page-title">Cluster: {this.state.singleclustername}</p>
+            <p className="page-title">
+              Cluster: {this.state.singleclustername}
+            </p>
           </div>
 
           <div className="row">
-
             <div className="col-md-2">
-            <Link to="/hosts">
-             <button className="btn-dark btn-sm link-button">
-             Click to view "Hosts"
-            </button>
-            </Link>
-
-            <div className="card host-card">   
-            <div id="inner" className="card-header">
-            Cluster Information
-            </div>
-              <p className="bold-text host-text">vCenter:</p>
-              <p className="host-text">{this.state.singlevcentername}</p>
-              </div>
-              </div>
-
-            <div className="col-md-2">
-            <div className="card host-card">
-            <div id="inner" className="card-header">
-            Memory Usage
-            </div>
-              <CircularProgressbar
-                value={this.state.totalmemoryusage}
-                text={
-                  <tspan
-                    className="progress"
-                    dy={needDominantBaselineFix ? -15 : 0}
+              <Link to="/hosts">
+                <button className="btn-dark btn-sm link-button">
+                  Click to view "Hosts"
+                </button>
+              </Link>
+              {this.state.showHostChart ? (
+                  <></>
+                ) : (
+                  <button
+                    className="btn-dark btn-sm link-button"
+                    onClick={() => {
+                      this.setState({ showHostChart: true });
+                    }}
                   >
-                    {this.state.totalmemoryusage}%
-                  </tspan>
-                }
-              />
-             </div>
+                    View Host CPU and MEM Usage
+                  </button>
+                )}
+
+              <div className="card host-card">
+                <div id="inner" className="card-header">
+                  Cluster Information
+                </div>
+                <p className="bold-text host-text">vCenter:</p>
+                <p className="host-text">{this.state.singlevcentername}</p>
+              </div>
             </div>
 
             <div className="col-md-2">
-            <div className="card host-card">
-            <div id="inner" className="card-header">
-            CPU Usage
-            </div>
-              <CircularProgressbar
-                value={this.state.clusterusagetotal}
-                text={
-                  <tspan
-                    className="progress"
-                    dy={needDominantBaselineFix ? -15 : 0}
-                  >
-                    {this.state.clusterusagetotal}%
-                  </tspan>
-                }
-              />
-             </div>
+              <div className="card host-card">
+                <div id="inner" className="card-header">
+                  Memory Usage
+                </div>
+                <CircularProgressbar
+                  value={this.state.totalmemoryusage}
+                  text={
+                    <tspan
+                      className="progress"
+                      dy={needDominantBaselineFix ? -15 : 0}
+                    >
+                      {this.state.totalmemoryusage}%
+                    </tspan>
+                  }
+                />
+              </div>
             </div>
 
             <div className="col-md-2">
-            <div className="card host-card">
-            <div id="inner" className="card-header">
-            ESXi Hosts
+              <div className="card host-card">
+                <div id="inner" className="card-header">
+                  CPU Usage
+                </div>
+                <CircularProgressbar
+                  value={this.state.clusterusagetotal}
+                  text={
+                    <tspan
+                      className="progress"
+                      dy={needDominantBaselineFix ? -15 : 0}
+                    >
+                      {this.state.clusterusagetotal}%
+                    </tspan>
+                  }
+                />
+              </div>
             </div>
-            <h3>            
-            {this.state.label.length}
-            </h3>
-            </div>
+
+            <div className="col-md-2">
+              <div className="card host-card">
+                <div id="inner" className="card-header">
+                  ESXi Hosts
+                </div>
+                <div className="normal">   
+                <h4>
+                {this.state.label.length}
+                </h4>
+                </div>
+                
+              </div>
             </div>
 
             <div className="col-md-4">
-            <div className="card host-card">
-            <div id="inner" className="card-header">
-            Cluster memory usage by host
-            <PieComponent {...this.state} />
+              <div className="card host-card">
+                <div id="inner" className="card-header">
+                  Cluster memory usage by host
+                  <PieComponent {...this.state} />
+                </div>
+              </div>
             </div>
-            </div>
-            </div>
-
           </div>
 
           <div className="row">
           
           <div className="col-md-2">
-            <div className="card host-card">
-            <div id="inner" className="card-header">
-            N+1 MEM
+              <div className="card host-card">
+                <div id="inner" className="card-header">
+                  N+1 MEM
+                </div>
+                {this.state.n1mem > 1 ? (
+                  <div className="normal">
+                    <h4>{this.state.n1mem}</h4>
+                  </div>
+                ) : (
+                  <div className="warning">
+                    <h4>{this.state.n1mem}</h4>
+                  </div>
+                )}
+              </div>
             </div>
-            <h4>            
-            {this.state.n1mem}
-            </h4>
-            </div>
-            </div>
-
-         
 
             <div className="col-md-2">
-            <div className="card host-card">
-            <div id="inner" className="card-header">
-            N+1 CPU
-            </div>
-            <h4>            
-            {this.state.n1cpu}
-            </h4>
-            </div>
+              <div className="card host-card">
+                <div id="inner" className="card-header">
+                  N+1 CPU
+                </div>
+                {this.state.n1cpu > 1 ? (
+                  <div className="normal">
+                    <h4>{this.state.n1cpu}</h4>
+                  </div>
+                ) : (
+                  <div className="warning">
+                    <h4>{this.state.n1cpu}</h4>
+                  </div>
+                )}
+              </div>
             </div>
 
-            <div className="col-md-4">
+            <div className="col-md-3">
             <div className="card host-card">
             <div id="inner" className="card-header">
             CPU Performance
@@ -263,37 +288,39 @@ class Clusters extends Component {
                     <p className="triple-label">
                       CPU Ready
                     </p>
-                    <p className="triple">
-                      2%
-                    </p>
+                    <div className="normal">
+                      <h4>2%</h4>
+                    </div>
                   </div>
                   <div className="col">
                   <p className="triple-label">
                       CO-Stop
                     </p>
-                    <p className="triple">
-                      3%
-                    </p>
+                    <div className="normal">
+                    <h4>3%</h4>
+                    </div>
                   </div>
-                  <div className="col">
-                  <p className="triple-label">
-                      Latency Avg.
-                    </p>
-                    <p className="triple">
-                      .54
-                    </p>
-                  </div>
+             
                 </div>
+              </div>
             </div>
+          </div>
+          {this.state.showHostChart ? (
+            <div className="card host-card chart">
+              <button
+                type="button"
+                className="btn btn-dark"
+                onClick={() => {
+                  this.setState({ showHostChart: false });
+                }}
+              >
+                Hide Host Mem and CPU Usage
+              </button>
+              <ClusterChartContainer />
             </div>
-
-
-           
-          </div>
-         
-          <div className="card host-card chart">
-          <ClusterChartContainer />
-          </div>
+          ) : (
+            <></>
+          )}
         </div>
       );
     }
