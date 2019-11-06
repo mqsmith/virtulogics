@@ -1,9 +1,11 @@
+// Import Links
 import React, { Fragment, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
 
+// Variables for Login
 const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: '',
@@ -20,10 +22,12 @@ const Login = ({ login, isAuthenticated }) => {
     login(email, password);
   };
 
+  // Redirect Route
   if (isAuthenticated) {
     return <Redirect to='/clusters' />;
   }
 
+  // Styling Login Component with Bootstrap classNames
   return (
     <Fragment>
       <h1 className='large text-primary'>Sign In</h1>
@@ -69,6 +73,7 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
+// Export Links
 export default connect(
   mapStateToProps,
   { login }

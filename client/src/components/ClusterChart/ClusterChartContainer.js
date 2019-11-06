@@ -1,9 +1,11 @@
+// Import Links
 import React, { Component } from "react";
 import axios from "axios";
 import moment from "moment";
 import ClusterLineChart from "../LineChart/ClusterLineChart";
 
 class ClusterChartContainer extends Component {
+  // State on ClusterChartContainer
   state = {
     hostOneCpuData: [],
     hostOneMemData: [],
@@ -23,25 +25,17 @@ class ClusterChartContainer extends Component {
     axios
       .get("/api/host/mem/1day")
       .then(hostMemData => {
-         // console.log(hostCpuData.data.data);
          const {
             memUsageOne,
             memUsageTwo,
             hostName,
             time
           } = hostMemData.data.data;
-        //   let hostNameOne = hostName.filter(data => data === "lab-esxi-01.vdilab.int");
-        //   let hostNameTwo = hostName.filter(data => data === "lab-esxi-02.vdilab.int");
-        //   let formattedTime = time.map(time => moment(time).format("M/D, ha"));
           console.log(hostName);
                   this.setState({
                     hostOneMemData: memUsageOne,
-        //             hostOneLabels: hostNameOne,
                     hostTwoMemData: memUsageTwo,
-        //             hostTwoLabels: hostNameTwo,
-        //             time:formattedTime
                   });
-        //           console.log(this.state);
         })
       .catch(err => {
         console.log(err);
@@ -52,7 +46,6 @@ class ClusterChartContainer extends Component {
     axios
       .get("/api/host/cpu/1day")
       .then(hostCpuData => {
-        // console.log(hostCpuData.data.data);
         const {
           cpuUsageOne,
           cpuUsageTwo,
@@ -70,22 +63,17 @@ class ClusterChartContainer extends Component {
                   hostTwoLabels: hostNameTwo,
                   time:formattedTime
                 });
-        //         console.log(this.state);
       })
       .catch(err => {
         console.log(err);
       });
   };
 
+  // Styling ClusterChartContainer Component with Bootstrap classNames
   render() {
-    // usage = this.state.data.filter(({ RAM_Usage }) => RAM_Usage !== null);
-    // console.log(usage);
     return (
       <>
-    
-                
         <div className="main chart-wrapper container">
-                    
           <ClusterLineChart
             label={"Host MEM Usage Average"}
             hostOneData={this.state.hostOneMemData}
@@ -115,4 +103,5 @@ class ClusterChartContainer extends Component {
   }
 }
 
+// Export Links
 export default ClusterChartContainer;

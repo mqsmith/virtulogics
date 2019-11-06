@@ -1,16 +1,16 @@
+// Import Links
 import React, { Component } from "react";
-// import Moment from "react-moment";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import Loading from "../../components/Loading/Loading";
 import "./Hosts.css";
-import Dual_Button_Card from "../..//components/Dual_Button_Card/";
 import { CircularProgressbar } from "react-circular-progressbar";
 
 const needDominantBaselineFix = true;
 
 class Hosts extends Component {
+  // State on Hosts
   state = {
     allData: [],
     loading: true
@@ -20,13 +20,13 @@ class Hosts extends Component {
     this.getBoth();
   }
 
+  // Axios Call
   getBoth = () => {
     axios
       .get("/api/host/cpu-mem/1")
       .then(allData => {
         let obj = allData.data;
         const array = Object.values(obj);
-        // console.log(array);
         this.setState({ allData: array, loading: false });
         console.log(this.state.allData[0].esxhostname);
         console.log(this.state.allData[0].totalCapacity_average);
@@ -49,6 +49,7 @@ class Hosts extends Component {
       });
   };
   render() {
+    // Loading Screen Logic
     let content;
     if (this.state.loading) {
       content = (
@@ -57,6 +58,7 @@ class Hosts extends Component {
         </div>
       );
     } else {
+      // Styling Hosts Component with Bootstrap classNames
       return (
         <div className="wrapper">
           {this.state.allData.map((host, i) => (
@@ -147,7 +149,6 @@ class Hosts extends Component {
                   </div>
                 </div>
 
-
                 <div className="col-md-3">
                   <div className="card host-card">
                     <div id="inner" className="card-header">
@@ -197,26 +198,5 @@ class Hosts extends Component {
     return <div>{content}</div>;
   }
 }
+// Export Link
 export default Hosts;
-
-{
-  /* <div className="col-md-4 cpu-col">
-                  <Dual_Button_Card
-                    title="Host CPU Usage"
-                    text1="CPU Usage (Mhz):"
-                    text2="CPU Usage (%):"
-                    firstButton={host.usagemhz_average}
-                    secondButton={host.cpu_usage_average}
-                  />
-                  <Dual_Button_Card
-                    title="Host Memory Usage"
-                    text1="MEM Usage (GB):"
-                    text2="MEM Usage (%):"
-                    firstButton={(
-                      (host.totalCapacity_average * host.usage_average) /
-                      100000
-                    ).toFixed(2)}
-                    secondButton={host.usage_average}
-                  />
-                </div> */
-}
