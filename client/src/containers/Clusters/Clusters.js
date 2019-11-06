@@ -1,18 +1,19 @@
+// Import Links
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import PieComponent from "../..//components/Pie/Pie";
 import Loading from "../../components/Loading/Loading";
-import Dual_Button_Card from "../..//components/Dual_Button_Card/";
 import ClusterChartContainer from "../../components/ClusterChart/ClusterChartContainer";
 import { CircularProgressbar } from "react-circular-progressbar";
-
 import "react-circular-progressbar/dist/styles.css";
 import "./Clusters.css";
 
 const needDominantBaselineFix = true;
 
 class Clusters extends Component {
+
+  // State on Cluester Component
   state = {
     allData: [],
     loading: true,
@@ -28,27 +29,20 @@ class Clusters extends Component {
     this.getBoth();
   }
 
+  // Axios Call
   getBoth = () => {
     axios
       .get("/api/host/cpu-mem/1")
       .then(allData => {
         let obj = allData.data;
         const array = Object.values(obj);
-        // console.log(array);
         this.setState({ allData: array, loading: false });
         let combined = [];
 
         for (let i = 0; i < this.state.allData.length; i++) {
-          // console.log(this.state.allData[i].usage_average)
           combined.push(this.state.allData[i].usage_average);
         }
-        // console.log(combined);
-
-        // console.log(array);
-        // let cluster = this.state.allData.filter(
-        //   data => data.usage_average === "lab-esxi-01.vdilab.int"
-
-        // );
+       
         const memData = this.state.allData.map(data => data.usage_average);
         let memTotal = 0;
         //Add the to values together to make the total
@@ -112,9 +106,6 @@ class Clusters extends Component {
         let n1cpu = totalclustercpu;
         console.log(clusterusagetotal);
 
-        // memTotal.push(this.state.data);
-        // labelData.push("Total");
-
         //Set state
         this.setState({
           clusterusagetotal: clusterusagetotal.toFixed(2),
@@ -135,6 +126,7 @@ class Clusters extends Component {
       });
   };
   render() {
+    // Loading Screen Logic
     let content;
     if (this.state.loading) {
       content = (
@@ -143,6 +135,8 @@ class Clusters extends Component {
         </div>
       );
     } else {
+
+      // Styling Clusters Component with Bootstrap classNames
       return (
         <div className="wrapper">
           <div className="title-row shadow mb-3 bg-white rounded">
@@ -158,6 +152,18 @@ class Clusters extends Component {
                   Click to view "Hosts"
                 </button>
               </Link>
+              {this.state.showHostChart ? (
+                  <></>
+                ) : (
+                  <button
+                    className="btn-dark btn-sm link-button"
+                    onClick={() => {
+                      this.setState({ showHostChart: true });
+                    }}
+                  >
+                    View Host CPU and MEM Usage
+                  </button>
+                )}
 
               <div className="card host-card">
                 <div id="inner" className="card-header">
@@ -211,19 +217,12 @@ class Clusters extends Component {
                 <div id="inner" className="card-header">
                   ESXi Hosts
                 </div>
-                <h3>{this.state.label.length}</h3>
-                {this.state.showHostChart ? (
-                  <></>
-                ) : (
-                  <button
-                    className="btn-dark btn-sm"
-                    onClick={() => {
-                      this.setState({ showHostChart: true });
-                    }}
-                  >
-                    View Host CPU and MEM Usage
-                  </button>
-                )}
+                <div className="normal">   
+                <h4>
+                {this.state.label.length}
+                </h4>
+                </div>
+                
               </div>
             </div>
 
@@ -238,12 +237,21 @@ class Clusters extends Component {
           </div>
 
           <div className="row">
-            <div className="col-md-2">
+          
+          <div className="col-md-2">
               <div className="card host-card">
                 <div id="inner" className="card-header">
                   N+1 MEM
                 </div>
-                <h4>{this.state.n1mem}</h4>
+                {this.state.n1mem > 1 ? (
+                  <div className="normal">
+                    <h4>{this.state.n1mem}</h4>
+                  </div>
+                ) : (
+                  <div className="warning">
+                    <h4>{this.state.n1mem}</h4>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -252,28 +260,41 @@ class Clusters extends Component {
                 <div id="inner" className="card-header">
                   N+1 CPU
                 </div>
-                <h4>{this.state.n1cpu}</h4>
+                {this.state.n1cpu > 1 ? (
+                  <div className="normal">
+                    <h4>{this.state.n1cpu}</h4>
+                  </div>
+                ) : (
+                  <div className="warning">
+                    <h4>{this.state.n1cpu}</h4>
+                  </div>
+                )}
               </div>
             </div>
 
-            <div className="col-md-4">
-              <div className="card host-card">
-                <div id="inner" className="card-header">
-                  CPU Performance
-                </div>
+            <div className="col-md-3">
+            <div className="card host-card">
+            <div id="inner" className="card-header">
+            CPU Performance
+            </div>
                 <div className="row">
                   <div className="col">
-                    <p className="triple-label">CPU Ready</p>
-                    <p className="triple">2%</p>
+                    <p className="triple-label">
+                      CPU Ready
+                    </p>
+                    <div className="normal">
+                      <h4>2%</h4>
+                    </div>
                   </div>
                   <div className="col">
-                    <p className="triple-label">CO-Stop</p>
-                    <p className="triple">3%</p>
+                  <p className="triple-label">
+                      CO-Stop
+                    </p>
+                    <div className="normal">
+                    <h4>3%</h4>
+                    </div>
                   </div>
-                  <div className="col">
-                    <p className="triple-label">Latency Avg.</p>
-                    <p className="triple">.54</p>
-                  </div>
+             
                 </div>
               </div>
             </div>
@@ -300,4 +321,6 @@ class Clusters extends Component {
     return <div>{content}</div>;
   }
 }
+
+// Export Link
 export default Clusters;

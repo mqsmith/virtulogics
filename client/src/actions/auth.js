@@ -1,3 +1,4 @@
+// Import Links
 import axios from 'axios';
 import { setAlert } from './alert';
 import {
@@ -12,7 +13,7 @@ import {
 } from './types';
 import setAuthToken from '../utils/setAuthToken';
 
-// Load User
+// Export for Load User
 export const loadUser = () => async dispatch => {
   if (localStorage.token) {
     setAuthToken(localStorage.token);
@@ -32,7 +33,7 @@ export const loadUser = () => async dispatch => {
   }
 };
 
-// Register User
+// Export for Register User
 export const register = ({ name, email, password }) => async dispatch => {
   const config = {
     headers: {
@@ -64,7 +65,7 @@ export const register = ({ name, email, password }) => async dispatch => {
   }
 };
 
-// Login User
+// Export for Login User
 export const login = (email, password) => async dispatch => {
   const config = {
     headers: {
@@ -96,7 +97,7 @@ export const login = (email, password) => async dispatch => {
   }
 };
 
-// Logout / Clear Profile
+// Expoer for Logout / Clear Profile
 export const logout = () => dispatch => {
   dispatch({ type: CLEAR_PROFILE });
   dispatch({ type: LOGOUT });

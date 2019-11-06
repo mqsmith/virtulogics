@@ -11,7 +11,7 @@ const User = require('../../models/User');
 //router.get('/',(req,res)=>res.send("Auth Route"));
 
 // @route    GET api/auth
-// @desc     Test route
+// @desc     Authenticate user and get token
 // @access   Public
 router.get('/', auth, async (req, res) => {
   try {
@@ -43,6 +43,7 @@ router.post(
     try {
       let user = await User.findOne({ email });
 
+      //check user 
       if (!user) {
         return res
           .status(400)
@@ -50,6 +51,8 @@ router.post(
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
+
+      //password match check
 
       if (!isMatch) {
         return res

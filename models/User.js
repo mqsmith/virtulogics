@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'); //bring in Mongoose
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({    //create a schema
   name: {
     type: String,
     required: true

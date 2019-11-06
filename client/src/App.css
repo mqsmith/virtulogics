@@ -1,3 +1,4 @@
+/* App Style Sheet */
 .App {
   text-align: center;
 }
@@ -32,7 +33,6 @@
   margin-top: 100px;
 }
 .wrapper{
-  
   padding: 10px;
   margin: 10px;
   opacity: 0.9;

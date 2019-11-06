@@ -1,16 +1,16 @@
+// Import Links
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
-// import LineChart from "../../components/LineMemChart";
 import Loading from "../../components/Loading/Loading";
-import Dual_Button_Card from "../..//components/Dual_Button_Card/Dual_Button_Card";
 import Collection from "../../components/HostChart/HostChartContainer";
 import { CircularProgressbar } from "react-circular-progressbar";
 
 const needDominantBaselineFix = true;
 
 class Host extends Component {
+  // Start on Host Component
   state = {
     allData: [],
     loading: true
@@ -25,6 +25,7 @@ class Host extends Component {
     console.log("Host updated props: ", this.props);
   }
 
+  // Axios Call
   getBoth = () => {
     axios
       .get("/api/host/cpu-mem/1/" + this.props.match.params.esxhostname)
@@ -54,6 +55,7 @@ class Host extends Component {
   };
 
   render() {
+    // Loading Screen Logic
     let content;
     if (this.state.loading) {
       content = (
@@ -62,6 +64,7 @@ class Host extends Component {
         </div>
       );
     } else {
+      // Styling Host Component with Bootstrap classNames
       return (
         <div className="wrapper">
           {this.state.allData.map((host, i) => (
@@ -150,7 +153,8 @@ class Host extends Component {
                     />
                   </div>
                 </div>
-                <div className="col-md-4">
+
+                <div className="col-md-3">
                   <div className="card host-card">
                     <div id="inner" className="card-header">
                       Host Performance Stats:
@@ -158,16 +162,31 @@ class Host extends Component {
                     <div className="row">
                       <div className="col">
                         <p className="triple-label">CPU Ready</p>
-                        <p className="triple">{host.utilization_average}</p>
+                        {host.utilization_average < 5 ? (
+                        <div className="triple normal">
+                        <h4>{host.utilization_average}%</h4>
+                        </div>
+                        ) : (
+                        <div className="triple warning ">
+                        <h4>{host.utilization_average}%</h4>
+                        </div>
+                        )}
+          
                       </div>
                       <div className="col">
                         <p className="triple-label">CO-Stop</p>
-                        <p className="triple">{host.costop_summation}</p>
+                        {host.costop_summation < 5 ? (
+                        <div className="triple normal">
+                        <h4>{host.costop_summation}</h4>
+                        </div>
+                        ) : (
+                        <div className="triple warning ">
+                        <h4>{host.costop_summation}</h4>
+                        </div>
+                        )}
+
                       </div>
-                      <div className="col">
-                        <p className="triple-label">Swap IN Avg.</p>
-                        <p className="triple">{host.swapinRate_average}</p>
-                      </div>
+
                     </div>
                   </div>
                 </div>
