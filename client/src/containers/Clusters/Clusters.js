@@ -9,9 +9,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import "./Clusters.css";
 
-
 class Clusters extends Component {
-
   // State on Cluester Component
   state = {
     allData: [],
@@ -41,7 +39,7 @@ class Clusters extends Component {
         for (let i = 0; i < this.state.allData.length; i++) {
           combined.push(this.state.allData[i].usage_average);
         }
-       
+
         const memData = this.state.allData.map(data => data.usage_average);
         let memTotal = 0;
         //Add the to values together to make the total
@@ -134,7 +132,6 @@ class Clusters extends Component {
         </div>
       );
     } else {
-
       // Styling Clusters Component with Bootstrap classNames
       return (
         <div className="wrapper">
@@ -152,17 +149,17 @@ class Clusters extends Component {
                 </button>
               </Link>
               {this.state.showHostChart ? (
-                  <></>
-                ) : (
-                  <button
-                    className="btn-dark btn-sm link-button"
-                    onClick={() => {
-                      this.setState({ showHostChart: true });
-                    }}
-                  >
-                    View Host CPU and MEM Usage
-                  </button>
-                )}
+                <></>
+              ) : (
+                <button
+                  className="btn-dark btn-sm link-button"
+                  onClick={() => {
+                    this.setState({ showHostChart: true });
+                  }}
+                >
+                  View Host CPU and MEM Usage
+                </button>
+              )}
 
               <div className="card host-card">
                 <div id="inner" className="card-header">
@@ -186,32 +183,34 @@ class Clusters extends Component {
                     </tspan>
                   }
                   styles={{
-                    background: { 
-                      fill: 'black',
-                       transform: 'scale(0.8)',
-                       transformOrigin: 'center center', 
-                       },
-                  path: {
-                  transform: "rotate(180deg)",
-                  transformOrigin: "center center",
-                  filter: 'drop-shadow(10px 10px 20px lightgray)',
-                  strokeLinecap: "butt",
-                  stroke: this.state.totalmemoryusage >= 50 ? "red" : "#2B4560"
-                },
-                root: { 
-                  filter: 'drop-shadow(10px 10px 20px lightgray)'
-                  },
-                trail: {
-                  strokeWidth: 8
-                },
-                text: {
-                  fontSize: 22,
-                  fontWeight: 800,
-                  filter: 'drop-shadow(10px 10px 20px lightgray)',
-                  animation: "fadein 2s",
-                  fill: this.state.totalmemoryusage >= 50 ? "red" : "#2B4560"
-                }
-              }}
+                    background: {
+                      fill: "black",
+                      transform: "scale(0.8)",
+                      transformOrigin: "center center"
+                    },
+                    path: {
+                      transform: "rotate(180deg)",
+                      transformOrigin: "center center",
+                      filter: "drop-shadow(10px 10px 20px lightgray)",
+                      strokeLinecap: "butt",
+                      stroke:
+                        this.state.totalmemoryusage >= 50 ? "red" : "#2B4560"
+                    },
+                    root: {
+                      filter: "drop-shadow(10px 10px 20px lightgray)"
+                    },
+                    trail: {
+                      strokeWidth: 8
+                    },
+                    text: {
+                      fontSize: 22,
+                      fontWeight: 800,
+                      filter: "drop-shadow(10px 10px 20px lightgray)",
+                      animation: "fadein 2s",
+                      fill:
+                        this.state.totalmemoryusage >= 50 ? "red" : "#2B4560"
+                    }
+                  }}
                 />
               </div>
             </div>
@@ -229,31 +228,33 @@ class Clusters extends Component {
                     </tspan>
                   }
                   styles={{
-                    background: { 
-                      fill: 'black',
-                       transform: 'scale(0.8)',
-                       transformOrigin: 'center center', 
-                       },
-                path: {
-                  transform: "rotate(180deg)",
-                  transformOrigin: "center center",
-                  strokeLinecap: "butt",
-                  stroke: this.state.clusterusagetotal >= 70 ? "red" : "#2B4560"
-                },
-                root: { 
-                  filter: 'drop-shadow(10px 10px 20px lightgray)'
-                  },
-                trail: {
-                  strokeWidth: 8
-                },
-                text: {
-                  fontSize: 22,
-                  fontWeight: 800,
-                  filter: 'drop-shadow(10px 10px 20px lightgray)',
-                  animation: "fadein 5s",
-                  fill: this.state.clusterusagetotal >= 70 ? "red" : "#2B4560"
-                }
-              }}
+                    background: {
+                      fill: "black",
+                      transform: "scale(0.8)",
+                      transformOrigin: "center center"
+                    },
+                    path: {
+                      transform: "rotate(180deg)",
+                      transformOrigin: "center center",
+                      strokeLinecap: "butt",
+                      stroke:
+                        this.state.clusterusagetotal >= 70 ? "red" : "#2B4560"
+                    },
+                    root: {
+                      filter: "drop-shadow(10px 10px 20px lightgray)"
+                    },
+                    trail: {
+                      strokeWidth: 8
+                    },
+                    text: {
+                      fontSize: 22,
+                      fontWeight: 800,
+                      filter: "drop-shadow(10px 10px 20px lightgray)",
+                      animation: "fadein 5s",
+                      fill:
+                        this.state.clusterusagetotal >= 70 ? "red" : "#2B4560"
+                    }
+                  }}
                 />
               </div>
             </div>
@@ -263,12 +264,9 @@ class Clusters extends Component {
                 <div id="inner" className="card-header">
                   ESXi Hosts
                 </div>
-                <div className="normal">   
-                <h4>
-                {this.state.label.length}
-                </h4>
+                <div className="normal">
+                  <h4>{this.state.label.length}</h4>
                 </div>
-                
               </div>
             </div>
 
@@ -283,8 +281,7 @@ class Clusters extends Component {
           </div>
 
           <div className="row">
-          
-          <div className="col-md-2">
+            <div className="col-md-2">
               <div className="card host-card">
                 <div id="inner" className="card-header">
                   N+1 MEM
@@ -319,28 +316,23 @@ class Clusters extends Component {
             </div>
 
             <div className="col-md-3">
-            <div className="card host-card">
-            <div id="inner" className="card-header">
-            CPU Performance
-            </div>
+              <div className="card host-card">
+                <div id="inner" className="card-header">
+                  CPU Performance
+                </div>
                 <div className="row">
                   <div className="col">
-                    <p className="triple-label">
-                      CPU Ready
-                    </p>
+                    <p className="triple-label">CPU Ready</p>
                     <div className="normal">
                       <h4>2%</h4>
                     </div>
                   </div>
                   <div className="col">
-                  <p className="triple-label">
-                      CO-Stop
-                    </p>
+                    <p className="triple-label">CO-Stop</p>
                     <div className="normal">
-                    <h4>3%</h4>
+                      <h4>3%</h4>
                     </div>
                   </div>
-             
                 </div>
               </div>
             </div>
