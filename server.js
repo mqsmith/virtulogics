@@ -31,8 +31,10 @@ app.use(express.static(__dirname + "/client/build"));
 // Define Routes
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));
-//app.use('/api/profile', require('./routes/api/profile'));
-//app.use('/api/posts', require('./routes/api/posts'));
+app.use('/api/hosts', require('./routes/api/hosts'));
+app.use('/api/host-cpu', require('./routes/api/host-cpu'));
+app.use('/api/host-mem', require('./routes/api/host-mem'));
+app.use('/api/uptime', require('./routes/api/uptime'));
 
 // app.get("/api/cars/:id", function(req, res) {
 //     db.Tesla.findById(req.params.id)
@@ -51,7 +53,7 @@ app.use("/api/auth", require("./routes/api/auth"));
 //     })
 // });
 
-app.get("/api/hosts", function(req, res) {
+/* app.get("/api/hosts", function(req, res) {
   db.HostCpu.find({})
     .then(allHosts => {
       console.log(allHosts);
@@ -87,7 +89,7 @@ app.post("/api/hosts", function(req, res) {
         error: true
       });
     });
-});
+}); */
 
 // Influx DB connection and routes
 const influx = new Influx.InfluxDB({
@@ -114,7 +116,7 @@ influx
   .catch(error => console.log({ error }));
 
 // to narrow down the fields we return we can do "select cpu, usagemhz_average, esxhostname from vsphere_host_cpu"
-app.get("/api/host-cpu/1", function(req, res) {
+/* app.get("/api/host-cpu/1", function(req, res) {
   influx
     .query(
       `
@@ -178,9 +180,9 @@ app.get("/api/host-cpu/1", function(req, res) {
         error: true
       });
     });
-});
+}); */
 
-app.get("/api/host-mem/1", function(req, res) {
+/* app.get("/api/host-mem/1", function(req, res) {
   influx
     .query(
       `select * from vsphere_host_mem
@@ -222,9 +224,9 @@ app.get("/api/host-mem/15", function(req, res) {
         error: true
       });
     });
-});
+}); */
 
-app.get("/api/uptime", function(req, res) {
+/* app.get("/api/uptime", function(req, res) {
   influx
     .query(
       `
@@ -248,7 +250,7 @@ app.get("/api/uptime", function(req, res) {
       });
     });
 });
-
+ */
 app.get("/api/cluster-cpu", function(req, res) {
   influx
     .query("select * from vsphere_cluster_cpu where time > now() - 15m")
