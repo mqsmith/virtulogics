@@ -124,6 +124,7 @@ class Hosts extends Component {
                     ).toFixed(2)}GB
                         </tspan>
                       }
+                      
                     />
                   </div>
                 </div>

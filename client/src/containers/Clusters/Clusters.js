@@ -207,20 +207,20 @@ class Clusters extends Component {
                   transformOrigin: "center center",
                   filter: 'drop-shadow(10px 10px 20px lightgray)',
                   strokeLinecap: "butt",
-                  stroke: this.state.totalmemoryusage >= 50 ? "red" : "blue"
+                  stroke: this.state.totalmemoryusage >= 50 ? "red" : "#2B4560"
                 },
                 root: { 
                   filter: 'drop-shadow(10px 10px 20px lightgray)'
                   },
                 trail: {
-                  strokeWidth: 5
+                  strokeWidth: 8
                 },
                 text: {
                   fontSize: 22,
                   fontWeight: 800,
                   filter: 'drop-shadow(10px 10px 20px lightgray)',
                   animation: "fadein 2s",
-                  fill: this.state.totalmemoryusage >= 50 ? "red" : "blue"
+                  fill: this.state.totalmemoryusage >= 50 ? "red" : "#2B4560"
                 }
               }}
                 />
@@ -258,7 +258,7 @@ class Clusters extends Component {
                   filter: 'drop-shadow(10px 10px 20px lightgray)'
                   },
                 trail: {
-                  strokeWidth: 5
+                  strokeWidth: 8
                 },
                 text: {
                   fontSize: 22,
