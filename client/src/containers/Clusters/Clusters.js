@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import PieComponent from "../..//components/Pie/Pie";
 import Loading from "../../components/Loading/Loading";
+// import "react-circular-progressbar/dist/styles.css";
 import Dual_Button_Card from "../..//components/Dual_Button_Card/";
 import ClusterChartContainer from "../../components/ClusterChart/ClusterChartContainer";
 import { CircularProgressbar } from "react-circular-progressbar";
@@ -195,6 +196,33 @@ class Clusters extends Component {
                       {this.state.totalmemoryusage}%
                     </tspan>
                   }
+                  styles={{
+                    background: { 
+                      fill: 'black',
+                       transform: 'scale(0.8)',
+                       transformOrigin: 'center center', 
+                       },
+                  path: {
+                  transform: "rotate(180deg)",
+                  transformOrigin: "center center",
+                  filter: 'drop-shadow(10px 10px 20px lightgray)',
+                  strokeLinecap: "butt",
+                  stroke: this.state.totalmemoryusage >= 50 ? "red" : "blue"
+                },
+                root: { 
+                  filter: 'drop-shadow(10px 10px 20px lightgray)'
+                  },
+                trail: {
+                  strokeWidth: 5
+                },
+                text: {
+                  fontSize: 22,
+                  fontWeight: 800,
+                  filter: 'drop-shadow(10px 10px 20px lightgray)',
+                  animation: "fadein 2s",
+                  fill: this.state.totalmemoryusage >= 50 ? "red" : "blue"
+                }
+              }}
                 />
               </div>
             </div>
@@ -214,6 +242,32 @@ class Clusters extends Component {
                       {this.state.clusterusagetotal}%
                     </tspan>
                   }
+                  styles={{
+                    background: { 
+                      fill: 'black',
+                       transform: 'scale(0.8)',
+                       transformOrigin: 'center center', 
+                       },
+                path: {
+                  transform: "rotate(180deg)",
+                  transformOrigin: "center center",
+                  strokeLinecap: "butt",
+                  stroke: this.state.clusterusagetotal >= 70 ? "red" : "#2B4560"
+                },
+                root: { 
+                  filter: 'drop-shadow(10px 10px 20px lightgray)'
+                  },
+                trail: {
+                  strokeWidth: 5
+                },
+                text: {
+                  fontSize: 22,
+                  fontWeight: 800,
+                  filter: 'drop-shadow(10px 10px 20px lightgray)',
+                  animation: "fadein 5s",
+                  fill: this.state.clusterusagetotal >= 70 ? "red" : "#2B4560"
+                }
+              }}
                 />
               </div>
             </div>
