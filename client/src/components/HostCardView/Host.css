@@ -1,0 +1,89 @@
+.card {
+    width: 90%;
+    padding: 10px
+}
+.card-body {
+    /* width: 100%; */
+    float: left;
+  
+}
+
+p {
+    /* font-weight: bold; */
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.main-card {
+    width: 100%;
+    padding: 10px;
+}
+img {
+    margin: 20px;
+    background-color: white;
+}
+.card-stats {
+    width: 100%;
+    box-shadow: 0 2px 2px #999, 0 2px 2px #999;
+}
+
+.main-card {
+    box-shadow: 0 2px 2px #999, 0 2px 2px #999;
+}
+.card-wrapper {
+    border-style: none;
+}
+.btn-sm {
+    float: left;
+}
+.loading {
+    padding-top: 250px;
+    font-size: 50px;
+}
+.top-left {
+    text-align: left;
+    line-height: 10px;
+}
+.host-text-box {
+    margin-left: 0px;
+    padding: 15px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+.image-holder {
+    margin-left: 15px;
+}
+.cpu-ready-text {
+    text-align: center;
+    font-size: 75px;
+}
+.polled {
+    text-align: center;
+}
+
+#title {
+    text-align: center;
+    font-family: arial, sans-serif;
+  }
+  
+  #hosts {
+    text-align: center;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    border: 3px solid #ddd;
+    width: 100%;
+  }
+  
+  #hosts td, #hosts th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #hosts tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #hosts tr:hover {background-color: #ddd;}
+  
+  #hosts th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #6AA4B0;
+    color: white;
+  }

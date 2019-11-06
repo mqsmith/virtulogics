@@ -1,19 +1,21 @@
 import React, { Component } from "react";
 // import Moment from "react-moment";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import moment from "moment";
+// import { Link } from "react-router-dom";
+// import moment from "moment";
 import Loading from "../../components/Loading/Loading";
 import "./Hosts.css";
-import Dual_Button_Card from "../..//components/Dual_Button_Card/";
-import { CircularProgressbar } from "react-circular-progressbar";
+// import Dual_Button_Card from "../..//components/Dual_Button_Card/";
+// import { CircularProgressbar } from "react-circular-progressbar";
+import HostList from "../../components/HostListView/HostList";
 
 const needDominantBaselineFix = true;
 
 class Hosts extends Component {
   state = {
     allData: [],
-    loading: true
+    loading: true,
+    listView: true
   };
 
   componentDidMount() {
@@ -65,14 +67,14 @@ class Hosts extends Component {
       return (
         <tr key={host.esxhostname}>
           <td>{host.esxhostname}</td>
-          <td>{(host.usage_average).toFixed(2)}</td>
+          <td>{host.usage_average.toFixed(2)}</td>
           <td>
             {(
               (host.totalCapacity_average * host.usage_average) /
               100000
             ).toFixed(2)}
           </td>
-          <td>{(host.cpu_usage_average).toFixed(2)}</td>
+          <td>{host.cpu_usage_average.toFixed(2)}</td>
         </tr>
       );
     });
@@ -88,13 +90,12 @@ class Hosts extends Component {
         ) : (
           <div className="wrapper">
             <div>
-              <h1 id="title">Host Info</h1>
-              <table id="hosts">
-                <tbody>
-                  {this.renderTableHeader()}
-                  {this.renderTableData()}
-                </tbody>
-              </table>
+              
+              <HostList hostData={this.state.allData} cardHandler={() => {
+                  this.setState({ listView: false });
+                }} view={this.state.listView} listHandler={() => {
+                  this.setState({ listView: true });
+                }}/>
             </div>
           </div>
         )}
@@ -103,7 +104,6 @@ class Hosts extends Component {
   }
 }
 export default Hosts;
-            
 
 {
   /* {this.state.allData.map((host, i) => (
