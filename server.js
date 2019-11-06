@@ -38,6 +38,8 @@ app.use('/api/uptime', require('./routes/api/uptime'));
 app.use('/api/cluster-cpu', require('./routes/api/cluster-cpu'));
 app.use('/api/chart-mem', require('./routes/api/chart-mem'));
 app.use('/api/chart-cpu', require('./routes/api/chart-cpu'));
+app.use('/api/host', require('./routes/api/host'));
+
 
 // app.get("/api/cars/:id", function(req, res) {
 //     db.Tesla.findById(req.params.id)
@@ -326,7 +328,7 @@ app.get("/api/chart-cpu/", function(req, res) {
     });
 }); */
 
-app.get("/api/chart-mem/:clustername", function(req, res) {
+/* app.get("/api/chart-mem/:clustername", function(req, res) {
   influx
     .query(
       `SELECT mean("usage_average") FROM "vsphere_host_mem" 
@@ -349,9 +351,9 @@ app.get("/api/chart-mem/:clustername", function(req, res) {
         error: true
       });
     });
-});
+}); */
 
-app.get("/api/host/uptime", function(req, res) {
+/* app.get("/api/host/uptime", function(req, res) {
   influx
     .query(
       `SELECT * FROM "vsphere_host_sys" WHERE time > now() - 1m
@@ -372,9 +374,9 @@ app.get("/api/host/uptime", function(req, res) {
         error: true
       });
     });
-});
+}); */
 
-app.get("/api/host/cpu-mem/1", async function(req, res) {
+/* app.get("/api/host/cpu-mem/1", async function(req, res) {
   let newHashMap = {};
   await influx
     .query(
@@ -618,7 +620,7 @@ app.get("/api/host/cpu-mem/1/:esxhostname", async function(req, res) {
   res.json({
     ...newHashMap
   });
-});
+});*/
 
 influx
   .getMeasurements()
