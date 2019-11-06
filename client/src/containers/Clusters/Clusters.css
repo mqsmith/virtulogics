@@ -84,13 +84,19 @@ h4 {
   .page-title {
       margin-bottom: 0px;
   }
-  .triple {
-    margin-bottom: -20px;
-      text-align: center;
-      font-size: 70px;
-  }
   .triple-label {
-      padding-top: 15px; 
-    margin-bottom: -20px;
+    padding-top: 15px; 
+    margin-bottom: -5px;
     text-align: center;
+  }
+  .normal h4 {
+    color: #2B4560;
+    text-align: center;
+    font-size: 60px;
+    margin-bottom: -8px;
+  }
+  .warning h4 {
+    color: red;
+    text-align: center;
+    font-size: 60px;
   }

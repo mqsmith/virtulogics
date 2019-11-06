@@ -76,7 +76,7 @@ class Host extends Component {
                 <div className="col-md-2">
                   <Link to="/hosts">
                     <button className="btn-dark btn-sm link-button">
-                      Click tp back to "Hosts"
+                      Back to "Hosts"
                     </button>
                   </Link>
 
@@ -152,7 +152,8 @@ class Host extends Component {
                     />
                   </div>
                 </div>
-                <div className="col-md-4">
+
+                <div className="col-md-3">
                   <div className="card host-card">
                     <div id="inner" className="card-header">
                       Host Performance Stats:
@@ -160,16 +161,31 @@ class Host extends Component {
                     <div className="row">
                       <div className="col">
                         <p className="triple-label">CPU Ready</p>
-                        <p className="triple">{host.utilization_average}</p>
+                        {host.utilization_average < 5 ? (
+                        <div className="triple normal">
+                        <h4>{host.utilization_average}%</h4>
+                        </div>
+                        ) : (
+                        <div className="triple warning ">
+                        <h4>{host.utilization_average}%</h4>
+                        </div>
+                        )}
+          
                       </div>
                       <div className="col">
                         <p className="triple-label">CO-Stop</p>
-                        <p className="triple">{host.costop_summation}</p>
+                        {host.costop_summation < 5 ? (
+                        <div className="triple normal">
+                        <h4>{host.costop_summation}</h4>
+                        </div>
+                        ) : (
+                        <div className="triple warning ">
+                        <h4>{host.costop_summation}</h4>
+                        </div>
+                        )}
+
                       </div>
-                      <div className="col">
-                        <p className="triple-label">Swap IN Avg.</p>
-                        <p className="triple">{host.swapinRate_average}</p>
-                      </div>
+
                     </div>
                   </div>
                 </div>
