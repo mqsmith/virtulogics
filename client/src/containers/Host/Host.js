@@ -1,16 +1,16 @@
+// Import Links
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
-// import LineChart from "../../components/LineMemChart";
 import Loading from "../../components/Loading/Loading";
-import Dual_Button_Card from "../..//components/Dual_Button_Card/Dual_Button_Card";
 import Collection from "../../components/HostChart/HostChartContainer";
 import { CircularProgressbar } from "react-circular-progressbar";
 
 const needDominantBaselineFix = true;
 
 class Host extends Component {
+  // Start on Host Component
   state = {
     allData: [],
     loading: true
@@ -25,6 +25,7 @@ class Host extends Component {
     console.log("Host updated props: ", this.props);
   }
 
+  // Axios Call
   getBoth = () => {
     axios
       .get("/api/host/cpu-mem/1/" + this.props.match.params.esxhostname)
@@ -54,6 +55,7 @@ class Host extends Component {
   };
 
   render() {
+    // Loading Screen Logic
     let content;
     if (this.state.loading) {
       content = (
@@ -62,6 +64,7 @@ class Host extends Component {
         </div>
       );
     } else {
+      // Styling Host Component with Bootstrap classNames
       return (
         <div className="wrapper">
           {this.state.allData.map((host, i) => (

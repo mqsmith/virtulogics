@@ -1,18 +1,19 @@
+// Import Links
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import PieComponent from "../..//components/Pie/Pie";
 import Loading from "../../components/Loading/Loading";
-import Dual_Button_Card from "../..//components/Dual_Button_Card/";
 import ClusterChartContainer from "../../components/ClusterChart/ClusterChartContainer";
 import { CircularProgressbar } from "react-circular-progressbar";
-
 import "react-circular-progressbar/dist/styles.css";
 import "./Clusters.css";
 
 const needDominantBaselineFix = true;
 
 class Clusters extends Component {
+
+  // State on Cluester Component
   state = {
     allData: [],
     loading: true,
@@ -28,27 +29,20 @@ class Clusters extends Component {
     this.getBoth();
   }
 
+  // Axios Call
   getBoth = () => {
     axios
       .get("/api/host/cpu-mem/1")
       .then(allData => {
         let obj = allData.data;
         const array = Object.values(obj);
-        // console.log(array);
         this.setState({ allData: array, loading: false });
         let combined = [];
 
         for (let i = 0; i < this.state.allData.length; i++) {
-          // console.log(this.state.allData[i].usage_average)
           combined.push(this.state.allData[i].usage_average);
         }
-        // console.log(combined);
-
-        // console.log(array);
-        // let cluster = this.state.allData.filter(
-        //   data => data.usage_average === "lab-esxi-01.vdilab.int"
-
-        // );
+       
         const memData = this.state.allData.map(data => data.usage_average);
         let memTotal = 0;
         //Add the to values together to make the total
@@ -112,9 +106,6 @@ class Clusters extends Component {
         let n1cpu = totalclustercpu;
         console.log(clusterusagetotal);
 
-        // memTotal.push(this.state.data);
-        // labelData.push("Total");
-
         //Set state
         this.setState({
           clusterusagetotal: clusterusagetotal.toFixed(2),
@@ -135,6 +126,7 @@ class Clusters extends Component {
       });
   };
   render() {
+    // Loading Screen Logic
     let content;
     if (this.state.loading) {
       content = (
@@ -143,6 +135,8 @@ class Clusters extends Component {
         </div>
       );
     } else {
+
+      // Styling Clusters Component with Bootstrap classNames
       return (
         <div className="wrapper">
           <div className="title-row shadow mb-3 bg-white rounded">
@@ -327,4 +321,6 @@ class Clusters extends Component {
     return <div>{content}</div>;
   }
 }
+
+// Export Link
 export default Clusters;
