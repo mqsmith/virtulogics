@@ -9,7 +9,6 @@ import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import "./Clusters.css";
 
-const needDominantBaselineFix = true;
 
 class Clusters extends Component {
 
@@ -182,10 +181,7 @@ class Clusters extends Component {
                 <CircularProgressbar
                   value={this.state.totalmemoryusage}
                   text={
-                    <tspan
-                      className="progress"
-                      dy={needDominantBaselineFix ? -15 : 0}
-                    >
+                    <tspan className="progress">
                       {this.state.totalmemoryusage}%
                     </tspan>
                   }
@@ -228,10 +224,7 @@ class Clusters extends Component {
                 <CircularProgressbar
                   value={this.state.clusterusagetotal}
                   text={
-                    <tspan
-                      className="progress"
-                      dy={needDominantBaselineFix ? -15 : 0}
-                    >
+                    <tspan className="progress">
                       {this.state.clusterusagetotal}%
                     </tspan>
                   }

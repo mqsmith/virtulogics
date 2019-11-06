@@ -9,7 +9,7 @@ import "./Host.css";
 // import Dual_Button_Card from "../..//components/Dual_Button_Card/";
 import { CircularProgressbar } from "react-circular-progressbar";
 
-const needDominantBaselineFix = true;
+
 
 const HostCard = (props) => {
     return (
@@ -47,13 +47,37 @@ const HostCard = (props) => {
                     <CircularProgressbar
                       value={host.usage_average}
                       text={
-                        <tspan
-                          className="progress"
-                          dy={needDominantBaselineFix ? -15 : 0}
-                        >
+                        <tspan className="progress">
                           {host.usage_average}%
                         </tspan>
                       }
+                      styles={{
+                    background: { 
+                      fill: 'black',
+                       transform: 'scale(0.8)',
+                       transformOrigin: 'center center', 
+                       },
+                  path: {
+                  transform: "rotate(180deg)",
+                  transformOrigin: "center center",
+                  filter: 'drop-shadow(10px 10px 20px lightgray)',
+                  strokeLinecap: "butt",
+                  stroke: host.usage_average >= 50 ? "red" : "#2B4560"
+                },
+                root: { 
+                  filter: 'drop-shadow(10px 10px 20px lightgray)'
+                  },
+                trail: {
+                  strokeWidth: 8
+                },
+                text: {
+                  fontSize: 22,
+                  fontWeight: 800,
+                  filter: 'drop-shadow(10px 10px 20px lightgray)',
+                  animation: "fadein 2s",
+                  fill: host.usage_average >= 50 ? "red" : "#2B4560"
+                }
+              }}
                     />
                   </div>
                 </div>
@@ -69,16 +93,42 @@ const HostCard = (props) => {
                       100000
                     ).toFixed(2)}
                       text={
-                        <tspan
-                          className="progress"
-                          dy={needDominantBaselineFix ? -15 : 0}
-                        >
+                        <tspan className="progress">
                           {(
                       (host.totalCapacity_average * host.usage_average) /
                       100000
                     ).toFixed(2)}GB
                         </tspan>
                       }
+                      styles={{
+                    background: { 
+                      fill: 'black',
+                       transform: 'scale(0.8)',
+                       transformOrigin: 'center center', 
+                       },
+                  path: {
+                  transform: "rotate(180deg)",
+                  transformOrigin: "center center",
+                  filter: 'drop-shadow(10px 10px 20px lightgray)',
+                  strokeLinecap: "butt",
+                  stroke: host.totalCapacity_average * host.usage_average /
+                      100000 >= 25 ? "red" : "#2B4560"
+                },
+                root: { 
+                  filter: 'drop-shadow(10px 10px 20px lightgray)'
+                  },
+                trail: {
+                  strokeWidth: 8
+                },
+                text: {
+                  fontSize: 22,
+                  fontWeight: 800,
+                  filter: 'drop-shadow(10px 10px 20px lightgray)',
+                  animation: "fadein 2s",
+                  fill: host.totalCapacity_average * host.usage_average /
+                      100000 >= 25 ? "red" : "#2B4560"
+                }
+              }}
                     />
                   </div>
                 </div>
@@ -91,13 +141,36 @@ const HostCard = (props) => {
                     <CircularProgressbar
                       value={host.cpu_usage_average}
                       text={
-                        <tspan
-                          className="progress"
-                          dy={needDominantBaselineFix ? -15 : 0}
-                        >
+                        <tspan className="progress">
                           {host.cpu_usage_average}%
                         </tspan>
                       }
+                      styles={{
+                    background: { 
+                      fill: 'black',
+                       transform: 'scale(0.8)',
+                       transformOrigin: 'center center', 
+                       },
+                path: {
+                  transform: "rotate(180deg)",
+                  transformOrigin: "center center",
+                  strokeLinecap: "butt",
+                  stroke: host.cpu_usage_average >= 50 ? "red" : "#2B4560"
+                },
+                root: { 
+                  filter: 'drop-shadow(10px 10px 20px lightgray)'
+                  },
+                trail: {
+                  strokeWidth: 8
+                },
+                text: {
+                  fontSize: 22,
+                  fontWeight: 800,
+                  filter: 'drop-shadow(10px 10px 20px lightgray)',
+                  animation: "fadein 5s",
+                  fill: host.cpu_usage_average >= 50 ? "red" : "#2B4560"
+                }
+              }}
                     />
                   </div>
                 </div>
