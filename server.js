@@ -35,6 +35,9 @@ app.use('/api/hosts', require('./routes/api/hosts'));
 app.use('/api/host-cpu', require('./routes/api/host-cpu'));
 app.use('/api/host-mem', require('./routes/api/host-mem'));
 app.use('/api/uptime', require('./routes/api/uptime'));
+app.use('/api/cluster-cpu', require('./routes/api/cluster-cpu'));
+app.use('/api/chart-mem', require('./routes/api/chart-mem'));
+app.use('/api/chart-cpu', require('./routes/api/chart-cpu'));
 
 // app.get("/api/cars/:id", function(req, res) {
 //     db.Tesla.findById(req.params.id)
@@ -251,7 +254,7 @@ app.get("/api/host-mem/15", function(req, res) {
     });
 });
  */
-app.get("/api/cluster-cpu", function(req, res) {
+/* app.get("/api/cluster-cpu", function(req, res) {
   influx
     .query("select * from vsphere_cluster_cpu where time > now() - 15m")
     .then(allClusterCpu => {
@@ -269,9 +272,9 @@ app.get("/api/cluster-cpu", function(req, res) {
         error: true
       });
     });
-});
+}); */
 
-app.get("/api/chart-mem", function(req, res) {
+/* app.get("/api/chart-mem", function(req, res) {
   influx
     .query(
       `select mean("active_average") as "RAM_Usage" from "vsphere_host_mem"
@@ -294,9 +297,9 @@ app.get("/api/chart-mem", function(req, res) {
         error: true
       });
     });
-});
+}); */
 
-//Filtered by hostname
+/* //Filtered by hostname
 app.get("/api/chart-cpu/", function(req, res) {
   influx
     .query(
@@ -321,7 +324,7 @@ app.get("/api/chart-cpu/", function(req, res) {
         error: true
       });
     });
-});
+}); */
 
 app.get("/api/chart-mem/:clustername", function(req, res) {
   influx
