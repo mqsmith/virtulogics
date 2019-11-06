@@ -1,3 +1,4 @@
+// Import Links
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -5,6 +6,7 @@ import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 import './Navbar.css';
 
+// Navbar Variables
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <ul>
@@ -29,13 +31,8 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   );
 
   return (
-    <nav className='navbar bg-dark nav-header'>
-      <h1>
-        <Link to='/'>
-          {/* <i className='fas fa-code' /> Virtulogics */}
-          {/* <img className="logo-header" src="/img/header.png" /> */}
-        </Link>
-      </h1>
+    <nav className='navbar nav-header justify-content-end'>
+      
       {!loading && (
         <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>
       )}
@@ -52,6 +49,7 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
+// Export Link
 export default connect(
   mapStateToProps,
   { logout }

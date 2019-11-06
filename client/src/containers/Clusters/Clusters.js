@@ -1,13 +1,19 @@
+// Import Links
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import PieComponent from "../..//components/Pie/Pie";
 import Loading from "../../components/Loading/Loading";
-import Dual_Button_Card from "../..//components/Dual_Button_Card/";
 import ClusterChartContainer from "../../components/ClusterChart/ClusterChartContainer";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 import "./Clusters.css";
 
+const needDominantBaselineFix = true;
+
 class Clusters extends Component {
+
+  // State on Cluester Component
   state = {
     allData: [],
     loading: true,
@@ -15,34 +21,28 @@ class Clusters extends Component {
     label: [],
     data: [],
     singlevcentername: [],
-    singleclustername: []
+    singleclustername: [],
+    showHostChart: false
   };
 
   componentDidMount() {
     this.getBoth();
   }
 
+  // Axios Call
   getBoth = () => {
     axios
       .get("/api/host/cpu-mem/1")
       .then(allData => {
         let obj = allData.data;
         const array = Object.values(obj);
-        // console.log(array);
         this.setState({ allData: array, loading: false });
         let combined = [];
 
         for (let i = 0; i < this.state.allData.length; i++) {
-          // console.log(this.state.allData[i].usage_average)
           combined.push(this.state.allData[i].usage_average);
         }
-        // console.log(combined);
-
-        // console.log(array);
-        // let cluster = this.state.allData.filter(
-        //   data => data.usage_average === "lab-esxi-01.vdilab.int"
-
-        // );
+       
         const memData = this.state.allData.map(data => data.usage_average);
         let memTotal = 0;
         //Add the to values together to make the total
@@ -77,9 +77,7 @@ class Clusters extends Component {
         let n1mem = ((64 - totalclustermemory) / 32).toFixed(2);
         console.log(n1mem);
 
-        const cpuUsage = this.state.allData.map(
-          data => data.usagemhz_average
-        );
+        const cpuUsage = this.state.allData.map(data => data.usagemhz_average);
         let clusterCpuTotal = 0;
         //Add the to values together to make the total
         for (let f = 0; f < cpuUsage.length; f++) {
@@ -94,7 +92,7 @@ class Clusters extends Component {
         for (let g = 0; g < cpuUsagePer.length; g++) {
           clusterusagetotal += cpuUsagePer[g];
         }
-      
+
         let hostcpu = 17.552;
         let totalcpu = 35.104;
 
@@ -106,21 +104,17 @@ class Clusters extends Component {
         console.log(clusterCpuTotal);
         console.log(totalclustercpu);
         let n1cpu = totalclustercpu;
-        console.log(clusterusagetotal);  
-     
-
-        // memTotal.push(this.state.data);
-        // labelData.push("Total");
+        console.log(clusterusagetotal);
 
         //Set state
         this.setState({
-          clusterusagetotal: clusterusagetotal,
+          clusterusagetotal: clusterusagetotal.toFixed(2),
           clustercputotal: clusterCpuTotal,
           n1cpu: n1cpu,
           totalclustermemory: totalclustermemory,
           n1mem: n1mem,
           cputotal: cputotal,
-          totalmemoryusage: memTotal,
+          totalmemoryusage: memTotal.toFixed(2),
           label: labelData,
           data: memData,
           singleclustername: singleclustername,
@@ -132,6 +126,7 @@ class Clusters extends Component {
       });
   };
   render() {
+    // Loading Screen Logic
     let content;
     if (this.state.loading) {
       content = (
@@ -140,84 +135,192 @@ class Clusters extends Component {
         </div>
       );
     } else {
+
+      // Styling Clusters Component with Bootstrap classNames
       return (
-        <div className="container">
-        <div className="card card-wrapper">
-        <div className="card main-card">
-                  <div className="row header-row">
-                    <div className="col-md-7 top-left">
-                      <Link to="/hosts">
-                        <button className="btn-dark btn-sm">
-                          Click to view host details
-                        </button>
-                      </Link>
-                    </div>
-                    </div>
-                  <div className="row">
-                  <div className="col-md-4 top-left">
-                        <img src="/img/cluster.png" />
-                        <div className="host-text-box">
-                          <p>Cluster: {this.state.singleclustername}</p>
-                          <p>
-                            vCenter:
-                            {this.state.singlevcentername}
-                          </p>
-                          <p>Number of ESXi Hosts: {this.state.label.length}</p>
-                          <p>N+RAM: {this.state.n1mem}</p>
-                          <p>N+CPU: {this.state.n1cpu}</p>
-                        </div>
-                      </div>
-         
-                  <div className="col-md-5 doughnut-chart">
-                        <p>Cluster memory usage by host</p>
-                        <PieComponent {...this.state} />
-                      </div>
-                  <div className="col-md-3 cpu-col">
-                        <Dual_Button_Card
-                          title="Cluster Memory Usage"
-                          text1="MEM Usage (GB):"
-                          text2="MEM Usage (%):"
-                          firstButton={this.state.totalclustermemory}
-                          secondButton={this.state.totalmemoryusage}
-                        />
-                      </div>
-                  </div>
-                  <div className="row header-row">
-                    <div className="col-md-7 top-left">
-               
-                    </div>
-                    </div>
-                  <div className="row">
-                 
-                      <div className="col-md-4 cpu-col"></div>
-                      <div className="col-md-5 doughnut-chart">
-                        <p>Cluster CPU usage by host</p>
-                        <PieComponent {...this.state} />
-                      </div> 
-                      <div className="col-md-3 cpu-col">
-                        <Dual_Button_Card
-                          title="Cluster CPU Usage"
-                          text1="CPU Usage (Mhz):"
-                          text2="CPU Usage (%):"
-                          firstButton={this.state.clustercputotal}
-                          secondButton={this.state.clusterusagetotal}
-                        />
-                      </div>
-                        </div>
-                        <ClusterChartContainer />
-                      </div>
-                      {/* <div className="col-md-5 doughnut-chart">  </div> */}
-                  
+        <div className="wrapper">
+          <div className="title-row shadow mb-3 bg-white rounded">
+            <p className="page-title">
+              Cluster: {this.state.singleclustername}
+            </p>
+          </div>
+
+          <div className="row">
+            <div className="col-md-2">
+              <Link to="/hosts">
+                <button className="btn-dark btn-sm link-button">
+                  Click to view "Hosts"
+                </button>
+              </Link>
+              {this.state.showHostChart ? (
+                  <></>
+                ) : (
+                  <button
+                    className="btn-dark btn-sm link-button"
+                    onClick={() => {
+                      this.setState({ showHostChart: true });
+                    }}
+                  >
+                    View Host CPU and MEM Usage
+                  </button>
+                )}
+
+              <div className="card host-card">
+                <div id="inner" className="card-header">
+                  Cluster Information
+                </div>
+                <p className="bold-text host-text">vCenter:</p>
+                <p className="host-text">{this.state.singlevcentername}</p>
+              </div>
+            </div>
+
+            <div className="col-md-2">
+              <div className="card host-card">
+                <div id="inner" className="card-header">
+                  Memory Usage
+                </div>
+                <CircularProgressbar
+                  value={this.state.totalmemoryusage}
+                  text={
+                    <tspan
+                      className="progress"
+                      dy={needDominantBaselineFix ? -15 : 0}
+                    >
+                      {this.state.totalmemoryusage}%
+                    </tspan>
+                  }
+                />
+              </div>
+            </div>
+
+            <div className="col-md-2">
+              <div className="card host-card">
+                <div id="inner" className="card-header">
+                  CPU Usage
+                </div>
+                <CircularProgressbar
+                  value={this.state.clusterusagetotal}
+                  text={
+                    <tspan
+                      className="progress"
+                      dy={needDominantBaselineFix ? -15 : 0}
+                    >
+                      {this.state.clusterusagetotal}%
+                    </tspan>
+                  }
+                />
+              </div>
+            </div>
+
+            <div className="col-md-2">
+              <div className="card host-card">
+                <div id="inner" className="card-header">
+                  ESXi Hosts
+                </div>
+                <div className="normal">   
+                <h4>
+                {this.state.label.length}
+                </h4>
+                </div>
                 
-                 
+              </div>
+            </div>
+
+            <div className="col-md-4">
+              <div className="card host-card">
+                <div id="inner" className="card-header">
+                  Cluster memory usage by host
+                  <PieComponent {...this.state} />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="row">
+          
+          <div className="col-md-2">
+              <div className="card host-card">
+                <div id="inner" className="card-header">
+                  N+1 MEM
+                </div>
+                {this.state.n1mem > 1 ? (
+                  <div className="normal">
+                    <h4>{this.state.n1mem}</h4>
                   </div>
-               
+                ) : (
+                  <div className="warning">
+                    <h4>{this.state.n1mem}</h4>
                   </div>
-               
-           
+                )}
+              </div>
+            </div>
+
+            <div className="col-md-2">
+              <div className="card host-card">
+                <div id="inner" className="card-header">
+                  N+1 CPU
+                </div>
+                {this.state.n1cpu > 1 ? (
+                  <div className="normal">
+                    <h4>{this.state.n1cpu}</h4>
+                  </div>
+                ) : (
+                  <div className="warning">
+                    <h4>{this.state.n1cpu}</h4>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="col-md-3">
+            <div className="card host-card">
+            <div id="inner" className="card-header">
+            CPU Performance
+            </div>
+                <div className="row">
+                  <div className="col">
+                    <p className="triple-label">
+                      CPU Ready
+                    </p>
+                    <div className="normal">
+                      <h4>2%</h4>
+                    </div>
+                  </div>
+                  <div className="col">
+                  <p className="triple-label">
+                      CO-Stop
+                    </p>
+                    <div className="normal">
+                    <h4>3%</h4>
+                    </div>
+                  </div>
+             
+                </div>
+              </div>
+            </div>
+          </div>
+          {this.state.showHostChart ? (
+            <div className="card host-card chart">
+              <button
+                type="button"
+                className="btn btn-dark"
+                onClick={() => {
+                  this.setState({ showHostChart: false });
+                }}
+              >
+                Hide Host Mem and CPU Usage
+              </button>
+              <ClusterChartContainer />
+            </div>
+          ) : (
+            <></>
+          )}
+        </div>
       );
     }
     return <div>{content}</div>;
   }
 }
+
+// Export Link
 export default Clusters;

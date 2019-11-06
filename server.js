@@ -346,6 +346,29 @@ app.get("/api/chart-mem/:clustername", function(req, res) {
     });
 });
 
+app.get("/api/host/uptime", function(req, res) {
+  influx
+    .query(
+      `SELECT * FROM "vsphere_host_sys" WHERE time > now() - 1m
+        `
+    )
+    .then(hostUptime => {
+      console.log(hostUptime);
+      res.json({
+        message: "Requested latest Host Uptime",
+        error: false,
+        data: hostUptime
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.json({
+        message: err.message,
+        error: true
+      });
+    });
+});
+
 app.get("/api/host/cpu-mem/1", async function(req, res) {
   let newHashMap = {};
   await influx
@@ -419,8 +442,8 @@ app.get("/api/host/mem/1day", function(req, res) {
       const hostTwo = hostMem.filter(
         data => data.esxhostname === "lab-esxi-02.vdilab.int"
       );
-      const memUsageOne = hostOne.map(data => data.mean);
-      const memUsageTwo = hostTwo.map(data => data.mean);
+      const memUsageOne = hostOne.map(data => (data.mean).toFixed(2));
+      const memUsageTwo = hostTwo.map(data => (data.mean).toFixed(2));
       const hostName = hostMem.map(data => data.esxhostname);
       const time = hostOne.map(data => data.time);
       console.log(time);
@@ -455,8 +478,8 @@ app.get("/api/host/cpu/1day", function(req, res) {
       const hostTwo = hostCpu.filter(
         data => data.esxhostname === "lab-esxi-02.vdilab.int"
       );
-      const cpuUsageOne = hostOne.map(data => data.mean);
-      const cpuUsageTwo = hostTwo.map(data => data.mean);
+      const cpuUsageOne = hostOne.map(data => (data.mean).toFixed(2));
+      const cpuUsageTwo = hostTwo.map(data => (data.mean).toFixed(2));
       const hostName = hostCpu.map(data => data.esxhostname);
       const time = hostOne.map(data => data.time);
       console.log(time);
@@ -480,7 +503,7 @@ app.get("/api/host/mem/7days/:esxhostname", function(req, res) {
     .query(
       `SELECT mean("usage_average") FROM "vsphere_host_mem" 
       WHERE ("esxhostname" = '${req.params.esxhostname}')
-      AND time > now() - 7d GROUP BY time(1h), "esxhostname"
+      AND time > now() - 7d GROUP BY time(4h), "esxhostname"
       `
     )
     .then(singleHostMem => {
@@ -508,7 +531,7 @@ app.get("/api/host/cpu/7days/:esxhostname", function(req, res) {
     .query(
       `SELECT mean("usage_average") FROM "vsphere_host_cpu" 
       WHERE ("esxhostname" = '${req.params.esxhostname}')
-      AND time > now() - 7d GROUP BY time(1h), "esxhostname"
+      AND time > now() - 7d GROUP BY time(4h), "esxhostname"
       `
     )
     .then(singleHostCpu => {
