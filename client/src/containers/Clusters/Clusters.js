@@ -134,7 +134,7 @@ class Clusters extends Component {
     } else {
       // Styling Clusters Component with Bootstrap classNames
       return (
-        <div className="wrapper">
+        <div id="wrapper" className="wrapper">
           <div className="title-row shadow mb-3 bg-white rounded">
             <p className="page-title">
               Cluster: {this.state.singleclustername}
@@ -171,7 +171,7 @@ class Clusters extends Component {
             </div>
 
             <div className="col-md-2">
-              <div className="card host-card">
+              <div className="card single-card">
                 <div id="inner" className="card-header">
                   Memory Usage
                 </div>
@@ -216,7 +216,7 @@ class Clusters extends Component {
             </div>
 
             <div className="col-md-2">
-              <div className="card host-card">
+              <div className="card single-card">
                 <div id="inner" className="card-header">
                   CPU Usage
                 </div>
@@ -260,7 +260,7 @@ class Clusters extends Component {
             </div>
 
             <div className="col-md-2">
-              <div className="card host-card">
+              <div className="card single-card">
                 <div id="inner" className="card-header">
                   ESXi Hosts
                 </div>
@@ -271,18 +271,20 @@ class Clusters extends Component {
             </div>
 
             <div className="col-md-4">
-              <div className="card host-card">
-                <div id="inner" className="card-header">
-                  Cluster memory usage by host
+              <div className="card double-card">
+                {/* <div id="inner" className="card-header">
+                  Cluster memory usage by host (%)
+                  </div>
+                   */}
                   <PieComponent {...this.state} />
-                </div>
+             
               </div>
             </div>
           </div>
 
           <div className="row">
             <div className="col-md-2">
-              <div className="card host-card">
+              <div className="card single-card">
                 <div id="inner" className="card-header">
                   N+1 MEM
                 </div>
@@ -299,7 +301,7 @@ class Clusters extends Component {
             </div>
 
             <div className="col-md-2">
-              <div className="card host-card">
+              <div className="card single-card">
                 <div id="inner" className="card-header">
                   N+1 CPU
                 </div>
@@ -316,19 +318,19 @@ class Clusters extends Component {
             </div>
 
             <div className="col-md-3">
-              <div className="card host-card">
+              <div className="card double-card">
                 <div id="inner" className="card-header">
                   CPU Performance
                 </div>
                 <div className="row">
                   <div className="col">
-                    <p className="triple-label">CPU Ready</p>
+                    <p className="double-label">CPU Ready</p>
                     <div className="normal">
                       <h4>2%</h4>
                     </div>
                   </div>
                   <div className="col">
-                    <p className="triple-label">CO-Stop</p>
+                    <p className="double-label">CO-Stop</p>
                     <div className="normal">
                       <h4>3%</h4>
                     </div>

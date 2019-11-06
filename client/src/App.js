@@ -34,6 +34,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
+    
       <Router>
         
         <Switch>
@@ -49,7 +50,7 @@ const App = () => {
           <PrivateRoute exact path='/host/:esxhostname' component={props => (
             <div className="page-wrap">
               <Navbar />
-              <Sidebar />
+              {/* <Sidebar /> */}
               <Host {...props} />
             </div>
           )
@@ -58,7 +59,7 @@ const App = () => {
           <PrivateRoute exact path='/hosts' component={props => (
             <div className="page-wrap">
               <Navbar />
-              <Sidebar />
+              {/* <Sidebar /> */}
               <Hosts {...props} />
             </div>
           )
@@ -67,7 +68,7 @@ const App = () => {
           <PrivateRoute exact path='/clusters' component={props => (
             <div className="page-wrap">
               <Navbar />
-              <Sidebar />
+              {/* <Sidebar /> */}
               <Clusters {...props} />
             </div>
           )
