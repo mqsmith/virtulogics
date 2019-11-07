@@ -40,9 +40,6 @@
 }
 .single-card {
  height: 228px;
- min-width: 180px;
+ /* min-width: 180px; */
 }
 
-.double-card {
-  height: 228px;
-}

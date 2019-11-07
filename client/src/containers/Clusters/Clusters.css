@@ -83,7 +83,7 @@ h4 {
     text-align: center;
   }
   .normal h4 {
-    padding-top: 30px; 
+    /* padding-top: 30px;  */
     color: #2B4560;
     text-align: center;
     font-size: 60px;
