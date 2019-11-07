@@ -7,7 +7,7 @@
   height: 40vmin;
 }
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -16,7 +16,7 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
 
 .App-link {
   color: #09d3ac;
@@ -26,8 +26,9 @@
   text-align: center;
   overflow: auto;
   margin-top: 100px;
-  margin-left:320px;
+  /* margin-left:320px; */
 }
+
 
 .nav-style{
   margin-top: 100px;
@@ -36,5 +37,9 @@
   padding: 10px;
   margin: 10px;
   opacity: 0.9;
+}
+.single-card {
+ height: 228px;
+ /* min-width: 180px; */
 }
 

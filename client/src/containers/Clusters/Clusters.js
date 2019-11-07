@@ -52,7 +52,22 @@ class Clusters extends Component {
         for (let e = 0; e < cpuData.length; e++) {
           cputotal += cpuData[e];
         }
+        const cpuReady = this.state.allData.map(data => data.ready_summation);
+        let readyTotal = 0;        
+        //Add the to values together to make the total
+        for (let f = 0; f < cpuReady.length; f++) {
+          readyTotal += cpuReady[f];
+        }
+        let cpuReadyTotal =  ((readyTotal  / (20 * 1000)) * 100).toFixed(2)
 
+        const costopData = this.state.allData.map(data => data.cpu_usage_average);
+        let cototal = 0;
+
+        //Add the to values together to make the total
+        for (let e = 0; e < costopData.length; e++) {
+          cototal += costopData[e];
+        }
+        let coStopTotal = (cototal / 1000).toFixed(2)
         const labelData = this.state.allData.map(data => data.esxhostname);
         const clusterName = this.state.allData.map(data => data.clustername);
         const singleclustername = [...new Set(clusterName)];
@@ -68,7 +83,7 @@ class Clusters extends Component {
         }
         let hostmemory = 28383;
         let totalhosts = labelData.length;
-        let totalclustermemory = ((hostmemory * memTotal) / 100000).toFixed(2);
+        let totalclustermemory = (hostmemory * memTotal) / 100000;
         console.log("This is the MEM total");
         console.log(totalclustermemory);
         let n1mem = ((64 - totalclustermemory) / 32).toFixed(2);
@@ -115,7 +130,9 @@ class Clusters extends Component {
           label: labelData,
           data: memData,
           singleclustername: singleclustername,
-          singlevcentername: singlevcentername
+          singlevcentername: singlevcentername,
+          cpuReadyTotal: cpuReadyTotal,
+          coStopTotal: coStopTotal
         });
       })
       .catch(err => {
@@ -134,7 +151,7 @@ class Clusters extends Component {
     } else {
       // Styling Clusters Component with Bootstrap classNames
       return (
-        <div className="wrapper">
+        <div id="wrapper" className="wrapper">
           <div className="title-row shadow mb-3 bg-white rounded">
             <p className="page-title">
               Cluster: {this.state.singleclustername}
@@ -171,7 +188,7 @@ class Clusters extends Component {
             </div>
 
             <div className="col-md-2">
-              <div className="card host-card">
+              <div className="card single-card">
                 <div id="inner" className="card-header">
                   Memory Usage
                 </div>
@@ -216,7 +233,7 @@ class Clusters extends Component {
             </div>
 
             <div className="col-md-2">
-              <div className="card host-card">
+              <div className="card single-card">
                 <div id="inner" className="card-header">
                   CPU Usage
                 </div>
@@ -260,7 +277,7 @@ class Clusters extends Component {
             </div>
 
             <div className="col-md-2">
-              <div className="card host-card">
+              <div className="card single-card">
                 <div id="inner" className="card-header">
                   ESXi Hosts
                 </div>
@@ -271,18 +288,20 @@ class Clusters extends Component {
             </div>
 
             <div className="col-md-4">
-              <div className="card host-card">
-                <div id="inner" className="card-header">
-                  Cluster memory usage by host
+              <div className="card double-card">
+                {/* <div id="inner" className="card-header">
+                  Cluster memory usage by host (%)
+                  </div>
+                   */}
                   <PieComponent {...this.state} />
-                </div>
+             
               </div>
             </div>
           </div>
 
           <div className="row">
             <div className="col-md-2">
-              <div className="card host-card">
+              <div className="card single-card">
                 <div id="inner" className="card-header">
                   N+1 MEM
                 </div>
@@ -299,7 +318,7 @@ class Clusters extends Component {
             </div>
 
             <div className="col-md-2">
-              <div className="card host-card">
+              <div className="card single-card">
                 <div id="inner" className="card-header">
                   N+1 CPU
                 </div>
@@ -316,22 +335,35 @@ class Clusters extends Component {
             </div>
 
             <div className="col-md-3">
-              <div className="card host-card">
+              <div className="card double-card">
                 <div id="inner" className="card-header">
                   CPU Performance
                 </div>
                 <div className="row">
                   <div className="col">
-                    <p className="triple-label">CPU Ready</p>
-                    <div className="normal">
-                      <h4>2%</h4>
-                    </div>
+                    <p className="double-label">CPU Ready</p>
+                    {this.state.cpuReadyTotal < 5 ? (
+                      <div className="double normal">
+                        <h4>{this.state.cpuReadyTotal}%</h4>
+                      </div>
+                    ) : (
+                      <div className="double warning ">
+                        <h4>{this.state.cpuReadyTotal}%</h4>
+                      </div>
+                    )}
                   </div>
                   <div className="col">
-                    <p className="triple-label">CO-Stop</p>
-                    <div className="normal">
-                      <h4>3%</h4>
-                    </div>
+                    <p className="double-label">CO-Stop (Sec)</p>
+                    {this.state.coStopTotal < 5 ? (
+                      <div className="double normal">
+                        <h4>{this.state.coStopTotal}%</h4>
+                      </div>
+                    ) : (
+                      <div className="double warning ">
+                        <h4>{this.state.coStopTotal}%</h4>
+                      </div>
+                      )}
+
                   </div>
                 </div>
               </div>

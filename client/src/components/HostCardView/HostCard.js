@@ -187,27 +187,26 @@ const HostCard = props => {
                 </div>
                 <div className="row">
                   <div className="col">
-                    <p className="triple-label">CPU Ready</p>
-                    {host.utilization_average < 5 ? (
-                      <div className="triple normal">
-                        <h4>{host.utilization_average}%</h4>
+                    <p className="double-label">CPU Ready</p>
+                    {((host.ready_summation  / (20 * 1000)) * 100).toFixed(2) < 5 ? (
+                      <div className="double normal">
+                        <h4>{((host.ready_summation  / (20 * 1000)) * 100).toFixed(2)}%</h4>
                       </div>
                     ) : (
-                      <div className="triple warning ">
-                        <h4>{host.utilization_average}%</h4>
+                      <div className="double warning ">
+                        <h4>{((host.ready_summation  / (20 * 1000)) * 100).toFixed(2)}%</h4>
                       </div>
                     )}
                   </div>
                   <div className="col">
-                    <p className="triple-label">CO-Stop</p>
-
-                    {host.costop_summation < 5 ? (
-                      <div className="triple normal">
-                        <h4>{host.costop_summation}</h4>
+                    <p className="double-label">CO-Stop (Sec)</p>
+                    {(host.costop_summation / 1000).toFixed(2) < 5 ? (
+                      <div className="double normal">
+                        <h4>{(host.costop_summation / 1000).toFixed(2)}</h4>
                       </div>
                     ) : (
-                      <div className="triple warning ">
-                        <h4>{host.costop_summation}</h4>
+                      <div className="double warning ">
+                        <h4>{(host.costop_summation / 1000).toFixed(2)}</h4>
                       </div>
                     )}
                   </div>

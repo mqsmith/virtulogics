@@ -6,7 +6,6 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/Nav/Navbar';
 import Routes from './components/routing/Routes';
 import Sidebar from "./components/Sidebar/Sidebar";
-import Toggle from './components/Sidebar/Toggle';
 import PrivateRoute from './components/routing/PrivateRoute';
 
 // Import Containers
@@ -68,7 +67,6 @@ const App = () => {
           <PrivateRoute exact path='/clusters' component={props => (
             <div className="page-wrap">
               <Navbar />
-              <Toggle />
               <Sidebar />
               <Clusters {...props} />
             </div>
