@@ -1,7 +1,4 @@
-.card {
-    width: 90%;
-    padding: 10px
-}
+
 .card-body {
     /* width: 100%; */
     float: left;
@@ -84,6 +81,6 @@ img {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
-    background-color: #6AA4B0;
+    background-color: black;
     color: white;
   }

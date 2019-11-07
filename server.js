@@ -615,9 +615,6 @@ app.get("/api/host/cpu-mem/1/:esxhostname", async function(req, res) {
   });
 });
 
-influx
-  .getMeasurements()
-  .then(names => console.log("My measurement names are: " + names.join(", ")));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/client/build/index.html"));
