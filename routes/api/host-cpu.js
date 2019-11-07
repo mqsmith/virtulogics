@@ -5,7 +5,12 @@ const Influx = require("influx");
 const os = require("os");
 const bodyParser = require("body-parser");
 require("dotenv").config();
-
+const influx = new Influx.InfluxDB({
+  database: "telegraf",
+  username: "gtadmin",
+  password: "@lmost12",
+  host: "159.242.248.20"
+});
 const app = express();
 
 // to narrow down the fields we return we can do "select cpu, usagemhz_average, esxhostname from vsphere_host_cpu"

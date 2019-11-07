@@ -1,4 +1,11 @@
 const express = require("express");
+const Influx = require("influx");
+const influx = new Influx.InfluxDB({
+  database: "telegraf",
+  username: "gtadmin",
+  password: "@lmost12",
+  host: "159.242.248.20"
+});
 
 require("dotenv").config();
 

@@ -1,4 +1,11 @@
 const express = require("express");
+const Influx = require("influx");
+const influx = new Influx.InfluxDB({
+  database: "telegraf",
+  username: "gtadmin",
+  password: "@lmost12",
+  host: "159.242.248.20"
+});
 
 require("dotenv").config();
 
@@ -6,7 +13,7 @@ const app = express();
 
 
 app.get("/api/hosts", function(req, res) {
-    db.HostCpu.find({})
+    influx.HostCpu.find({})
       .then(allHosts => {
         console.log(allHosts);
         res.json({
@@ -25,7 +32,7 @@ app.get("/api/hosts", function(req, res) {
   });
   
   app.post("/api/hosts", function(req, res) {
-    db.HostCpu.create(req.body)
+    influx.HostCpu.create(req.body)
       .then(newHosts => {
         console.log("New Host Metics: ", newHosts);
         res.json({

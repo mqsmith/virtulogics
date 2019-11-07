@@ -28,20 +28,6 @@ connectDB();
 app.use(express.json({ extended: false }));
 app.use(express.static(__dirname + "/client/build"));
 
-// Define Routes
-app.use("/api/users", require("./routes/api/users"));
-app.use("/api/auth", require("./routes/api/auth"));
-app.use('/api/hosts', require('./routes/api/hosts'));
-app.use('/api/host-cpu', require('./routes/api/host-cpu'));
-app.use('/api/host-mem', require('./routes/api/host-mem'));
-app.use('/api/uptime', require('./routes/api/uptime'));
-app.use('/api/cluster-cpu', require('./routes/api/cluster-cpu'));
-app.use('/api/chart-mem', require('./routes/api/chart-mem'));
-app.use('/api/chart-cpu', require('./routes/api/chart-cpu'));
-app.use('/api/host', require('./routes/api/host'));
-
-
-
 // Influx DB connection and routes
 const influx = new Influx.InfluxDB({
   database: "telegraf",
@@ -60,16 +46,33 @@ influx
   .then(() => {
     app.listen(PORT, () => {
       console.log(`🌎 ==> API server now on port ${PORT}!`);
-      console.log("Imflux DB connected successfully");
+      console.log("Influx DB connected successfully");
     });
     // writeDataToInflux(test);
   })
   .catch(error => console.log({ error }));
 
-
 influx
   .getMeasurements()
   .then(names => console.log("My measurement names are: " + names.join(", ")));
+
+// Define Routes
+app.get("/api/users", require("./routes/api/users"));
+app.get("/api/auth", require("./routes/api/auth"));
+app.get("/api/hosts", require("./routes/api/hosts"));
+app.get("/api/host-cpu", require("./routes/api/host-cpu"));
+app.get("/api/host-mem", require("./routes/api/host-mem"));
+app.get("/api/uptime", require("./routes/api/uptime"));
+app.get("/api/cluster-cpu", require("./routes/api/cluster-cpu"));
+app.get("/api/chart-mem", require("./routes/api/chart-mem"));
+app.get("/api/chart-cpu", require("./routes/api/chart-cpu"));
+app.get("/api/host", require("./routes/api/host"));
+app.get("/api/host/cpu-mem/1", require("./routes/api/host"));
+app.get("/api/host/cpu/1day", require("./routes/api/host"));
+app.get("/api/host/mem/1day", require("./routes/api/host"));
+app.get("/api/host/mem/7days/:esxhostname", require("./routes/api/host"));
+app.get("/api/host/cpu/7days/:esxhostname", require("./routes/api/host"));
+app.get("/api/host/cpu-mem/1/:esxhostname", require("./routes/api/host"));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/client/build/index.html"));
