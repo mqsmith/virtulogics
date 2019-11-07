@@ -57,9 +57,9 @@ influx
   .then(names => console.log("My measurement names are: " + names.join(", ")));
 
 // Define Routes
-app.get("/api/users", require("./routes/api/users"));
-app.get("/api/auth", require("./routes/api/auth"));
-app.get("/api/hosts", require("./routes/api/hosts"));
+app.use("/api/users", require("./routes/api/users"));
+app.use("/api/auth", require("./routes/api/auth"));
+app.use("/api/hosts", require("./routes/api/hosts"));
 app.get("/api/host-cpu", require("./routes/api/host-cpu"));
 app.get("/api/host-mem", require("./routes/api/host-mem"));
 app.get("/api/uptime", require("./routes/api/uptime"));
