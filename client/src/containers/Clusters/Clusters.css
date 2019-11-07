@@ -1,3 +1,4 @@
+/* Style Sheet for Clusters */
 body {
     background-color: rgb(106, 164, 176, 0.1);
         opacity: 0.9;
@@ -24,10 +25,7 @@ h4 {
 .card-header {
     text-align: center;
 }
-.doughnut-chart {
-    padding-left: 0px;
-    padding-right: 0px;
-}
+
 .chart {
     margin-top: 20px;
 }
@@ -49,7 +47,7 @@ h4 {
   }
   .host-card {
       text-align: left;
-      width: 98%;
+      width: 100%;
   }
   .tile-container {
       width: 30%;
@@ -79,19 +77,29 @@ h4 {
   .page-title {
       margin-bottom: 0px;
   }
-  .triple-label {
-    padding-top: 15px; 
+  .double-label {
+    padding-top: -30px; 
     margin-bottom: -5px;
     text-align: center;
   }
   .normal h4 {
+    /* padding-top: 30px;  */
     color: #2B4560;
     text-align: center;
     font-size: 60px;
     margin-bottom: -8px;
   }
   .warning h4 {
+    padding-top: 30px;  
     color: red;
     text-align: center;
     font-size: 60px;
   }
+  .inner .card-header { 
+    padding-bottom: 30px; 
+  }
+  /* Styling of overlay */
+.bm-overlay {
+  width: 200px;
+  background: rgba(0, 0, 0, 0.3);
+}

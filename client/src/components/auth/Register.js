@@ -1,3 +1,4 @@
+// Import Links
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
@@ -5,6 +6,7 @@ import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
+// Register Variables
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -27,10 +29,12 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     }
   };
 
+  // Redirect Route
   if (isAuthenticated) {
     return <Redirect to='/clusters' />;
   }
 
+  // Styling Register Component with Bootstrap classNames
   return (
     <Fragment>
       <h1 className='large text-primary'>Sign Up</h1>
@@ -97,6 +101,7 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
+// Export Links
 export default connect(
   mapStateToProps,
   { setAlert, register }

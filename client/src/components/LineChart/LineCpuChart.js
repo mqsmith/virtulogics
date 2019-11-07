@@ -1,24 +1,16 @@
+// Import Links
 import React from 'react';
 import Chart from 'chart.js';
+
 Chart.defaults.global.defaultFontFamily = "Roboto, sans-serif";
 
 class LineChart extends React.Component {
     constructor(props) {
       super(props);
       this.chartRef = React.createRef();
-      // console.log(this.props);
     }
 
-    
-    // componentDidUpdate() {
-    //   this.myChart.data.labels = this.props.esxhostname.map(d => console.log(d.name));
-    //   // this.myChart.data.datasets[0].data = this.props.data.map(d => d.value);
-    //   this.myChart.update();
-    // }
-  
     componentDidUpdate() {
-    //   console.log(this.props.hostData);
-    //   console.log(this.props.time);
       this.myChart = new Chart(this.chartRef.current, {
         type: 'line',
         options: {
@@ -44,7 +36,6 @@ class LineChart extends React.Component {
           datasets: [{
             label: this.props.hostLabels,
             data: this.props.hostData,
-            // fill: 'none',
             backgroundColor: this.props.color,
             pointRadius: 2,
             borderColor: this.props.color,
@@ -53,19 +44,13 @@ class LineChart extends React.Component {
           }]
         }
       });
-    //   console.log(this.myChart);
     }
 
-    
-      
-    
-      
-    
-  
+    // Render Chart
     render() {
-
       return <canvas ref={this.chartRef} />;
     }
   }
 
+  // Export Link
 export default LineChart;

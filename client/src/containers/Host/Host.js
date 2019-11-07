@@ -1,16 +1,16 @@
+// Import Links
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
-// import LineChart from "../../components/LineMemChart";
 import Loading from "../../components/Loading/Loading";
-import Dual_Button_Card from "../..//components/Dual_Button_Card/Dual_Button_Card";
 import Collection from "../../components/HostChart/HostChartContainer";
 import { CircularProgressbar } from "react-circular-progressbar";
 
 const needDominantBaselineFix = true;
 
 class Host extends Component {
+  // Start on Host Component
   state = {
     allData: [],
     loading: true
@@ -25,6 +25,7 @@ class Host extends Component {
     console.log("Host updated props: ", this.props);
   }
 
+  // Axios Call
   getBoth = () => {
     axios
       .get("/api/host/cpu-mem/1/" + this.props.match.params.esxhostname)
@@ -54,6 +55,7 @@ class Host extends Component {
   };
 
   render() {
+    // Loading Screen Logic
     let content;
     if (this.state.loading) {
       content = (
@@ -62,6 +64,7 @@ class Host extends Component {
         </div>
       );
     } else {
+      // Styling Host Component with Bootstrap classNames
       return (
         <div className="wrapper">
           {this.state.allData.map((host, i) => (
@@ -96,13 +99,37 @@ class Host extends Component {
                     <CircularProgressbar
                       value={host.usage_average}
                       text={
-                        <tspan
-                          className="progress"
-                          dy={needDominantBaselineFix ? -15 : 0}
-                        >
+                        <tspan className="progress">
                           {host.usage_average}%
                         </tspan>
                       }
+                      styles={{
+                        background: {
+                          fill: "black",
+                          transform: "scale(0.8)",
+                          transformOrigin: "center center"
+                        },
+                        path: {
+                          transform: "rotate(180deg)",
+                          transformOrigin: "center center",
+                          filter: "drop-shadow(10px 10px 20px lightgray)",
+                          strokeLinecap: "butt",
+                          stroke: host.usage_average >= 50 ? "red" : "#2B4560"
+                        },
+                        root: {
+                          filter: "drop-shadow(10px 10px 20px lightgray)"
+                        },
+                        trail: {
+                          strokeWidth: 8
+                        },
+                        text: {
+                          fontSize: 22,
+                          fontWeight: 800,
+                          filter: "drop-shadow(10px 10px 20px lightgray)",
+                          animation: "fadein 2s",
+                          fill: host.usage_average >= 50 ? "red" : "#2B4560"
+                        }
+                      }}
                     />
                   </div>
                 </div>
@@ -117,10 +144,7 @@ class Host extends Component {
                         100000
                       ).toFixed(2)}
                       text={
-                        <tspan
-                          className="progress"
-                          dy={needDominantBaselineFix ? -15 : 0}
-                        >
+                        <tspan className="progress">
                           {(
                             (host.totalCapacity_average * host.usage_average) /
                             100000
@@ -128,6 +152,43 @@ class Host extends Component {
                           GB
                         </tspan>
                       }
+                      styles={{
+                        background: {
+                          fill: "black",
+                          transform: "scale(0.8)",
+                          transformOrigin: "center center"
+                        },
+                        path: {
+                          transform: "rotate(180deg)",
+                          transformOrigin: "center center",
+                          filter: "drop-shadow(10px 10px 20px lightgray)",
+                          strokeLinecap: "butt",
+                          stroke:
+                            (host.totalCapacity_average * host.usage_average) /
+                              100000 >=
+                            25
+                              ? "red"
+                              : "#2B4560"
+                        },
+                        root: {
+                          filter: "drop-shadow(10px 10px 20px lightgray)"
+                        },
+                        trail: {
+                          strokeWidth: 8
+                        },
+                        text: {
+                          fontSize: 22,
+                          fontWeight: 800,
+                          filter: "drop-shadow(10px 10px 20px lightgray)",
+                          animation: "fadein 2s",
+                          fill:
+                            (host.totalCapacity_average * host.usage_average) /
+                              100000 >=
+                            25
+                              ? "red"
+                              : "#2B4560"
+                        }
+                      }}
                     />
                   </div>
                 </div>
@@ -140,13 +201,37 @@ class Host extends Component {
                     <CircularProgressbar
                       value={host.cpu_usage_average}
                       text={
-                        <tspan
-                          className="progress"
-                          dy={needDominantBaselineFix ? -15 : 0}
-                        >
+                        <tspan className="progress">
                           {host.cpu_usage_average}%
                         </tspan>
                       }
+                      styles={{
+                        background: {
+                          fill: "black",
+                          transform: "scale(0.8)",
+                          transformOrigin: "center center"
+                        },
+                        path: {
+                          transform: "rotate(180deg)",
+                          transformOrigin: "center center",
+                          strokeLinecap: "butt",
+                          stroke:
+                            host.cpu_usage_average >= 50 ? "red" : "#2B4560"
+                        },
+                        root: {
+                          filter: "drop-shadow(10px 10px 20px lightgray)"
+                        },
+                        trail: {
+                          strokeWidth: 8
+                        },
+                        text: {
+                          fontSize: 22,
+                          fontWeight: 800,
+                          filter: "drop-shadow(10px 10px 20px lightgray)",
+                          animation: "fadein 5s",
+                          fill: host.cpu_usage_average >= 50 ? "red" : "#2B4560"
+                        }
+                      }}
                     />
                   </div>
                 </div>
@@ -158,32 +243,29 @@ class Host extends Component {
                     </div>
                     <div className="row">
                       <div className="col">
-                        <p className="triple-label">CPU Ready</p>
-                        {host.utilization_average < 5 ? (
-                        <div className="triple normal">
-                        <h4>{host.utilization_average}%</h4>
-                        </div>
+                        <p className="double-label">CPU Ready</p>
+                        {((host.ready_summation  / (20 * 1000)) * 100).toFixed(2) < 5 ? (
+                          <div className="double normal">
+                            <h4>{((host.ready_summation  / (20 * 1000)) * 100).toFixed(2)}%</h4>
+                          </div>
                         ) : (
-                        <div className="triple warning ">
-                        <h4>{host.utilization_average}%</h4>
-                        </div>
+                          <div className="double warning ">
+                            <h4>{((host.ready_summation  / (20 * 1000)) * 100).toFixed(2)}%</h4>
+                          </div>
                         )}
-          
                       </div>
                       <div className="col">
-                        <p className="triple-label">CO-Stop</p>
-                        {host.costop_summation < 5 ? (
-                        <div className="triple normal">
-                        <h4>{host.costop_summation}</h4>
-                        </div>
+                        <p className="double-label">CO-Stop (Sec)</p>
+                        {(host.costop_summation / 1000).toFixed(2) < 5 ? (
+                          <div className="double normal">
+                            <h4>{(host.costop_summation / 1000).toFixed(2) }</h4>
+                          </div>
                         ) : (
-                        <div className="triple warning ">
-                        <h4>{host.costop_summation}</h4>
-                        </div>
+                          <div className="double warning ">
+                            <h4>{(host.costop_summation / 1000).toFixed(2) }</h4>
+                          </div>
                         )}
-
                       </div>
-
                     </div>
                   </div>
                 </div>
@@ -192,7 +274,7 @@ class Host extends Component {
                 Device polled @ {moment(host.time).format("h:mm:ss a")}
               </p>
               <div className="card host-card chart">
-              <Collection hostName={this.props.match.params.esxhostname} />
+                <Collection hostName={this.props.match.params.esxhostname} />
               </div>
             </div>
           ))}
@@ -203,22 +285,3 @@ class Host extends Component {
   }
 }
 export default Host;
-
-{/* <Dual_Button_Card
-  title="Host CPU Usage"
-  text1="CPU Usage (Mhz):"
-  text2="CPU Usage (%):"
-  firstButton={host.usagemhz_average}
-  secondButton={host.cpu_usage_average}
-/>;
-
-<Dual_Button_Card
-  title="Host Memory Usage"
-  text1="MEM Usage (GB):"
-  text2="MEM Usage (%):"
-  firstButton={(
-    (host.totalCapacity_average * host.usage_average) /
-    100000
-  ).toFixed(2)}
-  secondButton={host.usage_average}
-/>; */}

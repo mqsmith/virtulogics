@@ -1,18 +1,16 @@
+// Import Links
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import PieComponent from "../..//components/Pie/Pie";
 import Loading from "../../components/Loading/Loading";
-import Dual_Button_Card from "../..//components/Dual_Button_Card/";
 import ClusterChartContainer from "../../components/ClusterChart/ClusterChartContainer";
 import { CircularProgressbar } from "react-circular-progressbar";
-
 import "react-circular-progressbar/dist/styles.css";
 import "./Clusters.css";
 
-const needDominantBaselineFix = true;
-
 class Clusters extends Component {
+  // State on Cluester Component
   state = {
     allData: [],
     loading: true,
@@ -28,27 +26,20 @@ class Clusters extends Component {
     this.getBoth();
   }
 
+  // Axios Call
   getBoth = () => {
     axios
       .get("/api/host/cpu-mem/1")
       .then(allData => {
         let obj = allData.data;
         const array = Object.values(obj);
-        // console.log(array);
         this.setState({ allData: array, loading: false });
         let combined = [];
 
         for (let i = 0; i < this.state.allData.length; i++) {
-          // console.log(this.state.allData[i].usage_average)
           combined.push(this.state.allData[i].usage_average);
         }
-        // console.log(combined);
 
-        // console.log(array);
-        // let cluster = this.state.allData.filter(
-        //   data => data.usage_average === "lab-esxi-01.vdilab.int"
-
-        // );
         const memData = this.state.allData.map(data => data.usage_average);
         let memTotal = 0;
         //Add the to values together to make the total
@@ -61,7 +52,22 @@ class Clusters extends Component {
         for (let e = 0; e < cpuData.length; e++) {
           cputotal += cpuData[e];
         }
+        const cpuReady = this.state.allData.map(data => data.ready_summation);
+        let readyTotal = 0;        
+        //Add the to values together to make the total
+        for (let f = 0; f < cpuReady.length; f++) {
+          readyTotal += cpuReady[f];
+        }
+        let cpuReadyTotal =  ((readyTotal  / (20 * 1000)) * 100).toFixed(2)
 
+        const costopData = this.state.allData.map(data => data.cpu_usage_average);
+        let cototal = 0;
+
+        //Add the to values together to make the total
+        for (let e = 0; e < costopData.length; e++) {
+          cototal += costopData[e];
+        }
+        let coStopTotal = (cototal / 1000).toFixed(2)
         const labelData = this.state.allData.map(data => data.esxhostname);
         const clusterName = this.state.allData.map(data => data.clustername);
         const singleclustername = [...new Set(clusterName)];
@@ -77,7 +83,7 @@ class Clusters extends Component {
         }
         let hostmemory = 28383;
         let totalhosts = labelData.length;
-        let totalclustermemory = ((hostmemory * memTotal) / 100000).toFixed(2);
+        let totalclustermemory = (hostmemory * memTotal) / 100000;
         console.log("This is the MEM total");
         console.log(totalclustermemory);
         let n1mem = ((64 - totalclustermemory) / 32).toFixed(2);
@@ -112,9 +118,6 @@ class Clusters extends Component {
         let n1cpu = totalclustercpu;
         console.log(clusterusagetotal);
 
-        // memTotal.push(this.state.data);
-        // labelData.push("Total");
-
         //Set state
         this.setState({
           clusterusagetotal: clusterusagetotal.toFixed(2),
@@ -127,7 +130,9 @@ class Clusters extends Component {
           label: labelData,
           data: memData,
           singleclustername: singleclustername,
-          singlevcentername: singlevcentername
+          singlevcentername: singlevcentername,
+          cpuReadyTotal: cpuReadyTotal,
+          coStopTotal: coStopTotal
         });
       })
       .catch(err => {
@@ -135,6 +140,7 @@ class Clusters extends Component {
       });
   };
   render() {
+    // Loading Screen Logic
     let content;
     if (this.state.loading) {
       content = (
@@ -143,8 +149,9 @@ class Clusters extends Component {
         </div>
       );
     } else {
+      // Styling Clusters Component with Bootstrap classNames
       return (
-        <div className="wrapper">
+        <div id="wrapper" className="wrapper">
           <div className="title-row shadow mb-3 bg-white rounded">
             <p className="page-title">
               Cluster: {this.state.singleclustername}
@@ -159,17 +166,17 @@ class Clusters extends Component {
                 </button>
               </Link>
               {this.state.showHostChart ? (
-                  <></>
-                ) : (
-                  <button
-                    className="btn-dark btn-sm link-button"
-                    onClick={() => {
-                      this.setState({ showHostChart: true });
-                    }}
-                  >
-                    View Host CPU and MEM Usage
-                  </button>
-                )}
+                <></>
+              ) : (
+                <button
+                  className="btn-dark btn-sm link-button"
+                  onClick={() => {
+                    this.setState({ showHostChart: true });
+                  }}
+                >
+                  View Host CPU and MEM Usage
+                </button>
+              )}
 
               <div className="card host-card">
                 <div id="inner" className="card-header">
@@ -181,71 +188,120 @@ class Clusters extends Component {
             </div>
 
             <div className="col-md-2">
-              <div className="card host-card">
+              <div className="card single-card">
                 <div id="inner" className="card-header">
                   Memory Usage
                 </div>
                 <CircularProgressbar
                   value={this.state.totalmemoryusage}
                   text={
-                    <tspan
-                      className="progress"
-                      dy={needDominantBaselineFix ? -15 : 0}
-                    >
+                    <tspan className="progress">
                       {this.state.totalmemoryusage}%
                     </tspan>
                   }
+                  styles={{
+                    background: {
+                      fill: "black",
+                      transform: "scale(0.8)",
+                      transformOrigin: "center center"
+                    },
+                    path: {
+                      transform: "rotate(180deg)",
+                      transformOrigin: "center center",
+                      filter: "drop-shadow(10px 10px 20px lightgray)",
+                      strokeLinecap: "butt",
+                      stroke:
+                        this.state.totalmemoryusage >= 50 ? "red" : "#2B4560"
+                    },
+                    root: {
+                      filter: "drop-shadow(10px 10px 20px lightgray)"
+                    },
+                    trail: {
+                      strokeWidth: 8
+                    },
+                    text: {
+                      fontSize: 22,
+                      fontWeight: 800,
+                      filter: "drop-shadow(10px 10px 20px lightgray)",
+                      animation: "fadein 2s",
+                      fill:
+                        this.state.totalmemoryusage >= 50 ? "red" : "#2B4560"
+                    }
+                  }}
                 />
               </div>
             </div>
 
             <div className="col-md-2">
-              <div className="card host-card">
+              <div className="card single-card">
                 <div id="inner" className="card-header">
                   CPU Usage
                 </div>
                 <CircularProgressbar
                   value={this.state.clusterusagetotal}
                   text={
-                    <tspan
-                      className="progress"
-                      dy={needDominantBaselineFix ? -15 : 0}
-                    >
+                    <tspan className="progress">
                       {this.state.clusterusagetotal}%
                     </tspan>
                   }
+                  styles={{
+                    background: {
+                      fill: "black",
+                      transform: "scale(0.8)",
+                      transformOrigin: "center center"
+                    },
+                    path: {
+                      transform: "rotate(180deg)",
+                      transformOrigin: "center center",
+                      strokeLinecap: "butt",
+                      stroke:
+                        this.state.clusterusagetotal >= 70 ? "red" : "#2B4560"
+                    },
+                    root: {
+                      filter: "drop-shadow(10px 10px 20px lightgray)"
+                    },
+                    trail: {
+                      strokeWidth: 8
+                    },
+                    text: {
+                      fontSize: 22,
+                      fontWeight: 800,
+                      filter: "drop-shadow(10px 10px 20px lightgray)",
+                      animation: "fadein 5s",
+                      fill:
+                        this.state.clusterusagetotal >= 70 ? "red" : "#2B4560"
+                    }
+                  }}
                 />
               </div>
             </div>
 
             <div className="col-md-2">
-              <div className="card host-card">
+              <div className="card single-card">
                 <div id="inner" className="card-header">
                   ESXi Hosts
                 </div>
-                <div className="normal">   
-                <h4>
-                {this.state.label.length}
-                </h4>
+                <div className="normal">
+                  <h4>{this.state.label.length}</h4>
                 </div>
-                
               </div>
             </div>
 
             <div className="col-md-4">
-              <div className="card host-card">
-                <div id="inner" className="card-header">
-                  Cluster memory usage by host
+              <div className="card double-card">
+                {/* <div id="inner" className="card-header">
+                  Cluster memory usage by host (%)
+                  </div>
+                   */}
                   <PieComponent {...this.state} />
-                </div>
+             
               </div>
             </div>
           </div>
 
           <div className="row">
-          
-          <div className="col-md-2">
-              <div className="card host-card">
+            <div className="col-md-2">
+              <div className="card single-card">
                 <div id="inner" className="card-header">
                   N+1 MEM
                 </div>
@@ -262,7 +318,7 @@ class Clusters extends Component {
             </div>
 
             <div className="col-md-2">
-              <div className="card host-card">
+              <div className="card single-card">
                 <div id="inner" className="card-header">
                   N+1 CPU
                 </div>
@@ -279,28 +335,36 @@ class Clusters extends Component {
             </div>
 
             <div className="col-md-3">
-            <div className="card host-card">
-            <div id="inner" className="card-header">
-            CPU Performance
-            </div>
+              <div className="card double-card">
+                <div id="inner" className="card-header">
+                  CPU Performance
+                </div>
                 <div className="row">
                   <div className="col">
-                    <p className="triple-label">
-                      CPU Ready
-                    </p>
-                    <div className="normal">
-                      <h4>2%</h4>
-                    </div>
+                    <p className="double-label">CPU Ready</p>
+                    {this.state.cpuReadyTotal < 5 ? (
+                      <div className="double normal">
+                        <h4>{this.state.cpuReadyTotal}%</h4>
+                      </div>
+                    ) : (
+                      <div className="double warning ">
+                        <h4>{this.state.cpuReadyTotal}%</h4>
+                      </div>
+                    )}
                   </div>
                   <div className="col">
-                  <p className="triple-label">
-                      CO-Stop
-                    </p>
-                    <div className="normal">
-                    <h4>3%</h4>
-                    </div>
+                    <p className="double-label">CO-Stop (Sec)</p>
+                    {this.state.coStopTotal < 5 ? (
+                      <div className="double normal">
+                        <h4>{this.state.coStopTotal}%</h4>
+                      </div>
+                    ) : (
+                      <div className="double warning ">
+                        <h4>{this.state.coStopTotal}%</h4>
+                      </div>
+                      )}
+
                   </div>
-             
                 </div>
               </div>
             </div>
@@ -327,4 +391,6 @@ class Clusters extends Component {
     return <div>{content}</div>;
   }
 }
+
+// Export Link
 export default Clusters;

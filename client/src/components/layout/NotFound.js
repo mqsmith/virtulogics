@@ -1,3 +1,4 @@
+// Import Links
 import React, { Fragment } from 'react';
 
 const NotFound = () => {
@@ -11,4 +12,5 @@ const NotFound = () => {
   );
 };
 
+// Export Link
 export default NotFound;
