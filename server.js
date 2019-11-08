@@ -52,10 +52,6 @@ influx
   })
   .catch(error => console.log({ error }));
 
-influx
-  .getMeasurements()
-  .then(names => console.log("My measurement names are: " + names.join(", ")));
-
 // Define Routes
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));

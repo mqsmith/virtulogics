@@ -1,12 +1,7 @@
-import React from "react";
-// import React, { Component } from "react";
-import Moment from "react-moment";
-import axios from "axios";
+import React from "react"
 import { Link } from "react-router-dom";
 import moment from "moment";
-// import Loading from "../../components/Loading/Loading";
 import "./Host.css";
-// import Dual_Button_Card from "../..//components/Dual_Button_Card/";
 import { CircularProgressbar } from "react-circular-progressbar";
 
 const HostCard = props => {

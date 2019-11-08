@@ -19,7 +19,6 @@ app.get("/api/chart-cpu/", function(req, res) {
           `
       )
       .then(allClusterCpu => {
-        console.log(allClusterCpu);
         res.json({
           message: "Requested last 15 minutes cluster CPU stats",
           error: false,

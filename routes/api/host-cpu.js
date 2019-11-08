@@ -24,7 +24,6 @@ app.get("/api/host-cpu/1", function(req, res) {
     `
     )
     .then(allHostsCpu1 => {
-      console.log(allHostsCpu1);
       res.json({
         message: "Requested all host CPU data for the last 1 minute",
         error: false,
@@ -44,7 +43,6 @@ app.get("/api/host-cpu/15", function(req, res) {
   influx
     .query("select * from vsphere_host_cpu where time > now() - 15m")
     .then(allHostsCpu15 => {
-      console.log(allHostsCpu15);
       res.json({
         message: "Requested all host CPU data for the last minute",
         error: false,
@@ -64,7 +62,6 @@ app.get("/api/host-cpu/1", function(req, res) {
   influx
     .query("select * from vsphere_host_cpu where time > now() - 1m")
     .then(allHostsCpu1 => {
-      console.log(allHostsCpu1);
       res.json({
         message: "Requested all host CPU data for the last 15 minutes",
         error: false,
