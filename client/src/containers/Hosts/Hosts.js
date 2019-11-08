@@ -10,6 +10,7 @@ import HostList from "../../components/HostListView/HostList";
 
 class Hosts extends Component {
   // State on Hosts
+  intervalID;
   state = {
     allData: [],
     loading: true,

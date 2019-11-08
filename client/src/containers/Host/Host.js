@@ -10,6 +10,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 
 class Host extends Component {
   // Start on Host Component
+  intervalID;
   state = {
     allData: [],
     loading: true

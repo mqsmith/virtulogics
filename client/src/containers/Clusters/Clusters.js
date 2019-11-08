@@ -11,6 +11,8 @@ import "./Clusters.css";
 
 class Clusters extends Component {
   // State on Cluester Component
+  intervalID;
+
   state = {
     alldata: [],
     loading: true,
@@ -24,6 +26,11 @@ class Clusters extends Component {
 
   componentDidMount() {
     this.getBoth();
+  }
+
+  componentWillUnmount() {
+
+    clearTimeout(this.intervalID);
   }
 
   // Axios Call
@@ -122,6 +129,7 @@ class Clusters extends Component {
           cpureadytotal: cpureadytotal,
           costoptotal: costoptotal
         });
+        this.intervalID = setTimeout(this.getBoth.bind(this), 30000);
       })
       .catch(err => {
         console.log(err);
