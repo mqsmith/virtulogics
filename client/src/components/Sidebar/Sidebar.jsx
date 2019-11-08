@@ -1,7 +1,6 @@
 // Import Links
 import React, { Component } from "react";
 import SidebarNarrow from "../SideBarNarrow/SideBarNarrow";
-import "./Sidebar.css";
 import SideBarWide from "../SideBarWide/SideBarWide";
 
 // Sidebar Component
