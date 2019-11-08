@@ -19,7 +19,7 @@ const renderTableHeader =() => {
       return (
         <tr key={host.esxhostname}>
           <td> <Link to={`/host/${host.esxhostname}`}>
-                <button className="btn-dark btn-sm link-button">
+                <button className="btn-dark btn host-button">
                   {host.esxhostname}
                 </button>
               </Link></td>
