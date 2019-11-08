@@ -4,17 +4,17 @@ import "./SideBarWide.css";
 const SideBarWide = props => {
   return (
     <div>
-      <nav className="col-md-2 d-none d-md-block sidebar animated fadeInLeft">
+      <nav className="col-md-2 d-none d-md-block sidebar animated fadeInLeft slower">
         <div className="sidebar-sticky">
           <br></br>
           <ul className="nav flex-column">
-            <div className="text-right animated fadeInRight delay-1s">
+          <div className="text-right animated fadeInRight delay-1s">
               <div
        
                 className="toggle-x"
                 onClick={props.navHandler}
               >
-                X
+             <i className="fa fa-window-close" aria-hidden="true"></i>
               </div>
             </div>
 
