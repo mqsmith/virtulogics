@@ -21,17 +21,14 @@ class Clusters extends Component {
     data: [],
     singlevcentername: [],
     singleclustername: [],
-    showhostchart: undefined
+    showhostchart: "false"
   };
 
   componentDidMount() {
     this.getBoth();
   }
 
-  componentWillUnmount() {
-
-    clearTimeout(this.intervalID);
-  }
+ 
 
   // Axios Call
   getBoth = () => {
@@ -167,7 +164,7 @@ class Clusters extends Component {
                 <button
                   className="btn-dark btn-sm link-button"
                   onClick={() => {
-                    this.setState({ showhostchart: true });
+                    this.setState({ showhostchart: "true" });
                   }}
                 >
                   View Host CPU and MEM Usage
