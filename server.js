@@ -59,7 +59,7 @@ influx
 // Define Routes
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));
-app.get("/api/hosts", require("./routes/api/hosts"));
+app.use("/api/hosts", require("./routes/api/hosts"));
 app.get("/api/host-cpu", require("./routes/api/host-cpu"));
 app.get("/api/host-mem", require("./routes/api/host-mem"));
 app.get("/api/uptime", require("./routes/api/uptime"));
