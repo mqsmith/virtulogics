@@ -4,11 +4,11 @@ import "./SideBarWide.css";
 const SideBarWide = props => {
   return (
     <div>
-      <nav className="col-md-2 d-none d-md-block sidebar">
+      <nav className="col-md-2 d-none d-md-block sidebar animated fadeInLeft">
         <div className="sidebar-sticky">
           <br></br>
           <ul className="nav flex-column">
-            <div className="text-right">
+            <div className="text-right animated fadeInRight delay-1s">
               <button
                 type="button"
                 className="btn-dark toggle-button"
@@ -32,7 +32,7 @@ const SideBarWide = props => {
               </button>
             </div>
 
-            <li className="nav-item">
+            <li className="nav-item animated fadeInRight delay-1s">
               <a className="nav-link active" href="/clusters">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +52,7 @@ const SideBarWide = props => {
                 Cluster Overview <span className="sr-only">(current)</span>
               </a>
             </li>
-            <li className="nav-item">
+            <li className="nav-item animated fadeInRight delay-1s">
               <a className="nav-link active" href="/hosts">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
