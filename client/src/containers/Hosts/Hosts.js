@@ -14,7 +14,7 @@ class Hosts extends Component {
   state = {
     allData: [],
     loading: true,
-    listView: true
+    listView: false
   };
 
   componentDidMount() {
