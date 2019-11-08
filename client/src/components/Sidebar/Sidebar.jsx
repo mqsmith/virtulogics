@@ -4,11 +4,19 @@ import "./Sidebar.css";
 
 // Sidebar Component
 class Sidebar extends Component {
+  state={
+    display: true
+  }
+
+
   render() {
+  
+
     return (
       <>
-        <nav className="col-md-2 d-none d-md-block sidebar">
+        <nav className={this.state.display ? "col-md-2 d-none d-md-block sidebar"  : "col-md-2 d-none d-md-block sidebar sidebar-hidden"} >
           <div className="sidebar-sticky">
+          <button onClick={() => {this.setState({display: false})}}>Close</button>
           <br></br>
             <ul className="nav flex-column">
               <li className="nav-item">

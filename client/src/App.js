@@ -8,6 +8,7 @@ import Routes from './components/routing/Routes';
 import Sidebar from "./components/Sidebar/Sidebar";
 import PrivateRoute from './components/routing/PrivateRoute';
 
+
 // Import Containers
 import Home from "./containers/Home/Home";
 import Hosts from './containers/Hosts/Hosts';
@@ -35,7 +36,9 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        
+        <div>
+          Does this show up?
+        </div>
         <Switch>
           
           <Route exact path='/' component={props => (
