@@ -17,7 +17,7 @@ const jumbotron = {
 };
 
 const mainButton = {
-  backgroundColor: '#ff5235',
+  backgroundColor: '#aacbd1',
   fontSize: '20px',
   width: '150px',
   margin: '35px',
@@ -25,7 +25,7 @@ const mainButton = {
 };
 
 const mainButtonText = {
-  color: 'white'
+  color: '#3f5770'
 };
 
 const containerMarketing = {
@@ -41,7 +41,8 @@ const highlightText = {
 };
 
 const featureButton = {
-  backgroundColor: '#15a2b8'
+  backgroundColor: '#aacbd1',
+  color: '#3f5770'
 };
 
 const planList = {
@@ -50,13 +51,18 @@ const planList = {
 
 
 const signUpButton = {
-  backgroundColor: '#ff5235'
+  backgroundColor: '#aacbd1',
+  color: '#3f5770'
 };
 
 const pricingColumn = {
   textAlign: 'center',
-  display: 'inline-block'
-}
+  display: 'inline-block',
+};
+
+const priceImg = {
+paddingRight: '45px'
+};
 
 // Styling Home Component with Bootstrap classNames
 class Home extends Component {
@@ -73,8 +79,8 @@ class Home extends Component {
         <div className="container marketing" style={containerMarketing}>
           <div className="row featurette" style={featureText}>
             <div className="col-md-7" >
-              <h2 className="featurette-heading">Smart Capacity Planning Suggestions <span style={highlightText}>It'll blow your mind.</span></h2>
-              <p className="lead">Easily and Quickly know when its time to upgrade. </p>
+              <h2 className="featurette-heading">Smart Capacity Planning     <br></br><span style={highlightText}>It'll blow your mind.</span></h2>
+              <p className="lead">Easily and Quickly know when its time to add memory or additional hosts. </p>
               <br />
               <p className="lead"> Data is displayed in a clear and concise way where you can easy get an overview of your current load. Exactly what you need. </p>
               <br />
@@ -83,7 +89,7 @@ class Home extends Component {
               <p><a className="btn btn-secondary" href="/register" role="button" style={featureButton}>Try for Free</a></p>
             </div>
             <div className="col-md-5">
-              <img className="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" style={newImage} src="https://howto.socialchorus.com/hc/article_attachments/360003206494/Dashboard.gif" data-holder-rendered="true" />
+              <img className="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" style={newImage} src="/img/data.png" data-holder-rendered="true" />
             </div>
           </div>
 
@@ -91,11 +97,11 @@ class Home extends Component {
 
           <div className="row featurette" style={featureText}>
             <div className="col-md-5 pull-md-7">
-              <img className="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="https://media.giphy.com/media/fWwR0wiDbqmWs/giphy.gif" data-holder-rendered="true" style={newImage} />
+              <img className="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="/img/dashboard.png" data-holder-rendered="true" style={newImage} />
             </div>
             <div className="col-md-7 push-md-5">
               <h2 className="featurette-heading">Clean, Easy to Read Dashboard </h2> <h2><span style={highlightText}>Check it out for yourself.</span></h2>
-              <p className="lead">Our easy to read dashboard doesn't require weeks of training. </p>
+              <p className="lead">Our easy to read dashboard doesn't require weeks of training. We pride ourselves on providing clear, simple data.</p>
               <br />
               <p className="lead">Data is displayed in a clear and concise way where you can easy get an overview of your current load. Exactly what you need. </p>
               <br />
@@ -119,7 +125,7 @@ class Home extends Component {
 
             </div>
             <div className="col-md-5">
-              <img className="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="https://cdn.slidemodel.com/wp-content/uploads/7942-01-infinite-business-powerpoint-template-16x9-23-1-870x489.jpg" data-holder-rendered="true" style={newImage} />
+              <img className="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" src="/img/graphs.png" data-holder-rendered="true" style={newImage} />
             </div>
 
           </div>
@@ -128,7 +134,7 @@ class Home extends Component {
 
           <div className="row">
             <div className="col-lg-4" style={pricingColumn}>
-              <img className="rounded-circle" src="https://image.flaticon.com/icons/svg/179/179250.svg" alt="Generic placeholder 1" width="140" height="140" />
+              <img className="rounded-circle" src="https://image.flaticon.com/icons/svg/179/179250.svg" alt="Generic placeholder 1" width="140" height="140" style={priceImg}/>
               <h2>Bronze Plan</h2>
               <ul style={planList}>
                 <li>Capacity Planner Dashboard</li>
@@ -139,7 +145,7 @@ class Home extends Component {
               <p><a className="btn btn-secondary" href="/register" role="button" style={signUpButton}>Sign Up »</a></p>
             </div>
             <div className="col-lg-4" style={pricingColumn}>
-              <img className="rounded-circle" src="https://image.flaticon.com/icons/svg/179/179251.svg" alt="Generic placeholder 2" width="140" height="140" />
+              <img className="rounded-circle" src="https://image.flaticon.com/icons/svg/179/179251.svg" alt="Generic placeholder 2" width="140" height="140" style={priceImg}/>
               <div >
                 <h2 >Silver Plan</h2>
                 <ul style={planList}>
@@ -152,7 +158,7 @@ class Home extends Component {
               </div>
             </div>
             <div className="col-lg-4" style={pricingColumn}>
-              <img className="rounded-circle" src="https://image.flaticon.com/icons/svg/179/179249.svg" alt="Generic placeholder 3" width="140" height="140" />
+              <img className="rounded-circle" src="https://image.flaticon.com/icons/svg/179/179249.svg" alt="Generic placeholder 3" width="140" height="140" style={priceImg}/>
               <h2>Gold Plan</h2>
               <ul style={planList}>
                 <li>Everything in the Bronze and Silver Plan</li>
