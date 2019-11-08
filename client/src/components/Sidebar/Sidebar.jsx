@@ -1,28 +1,27 @@
 // Import Links
 import React, { Component } from "react";
-import SideBarNarrow from "../SideBarNarrow/SideBarNarrow";
+import SidebarNarrow from "../SideBarNarrow/SideBarNarrow";
 import SideBarWide from "../SideBarWide/SideBarWide";
 
 // Sidebar Component
-const Sidebar = (props) => {
-  // state = {
-  //   navOpen: false
-  // };
+class Sidebar extends Component {
+  state = {
+    navOpen: false
+  };
 
-  
+  render() {
     return (
       <>
-        {props.navOpen ? (
-          <SideBarWide navOpen={props.navOpen} navHandler={props.navHandler} />
-        ) : (
-          <SideBarNarrow
-            navOpen={props.navOpen}
-            navHandler={props.navHandler}
-          />
-        )}
-      </>
-    );
-  
+      {this.state.navOpen ? (<SideBarWide navOpen={this.state.navOpen} navHandler={() => {
+                  this.setState({ navOpen: false });
+                }}/>) : (<SidebarNarrow navOpen={this.state.navOpen} navHandler={() => {
+                  this.setState({ navOpen: true });
+                }}/>
+        
+    )}
+    </>
+    )
+  }
 }
 
 // Export Link

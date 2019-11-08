@@ -1,5 +1,5 @@
 // Import React Links
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // Import Components
@@ -29,12 +29,10 @@ if (localStorage.token) {
 
 
 const App = () => {
-  
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
 
-  const [nav, setNav] = useState(false)
 
   return (
     <Provider store={store}>
@@ -57,7 +55,7 @@ const App = () => {
             component={props => (
               <div className="page-wrap">
                 <Navbar />
-                <Sidebar navOpen={nav} navHandler={()=> {setNav((nav) => {return !nav})}}/>
+                <Sidebar/>
                 <Host {...props} />
               </div>
             )}
@@ -69,7 +67,7 @@ const App = () => {
             component={props => (
               <div className="page-wrap">
                 <Navbar />
-                <Sidebar navOpen={nav} navHandler={()=> {setNav((nav) => {return !nav})}}/>
+                <Sidebar />
                 <Hosts {...props} />
               </div>
             )}
@@ -81,7 +79,7 @@ const App = () => {
             component={props => (
               <div className="page-wrap">
                 <Navbar />
-                <Sidebar navOpen={nav} navHandler={()=> {setNav((nav) => {return !nav})}}/>
+                <Sidebar />
                 <Clusters {...props} />
               </div>
             )}
