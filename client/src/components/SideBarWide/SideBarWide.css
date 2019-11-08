@@ -8,19 +8,22 @@
     bottom: 0;
     left: 0;
     z-index: 100;
-    padding: 80px 0px 0;
+    padding: 80px 0px 0px 0px;
     width: auto;
    
     /* box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1); */
   }
-  
+
+
   .sidebar-sticky {
     position: relative;
     top: 0;
     height: calc(100vh - 48px);
+    z-index: 100;
     padding-top: .5rem;
     overflow-x: hidden;
     overflow-y: auto;
+    width: auto;
   
   }
   

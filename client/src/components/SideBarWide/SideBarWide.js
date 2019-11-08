@@ -3,8 +3,8 @@ import "./SideBarWide.css";
 
 const SideBarWide = props => {
   return (
-    <div>
-      <nav className="col-md-2 d-none d-md-block sidebar animated fadeInLeft slower">
+    <div className="row">
+      <nav className="col-md-2 d-md-block sidebar animated fadeInLeft slower">
         <div className="sidebar-sticky">
           <br></br>
           <ul className="nav flex-column">
