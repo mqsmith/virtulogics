@@ -84,3 +84,7 @@ img {
     background-color: black;
     color: white;
   }
+
+  .host-button{
+      width: 60%;
+  }
