@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+
 import HostCard from '../HostCardView/HostCard'
 
 const renderTableHeader =() => {
@@ -16,7 +18,11 @@ const renderTableHeader =() => {
     return props.hostData.map((host, i) => {
       return (
         <tr key={host.esxhostname}>
-          <td>{host.esxhostname}</td>
+          <td> <Link to={`/host/${host.esxhostname}`}>
+                <button className="btn-dark btn-sm link-button">
+                  {host.esxhostname}
+                </button>
+              </Link></td>
           <td>{(host.usage_average).toFixed(2)}</td>
           <td>
             {(
