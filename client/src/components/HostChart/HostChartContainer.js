@@ -19,7 +19,6 @@ class HostChartContainer extends Component {
   componentDidMount() {
     this.getSevenDayMem();
     this.getSevenDayCpu();
-    // console.log(this.ramUsage);
   }
 
   getSevenDayMem = (props) => {

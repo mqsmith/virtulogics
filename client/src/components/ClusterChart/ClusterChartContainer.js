@@ -29,10 +29,7 @@ class ClusterChartContainer extends Component {
          const {
             memUsageOne,
             memUsageTwo,
-            hostName,
-            time
           } = hostMemData.data.data;
-          console.log(hostName);
                   this.setState({
                     hostOneMemData: memUsageOne,
                     hostTwoMemData: memUsageTwo,
@@ -57,7 +54,6 @@ class ClusterChartContainer extends Component {
         let hostNameOne = hostName.filter(data => data === "lab-esxi-01.vdilab.int");
         let hostNameTwo = hostName.filter(data => data === "lab-esxi-02.vdilab.int");
         let formattedTime = time.map(time => moment(time).format("M/D, ha"));
-        console.log(hostName);
                 this.setState({
                   hostOneCpuData: cpuUsageOne,
                   hostOneLabels: hostNameOne,

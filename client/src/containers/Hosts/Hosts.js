@@ -29,22 +29,6 @@ class Hosts extends Component {
         let obj = allData.data;
         const array = Object.values(obj);
         this.setState({ allData: array, loading: false });
-        console.log(this.state.allData[0].esxhostname);
-        console.log(this.state.allData[0].totalCapacity_average);
-        console.log(this.state.allData[0].usage_average);
-        console.log(
-          (
-            (this.state.allData[0].totalCapacity_average *
-              this.state.allData[0].usage_average) /
-            100000
-          ).toFixed(2)
-        );
-        let used =
-          (this.state.allData[0].totalCapacity_average *
-            this.state.allData[0].usage_average) /
-          100000;
-        console.log(used.toFixed(2));
-        this.intervalID = setTimeout(this.getBoth.bind(this), 30000);
       })
       .catch(err => {
         console.log(err);

@@ -19,7 +19,6 @@ app.get("/api/host/uptime", function(req, res) {
           `
       )
       .then(hostUptime => {
-        console.log(hostUptime);
         res.json({
           message: "Requested latest Host Uptime",
           error: false,
@@ -45,11 +44,8 @@ app.get("/api/host/cpu-mem/1", async function(req, res) {
       )
       .then(allHostsMem1 => {
         for (let i = 0; i < allHostsMem1.length; i++) {
-          console.log(allHostsMem1[i].usage_average);
           let moid = allHostsMem1[i].moid;
-          console.log(allHostsMem1[i]);
           if (newHashMap[moid]) {
-            console.log(allHostsMem1[i].usage_average);
             allHostsMem1[i].mem_usage_average = allHostsMem1[i]["usage_average"];
             newHashMap[moid] = allHostsMem1[i];
           } else {
@@ -70,11 +66,9 @@ app.get("/api/host/cpu-mem/1", async function(req, res) {
       )
       .then(allHostsCpu1 => {
         for (let i = 0; i < allHostsCpu1.length; i++) {
-          console.log(allHostsCpu1[i].usage_average);
           let moid = allHostsCpu1[i].moid;
           if (newHashMap[moid]) {
             allHostsCpu1[i].cpu_usage_average = allHostsCpu1[i]["usage_average"];
-            console.log(allHostsCpu1[i].usage_average);
             delete allHostsCpu1[i].usage_average;
             let oldValues = newHashMap[moid];
             let newValues = allHostsCpu1[i];
@@ -100,7 +94,6 @@ app.get("/api/host/cpu-mem/1", async function(req, res) {
         `
       )
       .then(hostMem => {
-        // console.log(singleHostMem);
         const hostData = hostMem.map(data => data.mean);
         const hostOne = hostMem.filter(
           data => data.esxhostname === "lab-esxi-01.vdilab.int"
@@ -112,7 +105,6 @@ app.get("/api/host/cpu-mem/1", async function(req, res) {
         const memUsageTwo = hostTwo.map(data => (data.mean).toFixed(2));
         const hostName = hostMem.map(data => data.esxhostname);
         const time = hostOne.map(data => data.time);
-        console.log(time);
         res.json({
           message: "Requested last 24 hours of Host Mem Usage",
           error: false,
@@ -136,7 +128,6 @@ app.get("/api/host/cpu-mem/1", async function(req, res) {
         `
       )
       .then(hostCpu => {
-        // console.log(singleHostMem);
         const hostData = hostCpu.map(data => data.mean);
         const hostOne = hostCpu.filter(
           data => data.esxhostname === "lab-esxi-01.vdilab.int"
@@ -148,7 +139,6 @@ app.get("/api/host/cpu-mem/1", async function(req, res) {
         const cpuUsageTwo = hostTwo.map(data => (data.mean).toFixed(2));
         const hostName = hostCpu.map(data => data.esxhostname);
         const time = hostOne.map(data => data.time);
-        console.log(time);
         res.json({
           message: "Requested last 24 hours of Host CPU Usage",
           error: false,
@@ -173,10 +163,8 @@ app.get("/api/host/cpu-mem/1", async function(req, res) {
         `
       )
       .then(singleHostMem => {
-        // console.log(singleHostMem);
         const hostData = singleHostMem.map(data => data.mean);
         const time = singleHostMem.map(data => data.time);
-        console.log(time);
         res.json({
           message: "Requested last 7 days of Host Mem Usage",
           error: false,
@@ -201,10 +189,8 @@ app.get("/api/host/cpu-mem/1", async function(req, res) {
         `
       )
       .then(singleHostCpu => {
-        // console.log(singleHostMem);
         const hostCpuData = singleHostCpu.map(data => data.mean);
         const time = singleHostCpu.map(data => data.time);
-        console.log(time);
         res.json({
           message: "Requested last 7 days of Host Mem Usage",
           error: false,
@@ -222,7 +208,6 @@ app.get("/api/host/cpu-mem/1", async function(req, res) {
   
   app.get("/api/host/cpu-mem/1/:esxhostname", async function(req, res) {
     let newHashMap = {};
-    console.log(req.params.esxhostname);
     await influx
       .query(
         `select * from vsphere_host_mem
@@ -232,11 +217,8 @@ app.get("/api/host/cpu-mem/1", async function(req, res) {
       )
       .then(allHostsMem1 => {
         for (let i = 0; i < allHostsMem1.length; i++) {
-          console.log(allHostsMem1[i].usage_average);
           let moid = allHostsMem1[i].moid;
-          console.log(allHostsMem1[i]);
           if (newHashMap[moid]) {
-            console.log(allHostsMem1[i].usage_average);
             allHostsMem1[i].mem_usage_average = allHostsMem1[i]["usage_average"];
             newHashMap[moid] = allHostsMem1[i];
           } else {
@@ -259,11 +241,9 @@ app.get("/api/host/cpu-mem/1", async function(req, res) {
       )
       .then(allHostsCpu1 => {
         for (let i = 0; i < allHostsCpu1.length; i++) {
-          console.log(allHostsCpu1[i].usage_average);
           let moid = allHostsCpu1[i].moid;
           if (newHashMap[moid]) {
             allHostsCpu1[i].cpu_usage_average = allHostsCpu1[i]["usage_average"];
-            console.log(allHostsCpu1[i].usage_average);
             delete allHostsCpu1[i].usage_average;
             let oldValues = newHashMap[moid];
             let newValues = allHostsCpu1[i];
