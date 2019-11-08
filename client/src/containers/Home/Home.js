@@ -71,7 +71,7 @@ class Home extends Component {
 
       <div className="container">
 
-        <div class="jumbotron" style={jumbotron}>
+        <div className="jumbotron" style={jumbotron}>
           <h1>Virtulogics</h1>
           <p>Simple, Seamless Capacity Planning</p>
           <p><button className="btn btn-primary btn-lg" style={mainButton}><a href="/register" style={mainButtonText}>Try it Free</a></button></p>
