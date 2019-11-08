@@ -219,7 +219,6 @@ const HostCard = props => {
           </p>
         </div>
       ))}
-      ;
     </div>
   );
 };
