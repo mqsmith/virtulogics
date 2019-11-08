@@ -17,7 +17,6 @@ app.get("/api/chart-mem/:clustername", function(req, res) {
         `
       )
       .then(allClusterMem => {
-        console.log(allClusterMem);
         res.json({
           message: "Requested last 7 days of cluster MEM usage",
           error: false,
@@ -42,7 +41,6 @@ app.get("/api/chart-mem", function(req, res) {
           `
       )
       .then(allClusterCpu => {
-        console.log(allClusterCpu);
         res.json({
           message: "Requested last 15 minutes cluster CPU stats",
           error: false,

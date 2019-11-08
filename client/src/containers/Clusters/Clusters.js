@@ -14,14 +14,14 @@ class Clusters extends Component {
   intervalID;
 
   state = {
-    allData: [],
+    alldata: [],
     loading: true,
     totalmemoryusage: [],
     label: [],
     data: [],
     singlevcentername: [],
     singleclustername: [],
-    showHostChart: false
+    showhostchart: false
   };
 
   componentDidMount() {
@@ -37,73 +37,65 @@ class Clusters extends Component {
   getBoth = () => {
     axios
       .get("/api/host/cpu-mem/1")
-      .then(allData => {
-        let obj = allData.data;
+      .then(alldata => {
+        let obj = alldata.data;
         const array = Object.values(obj);
-        this.setState({ allData: array, loading: false });
+        this.setState({ alldata: array, loading: false });
         let combined = [];
 
-        for (let i = 0; i < this.state.allData.length; i++) {
-          combined.push(this.state.allData[i].usage_average);
+        for (let i = 0; i < this.state.alldata.length; i++) {
+          combined.push(this.state.alldata[i].usage_average);
         }
 
-        const memData = this.state.allData.map(data => data.usage_average);
+        const memData = this.state.alldata.map(data => data.usage_average);
         let memTotal = 0;
         //Add the to values together to make the total
         for (let i = 0; i < memData.length; i++) {
           memTotal += memData[i];
         }
-        const cpuData = this.state.allData.map(data => data.cpu_usage_average);
+        const cpuData = this.state.alldata.map(data => data.cpu_usage_average);
         let cputotal = 0;
         //Add the to values together to make the total
         for (let e = 0; e < cpuData.length; e++) {
           cputotal += cpuData[e];
         }
-        const cpuReady = this.state.allData.map(data => data.ready_summation);
-        let readyTotal = 0;        
+        const cpuReady = this.state.alldata.map(data => data.ready_summation);
+        let readyTotal = 0;
         //Add the to values together to make the total
         for (let f = 0; f < cpuReady.length; f++) {
           readyTotal += cpuReady[f];
         }
-        let cpuReadyTotal =  ((readyTotal  / (20 * 1000)) * 100).toFixed(2)
+        let cpureadytotal = ((readyTotal / (20 * 1000)) * 100).toFixed(2);
 
-        const costopData = this.state.allData.map(data => data.cpu_usage_average);
+        const costopData = this.state.alldata.map(
+          data => data.cpu_usage_average
+        );
         let cototal = 0;
 
         //Add the to values together to make the total
         for (let e = 0; e < costopData.length; e++) {
           cototal += costopData[e];
         }
-        let coStopTotal = (cototal / 1000).toFixed(2)
-        const labelData = this.state.allData.map(data => data.esxhostname);
-        const clusterName = this.state.allData.map(data => data.clustername);
+        let costoptotal = (cototal / 1000).toFixed(2);
+        const labelData = this.state.alldata.map(data => data.esxhostname);
+        const clusterName = this.state.alldata.map(data => data.clustername);
         const singleclustername = [...new Set(clusterName)];
-        const vcenterName = this.state.allData.map(data => data.vcenter);
+        const vcenterName = this.state.alldata.map(data => data.vcenter);
         const singlevcentername = [...new Set(vcenterName)];
-        const memCapcity = this.state.allData.map(
-          data => data.totalCapacity_average
-        );
-        let clusterMemTotal = 0;
-        //Add the to values together to make the total
-        for (let f = 0; f < memCapcity.length; f++) {
-          clusterMemTotal += memCapcity[f];
-        }
-        let hostmemory = 28383;
-        let totalhosts = labelData.length;
-        let totalclustermemory = (hostmemory * memTotal) / 100000;
-        console.log("This is the MEM total");
-        console.log(totalclustermemory);
-        let n1mem = ((64 - totalclustermemory) / 32).toFixed(2);
-        console.log(n1mem);
+       
 
-        const cpuUsage = this.state.allData.map(data => data.usagemhz_average);
+        let hostmemory = 28383;
+        let totalclustermemory = (hostmemory * memTotal) / 100000;
+        let n1mem = ((64 - totalclustermemory) / 32).toFixed(2);
+
+        const cpuUsage = this.state.alldata.map(data => data.usagemhz_average);
         let clusterCpuTotal = 0;
         //Add the to values together to make the total
         for (let f = 0; f < cpuUsage.length; f++) {
           clusterCpuTotal += cpuUsage[f];
         }
 
-        const cpuUsagePer = this.state.allData.map(
+        const cpuUsagePer = this.state.alldata.map(
           data => data.cpu_usage_average
         );
         let clusterusagetotal = 0;
@@ -119,11 +111,7 @@ class Clusters extends Component {
           (totalcpu - clusterCpuTotal / 1000) /
           hostcpu
         ).toFixed(2);
-        console.log("This is the CPU total");
-        console.log(clusterCpuTotal);
-        console.log(totalclustercpu);
         let n1cpu = totalclustercpu;
-        console.log(clusterusagetotal);
 
         //Set state
         this.setState({
@@ -138,8 +126,8 @@ class Clusters extends Component {
           data: memData,
           singleclustername: singleclustername,
           singlevcentername: singlevcentername,
-          cpuReadyTotal: cpuReadyTotal,
-          coStopTotal: coStopTotal
+          cpureadytotal: cpureadytotal,
+          costoptotal: costoptotal
         });
         this.intervalID = setTimeout(this.getBoth.bind(this), 30000);
       })
@@ -173,13 +161,13 @@ class Clusters extends Component {
                   Click to view "Hosts"
                 </button>
               </Link>
-              {this.state.showHostChart ? (
+              {this.state.showhostchart ? (
                 <></>
               ) : (
                 <button
                   className="btn-dark btn-sm link-button"
                   onClick={() => {
-                    this.setState({ showHostChart: true });
+                    this.setState({ showhostchart: true });
                   }}
                 >
                   View Host CPU and MEM Usage
@@ -301,8 +289,7 @@ class Clusters extends Component {
                   Cluster memory usage by host (%)
                   </div>
                    */}
-                  <PieComponent {...this.state} />
-             
+                <PieComponent {...this.state} />
               </div>
             </div>
           </div>
@@ -350,40 +337,39 @@ class Clusters extends Component {
                 <div className="row">
                   <div className="col">
                     <p className="double-label">CPU Ready</p>
-                    {this.state.cpuReadyTotal < 5 ? (
+                    {this.state.cpureadytotal < 5 ? (
                       <div className="double normal">
-                        <h4>{this.state.cpuReadyTotal}%</h4>
+                        <h4>{this.state.cpureadytotal}%</h4>
                       </div>
                     ) : (
                       <div className="double warning ">
-                        <h4>{this.state.cpuReadyTotal}%</h4>
+                        <h4>{this.state.cpureadytotal}%</h4>
                       </div>
                     )}
                   </div>
                   <div className="col">
                     <p className="double-label">CO-Stop (Sec)</p>
-                    {this.state.coStopTotal < 5 ? (
+                    {this.state.costoptotal < 5 ? (
                       <div className="double normal">
-                        <h4>{this.state.coStopTotal}%</h4>
+                        <h4>{this.state.costoptotal}%</h4>
                       </div>
                     ) : (
                       <div className="double warning ">
-                        <h4>{this.state.coStopTotal}%</h4>
+                        <h4>{this.state.costoptotal}%</h4>
                       </div>
-                      )}
-
+                    )}
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {this.state.showHostChart ? (
+          {this.state.showhostchart ? (
             <div className="card host-card chart">
               <button
                 type="button"
                 className="btn btn-dark"
                 onClick={() => {
-                  this.setState({ showHostChart: false });
+                  this.setState({ showhostchart: false });
                 }}
               >
                 Hide Host Mem and CPU Usage

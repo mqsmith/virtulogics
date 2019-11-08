@@ -15,7 +15,6 @@ const app = express();
 app.get("/api/hosts", function(req, res) {
     influx.HostCpu.find({})
       .then(allHosts => {
-        console.log(allHosts);
         res.json({
           message: "Requested all Host Metrics",
           error: false,
@@ -34,7 +33,6 @@ app.get("/api/hosts", function(req, res) {
   app.post("/api/hosts", function(req, res) {
     influx.HostCpu.create(req.body)
       .then(newHosts => {
-        console.log("New Host Metics: ", newHosts);
         res.json({
           message: "Successfully created",
           error: false,
