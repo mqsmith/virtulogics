@@ -12,6 +12,7 @@ import { CircularProgressbar } from "react-circular-progressbar";
 const HostCard = props => {
   return (
     <div>
+      <br></br>
       {props.hostData.map((host, i) => (
         <div className="host">
           <div className="title-row shadow mb-3 bg-white rounded">
@@ -188,13 +189,24 @@ const HostCard = props => {
                 <div className="row">
                   <div className="col">
                     <p className="double-label">CPU Ready</p>
-                    {((host.ready_summation  / (20 * 1000)) * 100).toFixed(2) < 5 ? (
+                    {((host.ready_summation / (20 * 1000)) * 100).toFixed(2) <
+                    5 ? (
                       <div className="double normal">
-                        <h4>{((host.ready_summation  / (20 * 1000)) * 100).toFixed(2)}%</h4>
+                        <h4>
+                          {((host.ready_summation / (20 * 1000)) * 100).toFixed(
+                            2
+                          )}
+                          %
+                        </h4>
                       </div>
                     ) : (
                       <div className="double warning ">
-                        <h4>{((host.ready_summation  / (20 * 1000)) * 100).toFixed(2)}%</h4>
+                        <h4>
+                          {((host.ready_summation / (20 * 1000)) * 100).toFixed(
+                            2
+                          )}
+                          %
+                        </h4>
                       </div>
                     )}
                   </div>

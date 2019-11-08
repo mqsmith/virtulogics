@@ -11,6 +11,7 @@ const needDominantBaselineFix = true;
 
 class Host extends Component {
   // Start on Host Component
+  intervalID;
   state = {
     allData: [],
     loading: true
@@ -48,6 +49,7 @@ class Host extends Component {
             this.state.allData[0].usage_average) /
           100000;
         console.log(used.toFixed(2));
+        this.intervalID = setTimeout(this.getBoth.bind(this), 30000);
       })
       .catch(err => {
         console.log(err);
