@@ -10,6 +10,7 @@ import HostList from "../../components/HostListView/HostList";
 
 class Hosts extends Component {
   // State on Hosts
+  intervalID;
   state = {
     allData: [],
     loading: true,
@@ -43,6 +44,7 @@ class Hosts extends Component {
             this.state.allData[0].usage_average) /
           100000;
         console.log(used.toFixed(2));
+        this.intervalID = setTimeout(this.getBoth.bind(this), 30000);
       })
       .catch(err => {
         console.log(err);
