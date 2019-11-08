@@ -46,7 +46,7 @@ const HostList = props => {
           <div className="toggle-switch">
             <h5>Detailed View</h5>
             <label className="switch">
-              <input type="checkbox" onClick={props.cardHandler} />
+              <input type="checkbox" onChange={props.cardHandler} />
               <span className="slider round"></span>
             </label>
           </div>
@@ -64,7 +64,7 @@ const HostList = props => {
           <div className="toggle-switch">
           <h5>List View</h5>
             <label className="switch">
-              <input type="checkbox" onClick={props.listHandler} checked />
+              <input type="checkbox" onChange={props.listHandler} checked />
               <span className="slider round"></span>
             </label>
           </div>
