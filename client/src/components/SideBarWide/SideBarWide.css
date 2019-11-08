@@ -39,3 +39,12 @@
     display: block;
     padding: .5rem 1rem;
   }
+
+  .toggle-button{
+    width: 8%;
+    outline: none !important;
+  }
+
+  .text-right{
+    padding-right: 5px;
+  }
