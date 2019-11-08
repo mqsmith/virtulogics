@@ -4,6 +4,8 @@ import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { login } from '../../actions/auth';
+import "./auth.css";
+
 
 // Variables for Login
 const Login = ({ login, isAuthenticated }) => {
@@ -30,7 +32,8 @@ const Login = ({ login, isAuthenticated }) => {
   // Styling Login Component with Bootstrap classNames
   return (
     <Fragment>
-      <h1 className='large text-primary'>Sign In</h1>
+      <div className="auth-container">
+      <div className="card">
       <p className='lead'>
         <i className='fas fa-user' /> Sign Into Your Account
       </p>
@@ -55,11 +58,13 @@ const Login = ({ login, isAuthenticated }) => {
             minLength='6'
           />
         </div>
-        <input type='submit' className='btn btn-primary' value='Login' />
+        <input type='submit' className='btn btn-dark' value='Login' />
       </form>
-      <p className='my-1'>
+      <p className='my-1 dark'>
         Don't have an account? <Link to='/register'>Sign Up</Link>
       </p>
+      </div>
+      </div>
     </Fragment>
   );
 };

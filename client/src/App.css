@@ -39,7 +39,16 @@
   opacity: 0.9;
 }
 .single-card {
+ min-width: 160px;
  height: 228px;
  /* min-width: 180px; */
 }
-
+.double-card {
+  min-width: 430px;
+}
+.host-card {
+min-width: 160px;
+}
+.btn {
+  min-width: 160px;
+}
