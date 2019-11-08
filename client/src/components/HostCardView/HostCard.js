@@ -1,17 +1,13 @@
-import React from "react";
-// import React, { Component } from "react";
-import Moment from "react-moment";
-import axios from "axios";
+import React from "react"
 import { Link } from "react-router-dom";
 import moment from "moment";
-// import Loading from "../../components/Loading/Loading";
 import "./Host.css";
-// import Dual_Button_Card from "../..//components/Dual_Button_Card/";
 import { CircularProgressbar } from "react-circular-progressbar";
 
 const HostCard = props => {
   return (
     <div>
+      <br></br>
       {props.hostData.map((host, i) => (
         <div className="host">
           <div className="title-row shadow mb-3 bg-white rounded">
@@ -188,13 +184,24 @@ const HostCard = props => {
                 <div className="row">
                   <div className="col">
                     <p className="double-label">CPU Ready</p>
-                    {((host.ready_summation  / (20 * 1000)) * 100).toFixed(2) < 5 ? (
+                    {((host.ready_summation / (20 * 1000)) * 100).toFixed(2) <
+                    5 ? (
                       <div className="double normal">
-                        <h4>{((host.ready_summation  / (20 * 1000)) * 100).toFixed(2)}%</h4>
+                        <h4>
+                          {((host.ready_summation / (20 * 1000)) * 100).toFixed(
+                            2
+                          )}
+                          %
+                        </h4>
                       </div>
                     ) : (
                       <div className="double warning ">
-                        <h4>{((host.ready_summation  / (20 * 1000)) * 100).toFixed(2)}%</h4>
+                        <h4>
+                          {((host.ready_summation / (20 * 1000)) * 100).toFixed(
+                            2
+                          )}
+                          %
+                        </h4>
                       </div>
                     )}
                   </div>

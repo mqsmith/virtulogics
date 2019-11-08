@@ -22,7 +22,6 @@ app.get("/api/host-mem/1", function(req, res) {
        `
       )
       .then(allHostsMem1 => {
-        console.log(allHostsMem1);
         res.json({
           message: "Requested all host MEM data for the last 1 minute",
           error: false,
@@ -42,7 +41,6 @@ app.get("/api/host-mem/1", function(req, res) {
     influx
       .query("select * from vsphere_host_mem where time > now() - 15m")
       .then(allHostsMem15 => {
-        console.log(allHostsMem15);
         res.json({
           message: "Requested all host MEM data for the last 15 minutes",
           error: false,

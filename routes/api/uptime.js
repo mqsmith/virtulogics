@@ -23,7 +23,6 @@ app.get("/api/uptime", function(req, res) {
        `
       )
       .then(allHostsUp => {
-        console.log(allHostsUp);
         res.json({
           message: "Requested last minute of uptime requests",
           error: false,

@@ -7,6 +7,7 @@ import LineCpuChart from "../LineChart/LineCpuChart"
 
 class HostChartContainer extends Component {
   // State on HostChartContainer
+  intervalID;
   state = {
     hostMemData: [],
     hostLabels: "",
@@ -18,7 +19,6 @@ class HostChartContainer extends Component {
   componentDidMount() {
     this.getSevenDayMem();
     this.getSevenDayCpu();
-    // console.log(this.ramUsage);
   }
 
   getSevenDayMem = (props) => {
@@ -32,6 +32,7 @@ class HostChartContainer extends Component {
           hostLabels: this.props.hostName + " MEM utilization",
           time: formattedTime
         });
+        this.intervalID = setTimeout(this.getSevenDayMem.bind(this), 30000);
       })
       .catch(err => {
         console.log(err);
@@ -47,6 +48,7 @@ class HostChartContainer extends Component {
           hostCpuData: hostCpuData,
           hostCpuLabels: this.props.hostName + " CPU utilization",
         });
+        this.intervalID = setTimeout(this.getSevenDayCpu.bind(this), 30000);
       })
       .catch(err => {
         console.log(err);

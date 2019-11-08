@@ -27,12 +27,10 @@ if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
-
 const App = () => {
   useEffect(() => {
     store.dispatch(loadUser());
   }, []);
-
 
   return (
     <Provider store={store}>
@@ -55,7 +53,7 @@ const App = () => {
             component={props => (
               <div className="page-wrap">
                 <Navbar />
-                <Sidebar/>
+                <Sidebar />
                 <Host {...props} />
               </div>
             )}
@@ -87,7 +85,7 @@ const App = () => {
 
           <Route
             component={props => (
-              <div className="nav-style">
+              <div>
                 <Navbar />
                 <Routes {...props} />
               </div>

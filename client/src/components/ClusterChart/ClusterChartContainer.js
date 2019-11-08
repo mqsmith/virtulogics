@@ -6,6 +6,7 @@ import ClusterLineChart from "../LineChart/ClusterLineChart";
 
 class ClusterChartContainer extends Component {
   // State on ClusterChartContainer
+  intervalID;
   state = {
     hostOneCpuData: [],
     hostOneMemData: [],
@@ -28,14 +29,12 @@ class ClusterChartContainer extends Component {
          const {
             memUsageOne,
             memUsageTwo,
-            hostName,
-            time
           } = hostMemData.data.data;
-          console.log(hostName);
                   this.setState({
                     hostOneMemData: memUsageOne,
                     hostTwoMemData: memUsageTwo,
                   });
+          this.intervalID = setTimeout(this.getMem.bind(this), 30000);
         })
       .catch(err => {
         console.log(err);
@@ -55,7 +54,6 @@ class ClusterChartContainer extends Component {
         let hostNameOne = hostName.filter(data => data === "lab-esxi-01.vdilab.int");
         let hostNameTwo = hostName.filter(data => data === "lab-esxi-02.vdilab.int");
         let formattedTime = time.map(time => moment(time).format("M/D, ha"));
-        console.log(hostName);
                 this.setState({
                   hostOneCpuData: cpuUsageOne,
                   hostOneLabels: hostNameOne,
@@ -63,6 +61,7 @@ class ClusterChartContainer extends Component {
                   hostTwoLabels: hostNameTwo,
                   time:formattedTime
                 });
+        this.intervalID = setTimeout(this.getCpu.bind(this), 30000);
       })
       .catch(err => {
         console.log(err);
