@@ -44,11 +44,12 @@ const HostList = props => {
       {props.view ? (
         <>
           <div className="toggle-switch">
-            <h5>Detailed View</h5>
+          <p id="toggle-text" >Detailed View &nbsp; &nbsp;
             <label className="switch">
               <input type="checkbox" onChange={props.cardHandler} />
               <span className="slider round"></span>
             </label>
+            </p>
           </div>
 
           <h1 id="title">Host Info</h1>
@@ -62,11 +63,12 @@ const HostList = props => {
       ) : (
         <>
           <div className="toggle-switch">
-          <h5>List View</h5>
+          <p id="toggle-text">List View &nbsp;&nbsp;
             <label className="switch">
               <input type="checkbox" onChange={props.listHandler} checked />
               <span className="slider round"></span>
             </label>
+            </p>
           </div>
 
           <HostCard hostData={props.hostData} />

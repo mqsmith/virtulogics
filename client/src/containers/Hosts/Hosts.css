@@ -1,22 +1,23 @@
-
 .card-body {
     /* width: 100%; */
     float: left;
-  
 }
 
 p {
     /* font-weight: bold; */
     font-family: 'Roboto Condensed', sans-serif;
 }
+
 .main-card {
     width: 100%;
     padding: 10px;
 }
+
 img {
     margin: 20px;
     background-color: white;
 }
+
 .card-stats {
     width: 100%;
     box-shadow: 0 2px 2px #999, 0 2px 2px #999;
@@ -25,32 +26,40 @@ img {
 .main-card {
     box-shadow: 0 2px 2px #999, 0 2px 2px #999;
 }
+
 .card-wrapper {
     border-style: none;
 }
+
 .btn-sm {
     float: left;
 }
+
 .loading {
     padding-top: 250px;
     font-size: 50px;
 }
+
 .top-left {
     text-align: left;
     line-height: 10px;
 }
+
 .host-text-box {
     margin-left: 0px;
     padding: 15px;
     font-family: 'Roboto Condensed', sans-serif;
 }
+
 .image-holder {
     margin-left: 15px;
 }
+
 .cpu-ready-text {
     text-align: center;
     font-size: 20px;
 }
+
 .polled {
     text-align: center;
 }
@@ -58,53 +67,59 @@ img {
 #title {
     text-align: center;
     font-family: arial, sans-serif;
-  }
-  
-  #hosts {
+}
+
+#hosts {
     text-align: center;
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     border: 3px solid #ddd;
     width: 100%;
-  }
-  
-  #hosts td, #hosts th {
+}
+
+#hosts td, #hosts th {
     border: 1px solid #ddd;
     padding: 8px;
-  }
-  
-  #hosts tr:nth-child(even){background-color: #f2f2f2;}
-  
-  #hosts tr:hover {background-color: #ddd;}
-  
-  #hosts th {
+}
+
+#hosts tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#hosts tr:hover {
+    background-color: #ddd;
+}
+
+#hosts th {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
     background-color: black;
     color: white;
-  }
+}
 
-  .host-button{
-      width: 60%;
-  }
+.host-button {
+    width: 60%;
+}
 
-  .switch {
+.switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
-  }
-  
-  /* Hide default HTML checkbox */
-  .switch input {
+}
+
+/* Hide default HTML checkbox */
+
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
-  }
-  
-  /* The slider */
-  .slider {
+}
+
+/* The slider */
+
+.slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -114,9 +129,9 @@ img {
     background-color: #ccc;
     -webkit-transition: .4s;
     transition: .4s;
-  }
-  
-  .slider:before {
+}
+
+.slider:before {
     position: absolute;
     content: "";
     height: 26px;
@@ -126,31 +141,41 @@ img {
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
-  }
-  
-  input:checked + .slider {
+}
+
+input:checked+.slider {
     background-color: #2B4560;
-  }
-  
-  input:focus + .slider {
+}
+
+input:focus+.slider {
     box-shadow: 0 0 1px #2B4560;
-  }
-  
-  input:checked + .slider:before {
+}
+
+input:checked+.slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
-  }
-  
-  /* Rounded sliders */
-  .slider.round {
-    border-radius: 34px;
-  }
-  
-  .slider.round:before {
-    border-radius: 50%;
-  }
+}
 
-  .toggle-switch{
-      text-align: right;
-  }
+/* Rounded sliders */
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.toggle-switch {
+    text-align: right;
+}
+
+.toggle-switch p {
+    margin-top: -58px;
+    float: right;
+}
+
+#toggle-text {
+    font-size: 22px;
+}
