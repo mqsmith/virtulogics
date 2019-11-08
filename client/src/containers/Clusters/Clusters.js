@@ -21,7 +21,7 @@ class Clusters extends Component {
     data: [],
     singlevcentername: [],
     singleclustername: [],
-    showhostchart: "false"
+    showhostchart: undefined
   };
 
   componentDidMount() {
