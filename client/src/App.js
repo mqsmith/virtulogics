@@ -1,19 +1,18 @@
+// Import React Links
 import React, {useEffect} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // Import Components
-import Navbar from './components/layout/Navbar';
+import Navbar from './components/Nav/Navbar';
 import Routes from './components/routing/Routes';
 import Sidebar from "./components/Sidebar/Sidebar";
 import PrivateRoute from './components/routing/PrivateRoute';
 
 // Import Containers
-import Home from "./containers/Home";
-// import Collection from "./containers/Collection";
+import Home from "./containers/Home/Home";
 import Hosts from './containers/Hosts/Hosts';
 import Clusters from './containers/Clusters/Clusters';
 import Host from './containers/Host/Host';
-
 
 // Redux
 import { Provider } from 'react-redux';
@@ -35,6 +34,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
+    
       <Router>
         
         <Switch>
@@ -46,20 +46,11 @@ const App = () => {
             </div>
           )
           } />
-
-          {/* <PrivateRoute exact path='/collection' component={props => (
-            <div className="page-wrap">
-              <Navbar />
-              <Sidebar />
-              <Collection {...props} />
-            </div>
-          )
-          } /> */}
-
+  
           <PrivateRoute exact path='/host/:esxhostname' component={props => (
             <div className="page-wrap">
               <Navbar />
-              <Sidebar />
+              {/* <Sidebar /> */}
               <Host {...props} />
             </div>
           )
@@ -68,25 +59,16 @@ const App = () => {
           <PrivateRoute exact path='/hosts' component={props => (
             <div className="page-wrap">
               <Navbar />
-              <Sidebar />
+              {/* <Sidebar /> */}
               <Hosts {...props} />
             </div>
           )
           } />
 
-          {/* <PrivateRoute exact path='/collection' component={props => (
-            <div className="page-wrap">
-              <Navbar />
-              <Sidebar />
-              <Collection {...props} />
-            </div>
-          )
-          } /> */}
-
           <PrivateRoute exact path='/clusters' component={props => (
             <div className="page-wrap">
               <Navbar />
-              <Sidebar />
+              {/* <Sidebar /> */}
               <Clusters {...props} />
             </div>
           )
@@ -105,5 +87,5 @@ const App = () => {
   );
 };
 
-
+// Export Link
 export default App;

@@ -1,4 +1,7 @@
-
+.card {
+    width: 100%;
+    padding: 10px
+}
 .card-body {
     /* width: 100%; */
     float: left;
@@ -49,7 +52,7 @@ img {
 }
 .cpu-ready-text {
     text-align: center;
-    font-size: 20px;
+    font-size: 75px;
 }
 .polled {
     text-align: center;
@@ -81,6 +84,6 @@ img {
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
-    background-color: black;
+    background-color: #2B4560;
     color: white;
   }

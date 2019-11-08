@@ -1,3 +1,4 @@
+// Import Links
 import React, { Fragment, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
@@ -5,6 +6,7 @@ import { setAlert } from '../../actions/alert';
 import { register } from '../../actions/auth';
 import PropTypes from 'prop-types';
 
+// Register Variables
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -27,13 +29,16 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     }
   };
 
+  // Redirect Route
   if (isAuthenticated) {
     return <Redirect to='/clusters' />;
   }
 
+  // Styling Register Component with Bootstrap classNames
   return (
     <Fragment>
-      <h1 className='large text-primary'>Sign Up</h1>
+    <div className="auth-container">
+    <div className="card">
       <p className='lead'>
         <i className='fas fa-user' /> Create Your Account
       </p>
@@ -55,10 +60,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             value={email}
             onChange={e => onChange(e)}
           />
-          <small className='form-text'>
-            This site uses Gravatar so if you want a profile image, use a
-            Gravatar email
-          </small>
+          
         </div>
         <div className='form-group'>
           <input
@@ -78,11 +80,13 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             onChange={e => onChange(e)}
           />
         </div>
-        <input type='submit' className='btn btn-primary' value='Register' />
+        <input type='submit' className='btn btn-dark' value='Register' />
       </form>
       <p className='my-1'>
         Already have an account? <Link to='/login'>Sign In</Link>
       </p>
+      </div>
+      </div>
     </Fragment>
   );
 };
@@ -97,6 +101,7 @@ const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated
 });
 
+// Export Links
 export default connect(
   mapStateToProps,
   { setAlert, register }
