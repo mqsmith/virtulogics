@@ -1,0 +1,23 @@
+.auth-container { 
+    padding-top: 50px;
+    text-align: center;
+  }
+  /* unvisited link */
+  .auth-container a:link {
+    color: #2B4560;
+  }
+  
+  /* visited link */
+  .auth-container a:visited {
+    color: #2B4560;
+  }
+  
+  /* mouse over link */
+  .auth-container a:hover {
+    color: lightblue;
+  }
+  
+  /* selected link */
+  .auth-container a:active {
+    color: #2B4560;
+  }
