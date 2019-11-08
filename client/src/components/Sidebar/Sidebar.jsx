@@ -6,7 +6,7 @@ import SideBarWide from "../SideBarWide/SideBarWide";
 // Sidebar Component
 class Sidebar extends Component {
   state = {
-    navOpen: true
+    navOpen: false
   };
 
   render() {
