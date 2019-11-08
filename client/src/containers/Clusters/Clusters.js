@@ -21,17 +21,14 @@ class Clusters extends Component {
     data: [],
     singlevcentername: [],
     singleclustername: [],
-    showhostchart: false
+    showhostchart: "false"
   };
 
   componentDidMount() {
     this.getBoth();
   }
 
-  componentWillUnmount() {
-
-    clearTimeout(this.intervalID);
-  }
+ 
 
   // Axios Call
   getBoth = () => {
@@ -40,7 +37,7 @@ class Clusters extends Component {
       .then(alldata => {
         let obj = alldata.data;
         const array = Object.values(obj);
-        this.setState({ alldata: array, loading: false });
+        this.setState({ alldata: array, loading: undefined });
         let combined = [];
 
         for (let i = 0; i < this.state.alldata.length; i++) {
@@ -167,7 +164,7 @@ class Clusters extends Component {
                 <button
                   className="btn-dark btn-sm link-button"
                   onClick={() => {
-                    this.setState({ showhostchart: true });
+                    this.setState({ showhostchart: "true" });
                   }}
                 >
                   View Host CPU and MEM Usage
@@ -285,10 +282,6 @@ class Clusters extends Component {
 
             <div className="col-md-4">
               <div className="card double-card">
-                {/* <div id="inner" className="card-header">
-                  Cluster memory usage by host (%)
-                  </div>
-                   */}
                 <PieComponent {...this.state} />
               </div>
             </div>
@@ -369,7 +362,7 @@ class Clusters extends Component {
                 type="button"
                 className="btn btn-dark"
                 onClick={() => {
-                  this.setState({ showhostchart: false });
+                  this.setState({ showhostchart: undefined });
                 }}
               >
                 Hide Host Mem and CPU Usage

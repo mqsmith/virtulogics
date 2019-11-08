@@ -9,7 +9,7 @@ const HostCard = props => {
     <div>
       <br></br>
       {props.hostData.map((host, i) => (
-        <div className="host">
+        <div key={host.esxhostname} className="host">
           <div className="title-row shadow mb-3 bg-white rounded">
             <p className="page-title">Host: {host.esxhostname}</p>
           </div>
