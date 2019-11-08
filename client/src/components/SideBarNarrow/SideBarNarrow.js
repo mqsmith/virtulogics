@@ -3,7 +3,7 @@ import "./SideBarNarrow.css"
 
 const SideBarNarrow = props => {
   return (
-    <div className="sideBarNarrow">
+    <div className="sideBarNarrow  animated fadeInDown">
       <button
         type="button"
         className="btn btn-dark"
