@@ -87,3 +87,11 @@ img {
     background-color: #2B4560;
     color: white;
   }
+
+.toggle-switch p { 
+    margin-top: -58px;
+    float: right;
+  }
+#toggle-text {
+font-size: 22px;
+ }
