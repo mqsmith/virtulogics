@@ -13,6 +13,7 @@ const influx = new Influx.InfluxDB({
 });
 const app = express();
 
+
 // to narrow down the fields we return we can do "select cpu, usagemhz_average, esxhostname from vsphere_host_cpu"
 app.get("/api/host-cpu/1", function(req, res) {
   influx

@@ -4,7 +4,7 @@ import "./SideBarWide.css";
 const SideBarWide = props => {
   return (
     <div className="row">
-      <nav className="col-md-2 d-md-block sidebar animated fadeInLeft slower">
+      <nav className="col-md-2 d-md-block sidebar animated fadeInLeft">
         <div className="sidebar-sticky">
           <br></br>
           <ul className="nav flex-column">

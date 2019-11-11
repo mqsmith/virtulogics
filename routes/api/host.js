@@ -10,7 +10,31 @@ const influx = new Influx.InfluxDB({
 require("dotenv").config();
 
 const app = express();
+const router = express.Router();
 
+const NPlus = require('../../models/NPlus');
+
+
+
+nPlus = () => {
+  app.post("/api/host/cpu-mem/1", function(req, res) {
+    NPlus.create(req.body)
+    .then((newNPlus) => {
+        console.log("New NPlus: ", newNPlus);
+        res.json({
+            message: "Successfully created",
+            error: false,
+            data: newNPlus
+        })
+    }).catch((err) => {
+        console.log(err);
+        res.json({
+            message: err.message,
+            error: true
+        })
+    })
+  });
+}
 
 app.get("/api/host/uptime", function(req, res) {
     influx
@@ -77,6 +101,7 @@ app.get("/api/host/cpu-mem/1", async function(req, res) {
             newHashMap[moid] = allHostsCpu1[i];
           }
         }
+        // nPlus()
       })
       .catch(err => {
         console.log(err);

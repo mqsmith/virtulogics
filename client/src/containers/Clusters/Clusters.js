@@ -28,9 +28,27 @@ class Clusters extends Component {
     this.getBoth();
   }
 
- 
-
   // Axios Call
+
+  nPLus = () => {
+    axios
+      .post("/api/host/cpu-mem/1", {
+        clusterName: this.state.singleclustername,
+        nPlusCPU: this.state.n1cpu,
+        nPlusMEM: this.state.n1mem
+      })
+      .then(response => {
+        console.log(response);
+        if(response.data.error){
+          alert("Failed to create" + response.data.message);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        alert("Failed to create: " + err.message);
+      });
+  };
+
   getBoth = () => {
     axios
       .get("/api/host/cpu-mem/1")
@@ -79,7 +97,6 @@ class Clusters extends Component {
         const singleclustername = [...new Set(clusterName)];
         const vcenterName = this.state.alldata.map(data => data.vcenter);
         const singlevcentername = [...new Set(vcenterName)];
-       
 
         let hostmemory = 28383;
         let totalclustermemory = (hostmemory * memTotal) / 100000;
@@ -126,6 +143,7 @@ class Clusters extends Component {
           cpureadytotal: cpureadytotal,
           costoptotal: costoptotal
         });
+        // this.nPLus(this.state)
         this.intervalID = setTimeout(this.getBoth.bind(this), 30000);
       })
       .catch(err => {
@@ -289,7 +307,11 @@ class Clusters extends Component {
 
           <div className="row">
             <div className="col-md-2">
-              <div className="card single-card">
+              <div
+                className="card single-card"
+                id="nPlusMEM"
+                value={this.state.n1mem}
+              >
                 <div id="inner" className="card-header">
                   N+1 MEM
                 </div>
@@ -306,7 +328,11 @@ class Clusters extends Component {
             </div>
 
             <div className="col-md-2">
-              <div className="card single-card">
+              <div
+                className="card single-card"
+                id="nPlusCPU"
+                value={this.state.n1cpu}
+              >
                 <div id="inner" className="card-header">
                   N+1 CPU
                 </div>
