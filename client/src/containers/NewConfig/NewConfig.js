@@ -38,10 +38,13 @@ class NewConfig extends Component {
 
   render() {
     return (
+      <div className="auth-container">
+      <div className="card">
       <div>
-        <h1>Welcome to the admin page</h1>
+        <h1>Welcome to the Admin page</h1>
         <form>
           <div className="form-group">
+          <label htmlFor="clusterName">Enter the cluster name as listed in vCenter  &nbsp;</label>
             <input
               type="text"
               placeholder="clusterName"
@@ -51,6 +54,7 @@ class NewConfig extends Component {
             />
           </div>
           <div className="form-group">
+          <label htmlFor="hostMem">Enter total amount of physical RAM per host  &nbsp;</label>
             <input
               type="number"
               placeholder="hostMem"
@@ -70,6 +74,8 @@ class NewConfig extends Component {
             </button>
           </div>
         </form>
+      </div>
+      </div>
       </div>
     );
   }
