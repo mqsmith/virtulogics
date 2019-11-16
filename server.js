@@ -56,6 +56,7 @@ influx
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/hosts", require("./routes/api/hosts"));
+app.post("/api/config", require("./routes/api/admin"));
 app.get("/api/host-cpu", require("./routes/api/host-cpu"));
 app.get("/api/host-mem", require("./routes/api/host-mem"));
 app.get("/api/uptime", require("./routes/api/uptime"));

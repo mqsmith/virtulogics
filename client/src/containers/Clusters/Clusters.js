@@ -344,7 +344,7 @@ class Clusters extends Component {
                     <p className="double-label">CO-Stop (Sec)</p>
                     {this.state.costoptotal < 5 ? (
                       <div className="double normal">
-                        <h4>{this.state.costoptotal}%</h4>
+                        <h4>{this.state.costoptotal}</h4>
                       </div>
                     ) : (
                       <div className="double warning ">

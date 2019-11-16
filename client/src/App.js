@@ -13,6 +13,7 @@ import Home from "./containers/Home/Home";
 import Hosts from "./containers/Hosts/Hosts";
 import Clusters from "./containers/Clusters/Clusters";
 import Host from "./containers/Host/Host";
+import NewConfig from "./containers/NewConfig/NewConfig"
 
 // Redux
 import { Provider } from "react-redux";
@@ -47,6 +48,17 @@ const App = () => {
             )}
           />
 
+          <PrivateRoute
+            exact
+            path="/config"
+            component={props => (
+              <div className="page-wrap">
+                <Navbar />
+                <Sidebar />
+                <NewConfig />
+              </div>
+            )}
+          />
           <PrivateRoute
             exact
             path="/host/:esxhostname"
