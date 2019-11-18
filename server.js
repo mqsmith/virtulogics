@@ -56,12 +56,14 @@ influx
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/auth", require("./routes/api/auth"));
 app.use("/api/hosts", require("./routes/api/hosts"));
+app.post("/api/config", require("./routes/api/admin"));
 app.get("/api/host-cpu", require("./routes/api/host-cpu"));
 app.get("/api/host-mem", require("./routes/api/host-mem"));
 app.get("/api/uptime", require("./routes/api/uptime"));
 app.get("/api/cluster-cpu", require("./routes/api/cluster-cpu"));
 app.get("/api/chart-mem", require("./routes/api/chart-mem"));
 app.get("/api/chart-cpu", require("./routes/api/chart-cpu"));
+app.post("/api/cluster/nPlus", require("./routes/api/host"));
 app.get("/api/host", require("./routes/api/host"));
 app.get("/api/host/cpu-mem/1", require("./routes/api/host"));
 app.get("/api/host/cpu/1day", require("./routes/api/host"));

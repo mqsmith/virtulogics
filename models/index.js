@@ -2,6 +2,7 @@
 
 module.exports = {
   User: require("./User"),
-  NPlus: require("./NPlus")
+  NPlus: require("./NPlus"),
 
+  NewConfig: require("./NewConfig")
 };

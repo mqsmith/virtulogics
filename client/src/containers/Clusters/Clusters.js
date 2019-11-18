@@ -21,7 +21,9 @@ class Clusters extends Component {
     data: [],
     singlevcentername: [],
     singleclustername: [],
-    showhostchart: undefined
+    showhostchart: undefined,
+    n1cpu: "",
+    n1mem: ""
   };
 
   componentDidMount() {
@@ -31,21 +33,21 @@ class Clusters extends Component {
   // Axios Call
 
   nPLus = () => {
+    console.log(this.state.n1mem);
+    console.log(this.state.n1cpu);
     axios
-      .post("/api/host/cpu-mem/1", {
-        clusterName: this.state.singleclustername,
-        nPlusCPU: this.state.n1cpu,
-        nPlusMEM: this.state.n1mem
-      })
+      .post("/api/cluster/nPlus", this.state)
       .then(response => {
         console.log(response);
-        if(response.data.error){
-          alert("Failed to create" + response.data.message);
-        }
+        // if(response.data.error){
+        //   alert("Failed to create" + response.data.message);
+        // }else{
+        //   // this.props.history.push('/collection/' + response.data.data._id);
+        // } 
       })
       .catch(err => {
         console.log(err);
-        alert("Failed to create: " + err.message);
+        // alert("Failed to create: " + err.message);
       });
   };
 
@@ -126,7 +128,7 @@ class Clusters extends Component {
           hostcpu
         ).toFixed(2);
         let n1cpu = totalclustercpu;
-
+          
         //Set state
         this.setState({
           clusterusagetotal: clusterusagetotal.toFixed(2),
@@ -143,7 +145,10 @@ class Clusters extends Component {
           cpureadytotal: cpureadytotal,
           costoptotal: costoptotal
         });
-        // this.nPLus(this.state)
+        
+        console.log(this.state.n1cpu);
+        console.log(this.state.n1mem);
+        this.nPLus()
         this.intervalID = setTimeout(this.getBoth.bind(this), 30000);
       })
       .catch(err => {
@@ -370,7 +375,7 @@ class Clusters extends Component {
                     <p className="double-label">CO-Stop (Sec)</p>
                     {this.state.costoptotal < 5 ? (
                       <div className="double normal">
-                        <h4>{this.state.costoptotal}%</h4>
+                        <h4>{this.state.costoptotal}</h4>
                       </div>
                     ) : (
                       <div className="double warning ">
