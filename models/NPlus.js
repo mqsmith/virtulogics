@@ -3,13 +3,16 @@ const mongoose = require('mongoose'); //bring in Mongoose
 const NPlusSchema = new mongoose.Schema({    //create a schema
   clusterName: {
     type: String,
+    required: true,
+    unique: false
+  },
+  n1cpu: {
+    type: String,
     required: true
   },
-  nPlusCPU: {
+  n1mem: {
     type: String,
-  },
-  nPlusMEM: {
-    type: String,
+    required: true
   },
   dateAdded: {
     type: Date,

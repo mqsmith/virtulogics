@@ -23,7 +23,8 @@ class Clusters extends Component {
     singleclustername: [],
     showhostchart: undefined,
     n1cpu: "",
-    n1mem: ""
+    n1mem: "",
+    clusterName: ""
   };
 
   componentDidMount() {
@@ -35,6 +36,7 @@ class Clusters extends Component {
   nPLus = () => {
     console.log(this.state.n1mem);
     console.log(this.state.n1cpu);
+    console.log(this.state.clusterName);
     axios
       .post("/api/cluster/nPlus", this.state)
       .then(response => {
@@ -143,11 +145,13 @@ class Clusters extends Component {
           singleclustername: singleclustername,
           singlevcentername: singlevcentername,
           cpureadytotal: cpureadytotal,
-          costoptotal: costoptotal
+          costoptotal: costoptotal,
+          clusterName: clusterName[0]
         });
         
         console.log(this.state.n1cpu);
         console.log(this.state.n1mem);
+        console.log(this.state.clusterName);
         this.nPLus()
         this.intervalID = setTimeout(this.getBoth.bind(this), 30000);
       })

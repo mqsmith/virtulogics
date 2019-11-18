@@ -63,7 +63,7 @@ app.get("/api/uptime", require("./routes/api/uptime"));
 app.get("/api/cluster-cpu", require("./routes/api/cluster-cpu"));
 app.get("/api/chart-mem", require("./routes/api/chart-mem"));
 app.get("/api/chart-cpu", require("./routes/api/chart-cpu"));
-app.post("/api/cluster/nPlus", require("./routes/api/host"));
+app.post("/api/cluster/nPlus", require("./routes/api/nPlus"));
 app.get("/api/host", require("./routes/api/host"));
 app.get("/api/host/cpu-mem/1", require("./routes/api/host"));
 app.get("/api/host/cpu/1day", require("./routes/api/host"));

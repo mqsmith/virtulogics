@@ -17,7 +17,7 @@ require("dotenv").config();
 
 
 // nPlus = () => {
-  router.post("/api/cluster/nPlus", function(req, res) {
+  app.post("/api/cluster/nPlus", function(req, res) {
     console.log(req.body)
     db.NPlus.create(req.body)
     .then((newNPlus) => {
