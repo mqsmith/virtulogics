@@ -4,15 +4,17 @@ const NPlusSchema = new mongoose.Schema({    //create a schema
   clusterName: {
     type: String,
     required: true,
-    unique: false
+    // unique: false
   },
   n1cpu: {
     type: String,
-    required: true
+    required: true,
+    // unique: false
   },
   n1mem: {
     type: String,
-    required: true
+    required: true,
+    // unique: false
   },
   dateAdded: {
     type: Date,

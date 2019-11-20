@@ -6,8 +6,8 @@ const db = require("../../models");
 
     router.post("/api/cluster/nPlus", function(req, res) {
         console.log("This is just a test to see if this is working")
-        console.log(req.body)
-        db.NPlus.findOneAndUpdate(req.body)
+        // console.log(req.body)
+        db.NPlus.create(req.body)
         .then((newNPlus) => {
             console.log("New NPlus: ", newNPlus);
             res.json({
