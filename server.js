@@ -31,9 +31,9 @@ app.use(express.static(__dirname + "/client/build"));
 // Influx DB connection and routes
 const influx = new Influx.InfluxDB({
   database: "telegraf",
-  username: "gtadmin",
-  password: "@lmost12",
-  host: "159.242.248.20"
+  username: "telegraf",
+  password: "Advil2019!",
+  host: "localhost"
 });
 
 influx

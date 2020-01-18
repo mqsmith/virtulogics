@@ -7,9 +7,9 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 const influx = new Influx.InfluxDB({
   database: "telegraf",
-  username: "gtadmin",
-  password: "@lmost12",
-  host: "159.242.248.20"
+  username: "telegraf",
+  password: "@Advil2019!",
+  host: "localhost"
 });
 const app = express();
 
