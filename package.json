@@ -27,7 +27,7 @@
     "gravatar": "^1.8.0",
     "influx": "^5.4.2",
     "jsonwebtoken": "^8.5.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "mongoose": "^5.7.4",
     "path": "^0.12.7",
     "react-chartjs-2": "^2.8.0",
